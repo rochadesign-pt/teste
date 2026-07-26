@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes, useLocation } from "react-router-dom";
 
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
@@ -17,9 +17,13 @@ function ScrollToTop() {
   return null;
 }
 
+// Em builds "single-file" (pré-visualização partilhável) usamos HashRouter,
+// porque a página é servida num URL fixo sem controlo de rotas no servidor.
+const Router = import.meta.env.VITE_HASH_ROUTER === "true" ? HashRouter : BrowserRouter;
+
 export default function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <SmoothScroll>
         <ScrollToTop />
         <Navbar />
@@ -36,6 +40,6 @@ export default function App() {
         </main>
         <Footer />
       </SmoothScroll>
-    </BrowserRouter>
+    </Router>
   );
 }
