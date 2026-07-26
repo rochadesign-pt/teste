@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white font-sans text-ink-950 antialiased;
+  }
+
+  ::selection {
+    @apply bg-gold-500 text-ink-950;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-5 md:px-8;
+  }
+
+  .display-title {
+    @apply font-display uppercase leading-[0.95] tracking-tight;
+  }
+
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-wider2 text-bordeaux-700;
+  }
+
+  .eyebrow-light {
+    @apply text-xs font-bold uppercase tracking-wider2 text-gold-500;
+  }
+}
+
+/* Textura de linhas de campo — usada em fundos escuros */
+.court-lines {
+  background-image: radial-gradient(
+      circle at 50% 130%,
+      rgba(255, 199, 44, 0.08) 0%,
+      transparent 55%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 119px,
+      rgba(255, 255, 255, 0.035) 119px,
+      rgba(255, 255, 255, 0.035) 120px
+    );
+}
+
+/* Halftone subtil, estilo cartaz desportivo */
+.halftone {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1.6px);
+  background-size: 14px 14px;
+}
