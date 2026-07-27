@@ -3,14 +3,14 @@ export function Footer() {
     <footer className="bg-ink text-white">
       <div className="mx-auto max-w-[1440px] px-6 pt-20 pb-8 lg:px-12">
         <div className="mb-16 flex flex-wrap items-end justify-between gap-8">
-          <p className="font-display max-w-2xl text-4xl leading-[1.02] font-black uppercase sm:text-5xl">
+          <p className="font-display max-w-2xl text-4xl leading-[1.02] font-medium sm:text-5xl">
             Limpeza profissional,
             <br />
             <span className="text-accent">sem meias-medidas.</span>
           </p>
           <a
             href="#"
-            className="flex h-14 items-center rounded-full border border-white/25 px-8 text-sm font-bold transition-colors duration-200 hover:bg-white hover:text-ink"
+            className="flex h-14 items-center rounded-full border border-white/25 px-8 text-sm font-semibold transition-colors duration-200 hover:bg-white hover:text-ink"
           >
             Falar com a equipa comercial
           </a>
@@ -24,7 +24,7 @@ export function Footer() {
             { title: 'Suporte', links: ['Contactos', 'Fichas técnicas', 'Fichas de segurança', 'FAQ'] },
           ].map((col) => (
             <div key={col.title}>
-              <p className="mb-4 text-xs font-bold tracking-[0.18em] text-accent">
+              <p className="mb-4 text-[11px] font-medium tracking-[0.16em] text-accent">
                 {col.title.toUpperCase()}
               </p>
               <ul className="space-y-2.5">

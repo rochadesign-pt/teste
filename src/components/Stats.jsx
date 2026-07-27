@@ -39,7 +39,7 @@ export function Stats() {
       <div className="grid grid-cols-2 gap-y-12 lg:grid-cols-4">
         {product.stats.map((stat) => (
           <div key={stat.label} className="border-l-2 border-accent pl-6">
-            <p className="font-display text-6xl font-black tabular-nums lg:text-7xl">
+            <p className="font-display text-6xl font-medium tabular-nums lg:text-7xl">
               <span className="stat-value" data-value={stat.value}>
                 0
               </span>

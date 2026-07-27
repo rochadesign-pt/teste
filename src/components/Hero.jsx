@@ -36,7 +36,7 @@ export function Hero({ format, setFormat, onAdd }) {
         animate="show"
         className="flex flex-col justify-center py-8 lg:pr-12"
       >
-        <motion.div variants={item} className="mb-6 flex items-center gap-3 text-xs font-bold tracking-[0.2em]">
+        <motion.div variants={item} className="mb-6 flex items-center gap-3 text-[11px] font-medium tracking-[0.16em]">
           <span className="text-accent">{product.brand}</span>
           <span className="h-1 w-1 rounded-full bg-accent" />
           <span className="opacity-50">{product.line.toUpperCase()}</span>
@@ -44,13 +44,11 @@ export function Hero({ format, setFormat, onAdd }) {
 
         <motion.h1
           variants={item}
-          className="font-display text-[13vw] leading-[0.9] font-black uppercase sm:text-7xl lg:text-[5.2rem]"
+          className="font-display text-[12vw] leading-[1] font-medium sm:text-6xl lg:text-[4.6rem]"
         >
-          Tira
-          <br />
-          gorduras
-          <span className="mt-3 block font-display text-[0.45em] font-extrabold text-accent">
-            HTG-30 · 750 mL
+          Tiragorduras
+          <span className="mt-2 block text-[0.44em] font-normal text-accent-deep">
+            HTG-30 · {selected.label}
           </span>
         </motion.h1>
 
@@ -63,7 +61,7 @@ export function Hero({ format, setFormat, onAdd }) {
 
         {/* format picker */}
         <motion.div variants={item} className="mt-10">
-          <p className="mb-3 text-xs font-bold tracking-[0.18em] opacity-50">FORMATO</p>
+          <p className="mb-3 text-[11px] font-medium tracking-[0.16em] opacity-50">FORMATO</p>
           <div className="flex flex-wrap gap-2">
             {product.formats.map((f) => (
               <button
@@ -71,17 +69,37 @@ export function Hero({ format, setFormat, onAdd }) {
                 type="button"
                 onClick={() => setFormat(f.id)}
                 aria-pressed={format === f.id}
-                className={`rounded-full border px-5 py-2.5 text-sm font-bold transition-colors duration-200 ${
+                className={`rounded-full border px-5 py-2.5 text-sm font-semibold transition-colors duration-200 ${
                   format === f.id
                     ? 'border-ink bg-ink text-white'
                     : 'border-ink/20 hover:border-ink'
                 }`}
               >
                 {f.label}
-                <span className="ml-2 font-medium opacity-50">{f.detail}</span>
+                <span className="ml-2 font-normal opacity-50">{f.detail}</span>
               </button>
             ))}
           </div>
+          <a
+            href="#opcoes"
+            onClick={(e) => {
+              e.preventDefault()
+              document.getElementById('opcoes')?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' })
+            }}
+            className="group mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-accent-deep"
+          >
+            Complementos e bundles
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              fill="none"
+              aria-hidden="true"
+              className="transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-y-0.5"
+            >
+              <path d="M5 1v8m0 0L1.5 5.4M5 9l3.5-3.6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
         </motion.div>
 
         {/* price + CTA */}
@@ -92,7 +110,7 @@ export function Hero({ format, setFormat, onAdd }) {
             whileHover={reduce ? {} : { scale: 1.02 }}
             whileTap={reduce ? {} : { scale: 0.97 }}
             transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-            className="group flex h-16 items-center gap-4 rounded-full bg-accent pr-2 pl-6 text-base font-bold whitespace-nowrap text-white shadow-[0_12px_32px_-12px_rgba(100,167,11,0.7)] transition-colors duration-200 hover:bg-accent-deep sm:gap-6 sm:pl-8"
+            className="group flex h-16 items-center gap-4 rounded-full bg-accent pr-2 pl-6 text-base font-semibold whitespace-nowrap text-white shadow-[0_12px_32px_-12px_rgba(100,167,11,0.7)] transition-colors duration-200 hover:bg-accent-deep sm:gap-6 sm:pl-8"
           >
             {added ? 'Adicionado ✓' : 'Adicionar ao carrinho'}
             <span className="flex h-12 items-center rounded-full bg-ink px-5 text-white tabular-nums whitespace-nowrap">
@@ -117,7 +135,7 @@ export function Hero({ format, setFormat, onAdd }) {
         {/* oversized watermark type */}
         <span
           aria-hidden="true"
-          className="font-display absolute top-6 left-1/2 -translate-x-1/2 text-[9rem] leading-none font-black whitespace-nowrap text-accent/10 select-none lg:text-[11rem]"
+          className="font-display absolute top-6 left-1/2 -translate-x-1/2 text-[9rem] leading-none font-medium whitespace-nowrap text-accent/10 select-none lg:text-[11rem]"
         >
           HTG-30
         </span>
@@ -134,15 +152,15 @@ export function Hero({ format, setFormat, onAdd }) {
 
         {/* floating badges */}
         <div className="absolute right-6 bottom-6 flex flex-col items-end gap-2">
-          <span className="rounded-full bg-ink px-4 py-2 text-xs font-bold text-white">
+          <span className="rounded-full bg-ink px-4 py-2 text-xs font-semibold text-white">
             pH 13–14 · alcalino
           </span>
-          <span className="rounded-full bg-accent-soft px-4 py-2 text-xs font-bold text-accent-deep">
+          <span className="rounded-full bg-accent-soft px-4 py-2 text-xs font-semibold text-accent-deep">
             Uso profissional
           </span>
         </div>
 
-        <div className="absolute bottom-6 left-6 hidden items-center gap-2 rounded-full bg-page px-4 py-2 text-xs font-bold lg:flex">
+        <div className="absolute bottom-6 left-6 hidden items-center gap-2 rounded-full bg-page px-4 py-2 text-xs font-semibold lg:flex">
           <span className="h-2 w-2 animate-pulse rounded-full bg-accent" />
           Em stock
         </div>

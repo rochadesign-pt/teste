@@ -22,10 +22,10 @@ export function Nav({ cartCount = 0 }) {
     >
       <nav className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-4 lg:px-12">
         <a href="#" className="flex items-baseline gap-2 text-ink">
-          <span className="font-display text-xl font-black tracking-tight">
+          <span className="font-display text-xl font-medium tracking-tight">
             MISTOLIN
           </span>
-          <span className="rounded-full bg-accent px-2 py-0.5 text-[11px] font-bold text-white">
+          <span className="rounded-full bg-accent px-2 py-0.5 text-[11px] font-semibold text-white">
             PRO
           </span>
         </a>
@@ -35,9 +35,13 @@ export function Nav({ cartCount = 0 }) {
             <li key={item}>
               <a
                 href="#"
-                className="opacity-70 transition-opacity duration-200 hover:opacity-100"
+                className="group relative opacity-70 transition-opacity duration-200 hover:opacity-100"
               >
                 {item}
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-ink transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-x-100"
+                />
               </a>
             </li>
           ))}
@@ -59,7 +63,7 @@ export function Nav({ cartCount = 0 }) {
             className="flex h-10 items-center gap-2 rounded-full bg-ink px-4 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-deep"
           >
             Carrinho
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[11px] font-bold">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[11px] font-semibold">
               {cartCount}
             </span>
           </button>

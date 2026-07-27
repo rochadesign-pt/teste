@@ -30,7 +30,7 @@ export function StickyBar({ format, onAdd }) {
         >
           <div className="flex items-center justify-between gap-4 rounded-full bg-ink py-2 pr-2 pl-6 text-white shadow-2xl lg:min-w-[560px]">
             <div className="min-w-0">
-              <p className="font-display truncate text-sm font-extrabold uppercase">
+              <p className="font-display truncate text-sm font-medium">
                 {product.name} · {selected.label}
               </p>
               <p className="text-xs opacity-60">{fmt(selected.price)} · IVA incluído</p>
@@ -41,7 +41,7 @@ export function StickyBar({ format, onAdd }) {
               whileHover={reduce ? {} : { scale: 1.03 }}
               whileTap={reduce ? {} : { scale: 0.96 }}
               transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-              className="h-12 shrink-0 rounded-full bg-accent px-6 text-sm font-bold whitespace-nowrap transition-colors duration-200 hover:bg-accent-deep"
+              className="h-12 shrink-0 rounded-full bg-accent px-6 text-sm font-semibold whitespace-nowrap transition-colors duration-200 hover:bg-accent-deep"
             >
               Adicionar
             </motion.button>

@@ -24,8 +24,8 @@ export function Benefits() {
         transition={{ duration: 0.6, ease: EASE }}
         className="mb-14 max-w-2xl"
       >
-        <p className="mb-4 text-xs font-bold tracking-[0.2em] text-accent">PORQUÊ O HTG-30</p>
-        <h2 className="font-display text-4xl leading-[1.02] font-black uppercase sm:text-5xl lg:text-6xl">
+        <p className="mb-4 text-[11px] font-medium tracking-[0.16em] text-accent">PORQUÊ O HTG-30</p>
+        <h2 className="font-display text-4xl leading-[1.02] font-medium sm:text-5xl lg:text-6xl">
           Feito para a gordura
           <br />
           que mais ninguém tira.
@@ -43,17 +43,17 @@ export function Benefits() {
           <motion.article
             key={b.title}
             variants={card}
-            whileHover={reduce ? {} : { y: -6 }}
+            whileHover={reduce ? {} : { y: -4 }}
             transition={{ type: 'spring', stiffness: 300, damping: 24 }}
             className={`flex min-h-[280px] flex-col justify-between rounded-3xl p-7 ${
               i === 0 ? 'bg-accent text-white' : i === 3 ? 'bg-ink text-white' : 'bg-white shadow-sm'
             }`}
           >
-            <span className="font-display text-sm font-extrabold opacity-50">
+            <span className="font-display text-sm font-semibold opacity-50">
               {String(i + 1).padStart(2, '0')}
             </span>
             <div>
-              <h3 className="font-display mb-3 text-xl leading-tight font-extrabold uppercase">
+              <h3 className="font-display mb-3 text-xl leading-tight font-medium">
                 {b.title}
               </h3>
               <p className="text-sm leading-relaxed opacity-80">{b.text}</p>

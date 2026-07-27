@@ -24,9 +24,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+body {
+  letter-spacing: -0.01em;
+}
+
 .font-display {
   font-family: 'Karla', 'Inter', sans-serif;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 ::selection {

@@ -43,10 +43,10 @@ export function Marquee({ dark = false }) {
             {ITEMS.map((item) => (
               <span
                 key={`${half}-${item}`}
-                className="font-display flex items-center gap-6 pr-6 text-2xl font-extrabold whitespace-nowrap uppercase lg:text-3xl"
+                className="font-display flex items-center gap-6 pr-6 text-xl font-medium whitespace-nowrap opacity-80 lg:text-2xl"
               >
                 {item}
-                <svg width="18" height="18" viewBox="0 0 18 18" className="text-accent" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 18 18" className="text-accent" aria-hidden="true">
                   <path d="M9 0l2.2 6.8H18l-5.6 4.1 2.1 6.9L9 13.6l-5.5 4.2 2.1-6.9L0 6.8h6.8z" fill="currentColor" />
                 </svg>
               </span>

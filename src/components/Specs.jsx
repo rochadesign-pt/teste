@@ -17,8 +17,8 @@ export function Specs() {
           viewport={{ once: true, margin: '-10%' }}
           transition={{ duration: 0.6, ease: EASE }}
         >
-          <p className="mb-4 text-xs font-bold tracking-[0.2em] text-accent">DETALHES</p>
-          <h2 className="font-display text-4xl leading-[1.02] font-black uppercase sm:text-5xl">
+          <p className="mb-4 text-[11px] font-medium tracking-[0.16em] text-accent">DETALHES</p>
+          <h2 className="font-display text-4xl leading-[1.02] font-medium sm:text-5xl">
             Tudo o que
             <br />
             precisa de saber.
@@ -29,9 +29,9 @@ export function Specs() {
               <a
                 key={doc}
                 href="#"
-                className="flex items-center gap-2 rounded-full border border-ink/15 bg-white px-4 py-2.5 text-xs font-semibold transition-colors duration-200 hover:border-ink"
+                className="group flex items-center gap-2 rounded-full border border-ink/15 bg-white px-4 py-2.5 text-xs font-medium transition-colors duration-200 hover:border-ink"
               >
-                <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true">
+                <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" className="transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-y-0.5">
                   <path d="M6 1v8m0 0L3 6.2M6 9l3-2.8M1 12.5h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 {doc}
@@ -51,7 +51,7 @@ export function Specs() {
                   aria-expanded={isOpen}
                   className="flex w-full items-center justify-between py-6 text-left"
                 >
-                  <span className="font-display text-xl font-extrabold uppercase lg:text-2xl">
+                  <span className="font-display text-xl font-medium lg:text-2xl">
                     {spec.title}
                   </span>
                   <motion.span

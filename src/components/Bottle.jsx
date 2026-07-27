@@ -42,9 +42,9 @@ export function Bottle({ className }) {
         x="172"
         y="242"
         textAnchor="middle"
-        fill="#f5f1e8"
+        fill="#ffffff"
         style={{
-          font: '800 15px Archivo, sans-serif',
+          font: '600 15px Karla, sans-serif',
           letterSpacing: '0.22em',
         }}
       >
@@ -55,7 +55,7 @@ export function Bottle({ className }) {
         y="292"
         textAnchor="middle"
         fill="#64a70b"
-        style={{ font: '900 44px Archivo, sans-serif', letterSpacing: '-0.01em' }}
+        style={{ font: '700 44px Karla, sans-serif', letterSpacing: '-0.01em' }}
       >
         HTG-30
       </text>
@@ -63,8 +63,8 @@ export function Bottle({ className }) {
         x="172"
         y="322"
         textAnchor="middle"
-        fill="#f5f1e8"
-        style={{ font: '600 13px Archivo, sans-serif', letterSpacing: '0.14em' }}
+        fill="#ffffff"
+        style={{ font: '500 13px Karla, sans-serif', letterSpacing: '0.14em' }}
       >
         TIRAGORDURAS
       </text>
@@ -74,8 +74,8 @@ export function Bottle({ className }) {
         x="172"
         y="474"
         textAnchor="middle"
-        fill="#f5f1e8"
-        style={{ font: '700 15px Archivo, sans-serif', letterSpacing: '0.08em' }}
+        fill="#ffffff"
+        style={{ font: '600 15px Karla, sans-serif', letterSpacing: '0.08em' }}
       >
         750 mL
       </text>
