@@ -11,7 +11,7 @@
   --color-accent-soft: #eef4e2;
   --color-line: #e3e7e8;
 
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Figtree', system-ui, sans-serif;
 
   --radius: 0.625rem;
   --ease-soft: cubic-bezier(0.32, 0.72, 0, 1);
@@ -33,7 +33,7 @@ body {
 }
 
 .font-display {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Figtree', sans-serif;
   letter-spacing: -0.035em;
 }
 
