@@ -25,25 +25,25 @@ export function GameRow({ game }: { game: Game }) {
       (isIlliabum(game.away) && game.awayScore! > game.homeScore!));
 
   return (
-    <article className="grid grid-cols-1 gap-4 border-t border-ink-950/10 py-6 last:border-b sm:grid-cols-[1fr_auto] sm:items-center md:py-8">
+    <article className="grid grid-cols-1 gap-4 border-t border-border py-6 last:border-b sm:grid-cols-[1fr_auto] sm:items-center md:py-8">
       <div>
         <div className="mb-3 flex flex-wrap items-center gap-2">
-          <Badge variant="bordeaux">{game.competition}</Badge>
-          <span className="text-xs font-semibold uppercase tracking-wider2 text-ink-950/50">
+          <Badge variant="secondary">{game.competition}</Badge>
+          <span className="text-xs font-semibold uppercase tracking-wider2 text-muted-foreground">
             {game.round} · {game.date}
           </span>
           {played && (
-            <Badge variant={illiabumWon ? "gold" : "outline"}>
+            <Badge variant={illiabumWon ? "default" : "outline"}>
               {illiabumWon ? "Vitória" : "Derrota"}
             </Badge>
           )}
         </div>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
           <TeamName name={game.home} highlight={isIlliabum(game.home)} />
-          <span className="text-sm font-bold text-ink-950/40">vs</span>
+          <span className="text-sm font-bold text-muted-foreground">vs</span>
           <TeamName name={game.away} highlight={isIlliabum(game.away)} />
         </div>
-        <p className="mt-2 text-sm text-ink-950/50">{game.venue}</p>
+        <p className="mt-2 text-sm text-muted-foreground">{game.venue}</p>
       </div>
 
       <div className="sm:pl-8 sm:text-right">

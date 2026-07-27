@@ -65,7 +65,7 @@ export default function Equipas() {
                     </p>
                   </div>
                   <div className="flex shrink-0 flex-col items-start gap-4">
-                    <Badge variant={team.featured ? "gold" : "bordeaux"}>
+                    <Badge variant={team.featured ? "default" : "secondary"}>
                       {team.competition}
                     </Badge>
                     {team.featured && (

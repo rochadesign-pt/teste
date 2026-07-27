@@ -9,7 +9,7 @@ import { articles } from "@/data/news";
 
 export function NewsPreview() {
   return (
-    <section className="bg-neutral-100 py-16 md:py-24">
+    <section className="bg-muted py-16 md:py-24">
       <div className="container-site">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6 md:mb-14">
           <div>

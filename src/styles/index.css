@@ -3,12 +3,65 @@
 @tailwind utilities;
 
 @layer base {
+  /* Design tokens shadcn/ui — mapeados às cores do Illiabum Clube.
+     primary = amarelo (cor de ação) · secondary = bordô (cor de marca) */
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 300 9% 5%;
+    --card: 0 0% 100%;
+    --card-foreground: 300 9% 5%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 300 9% 5%;
+    --primary: 44 100% 59%;
+    --primary-foreground: 300 9% 5%;
+    --secondary: 348 74% 21%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 240 4% 40%;
+    --accent: 44 100% 92%;
+    --accent-foreground: 300 9% 5%;
+    --destructive: 0 72% 42%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 300 5% 88%;
+    --input: 300 5% 82%;
+    --ring: 44 100% 45%;
+    --radius: 0rem; /* cantos retos — identidade de cartaz desportivo */
+  }
+
+  /* Secções escuras (bordô/preto) podem ativar .dark para os componentes
+     shadcn adaptarem automaticamente. */
+  .dark {
+    --background: 300 9% 5%;
+    --foreground: 0 0% 100%;
+    --card: 300 8% 8%;
+    --card-foreground: 0 0% 100%;
+    --popover: 300 8% 8%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 44 100% 59%;
+    --primary-foreground: 300 9% 5%;
+    --secondary: 348 66% 30%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 300 6% 14%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 300 6% 14%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 16%;
+    --input: 0 0% 24%;
+    --ring: 44 100% 59%;
+  }
+
   html {
     scroll-behavior: smooth;
   }
 
+  * {
+    @apply border-border;
+  }
+
   body {
-    @apply bg-white font-sans text-ink-950 antialiased;
+    @apply bg-background font-sans text-foreground antialiased;
   }
 
   ::selection {

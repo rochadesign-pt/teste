@@ -1,10 +1,49 @@
+import animate from "tailwindcss-animate";
+
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class",
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      // Tokens shadcn/ui — a fonte de verdade está nas CSS variables (index.css)
       colors: {
-        // Bordô — cor principal do clube
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+
+        // Escalas gráficas da marca — para direção de arte (heros, texturas,
+        // marquees); os componentes usam os tokens acima.
         bordeaux: {
           50: "#fdf2f4",
           100: "#fbe3e7",
@@ -18,18 +57,21 @@ export default {
           900: "#5c0e1e",
           950: "#3d0813",
         },
-        // Amarelo / dourado — cor de destaque
         gold: {
           300: "#ffdd66",
           400: "#ffd23f",
           500: "#ffc72c",
           600: "#e6ad00",
         },
-        // Preto profundo para fundos
         ink: {
           900: "#141114",
           950: "#0c0a0c",
         },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "var(--radius)",
+        sm: "var(--radius)",
       },
       fontFamily: {
         display: ["Anton", "Impact", "sans-serif"],
@@ -43,5 +85,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [animate],
 };
