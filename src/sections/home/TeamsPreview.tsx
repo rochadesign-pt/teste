@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -67,7 +66,7 @@ export function TeamsPreview() {
           </div>
           <Reveal delay={0.1}>
             <Button asChild variant="outline-light">
-              <Link to="/equipas">Todas as equipas</Link>
+              <a href="/equipas">Todas as equipas</a>
             </Button>
           </Reveal>
         </div>
@@ -78,9 +77,9 @@ export function TeamsPreview() {
             className="flex w-max gap-4 px-5 md:px-8 lg:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]"
           >
             {teams.map((team, index) => (
-              <Link
+              <a
                 key={team.slug}
-                to="/equipas"
+                href="/equipas"
                 className={cn(
                   "group relative flex h-[26rem] w-72 shrink-0 flex-col justify-between overflow-hidden p-6 transition-colors duration-300 md:w-80",
                   index % 3 === 0
@@ -112,7 +111,7 @@ export function TeamsPreview() {
                 >
                   →
                 </span>
-              </Link>
+              </a>
             ))}
           </div>
         </div>

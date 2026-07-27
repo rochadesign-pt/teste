@@ -3,7 +3,7 @@ import animate from "tailwindcss-animate";
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: "class",
-  content: ["./index.html", "./src/**/*.{ts,tsx}"],
+  content: ["./src/**/*.{astro,ts,tsx}", "./preview/index.html"],
   theme: {
     extend: {
       // Tokens shadcn/ui — a fonte de verdade está nas CSS variables (index.css)
@@ -74,8 +74,10 @@ export default {
         sm: "var(--radius)",
       },
       fontFamily: {
-        display: ["Anton", "Impact", "sans-serif"],
-        sans: ["Archivo", "system-ui", "sans-serif"],
+        // Uma só família para todo o site: Overused Grotesk.
+        // "display" = mesma família em Black (peso reforçado em index.css).
+        display: ["Overused Grotesk", "system-ui", "sans-serif"],
+        sans: ["Overused Grotesk", "system-ui", "sans-serif"],
       },
       letterSpacing: {
         wider2: "0.18em",

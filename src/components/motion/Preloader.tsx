@@ -22,11 +22,16 @@ export function Preloader({ children }: { children: ReactNode }) {
   const counter = useRef<HTMLSpanElement>(null);
 
   useGSAP(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    // Uma vez por sessão de navegação — em revisitas o preloader não repete.
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      sessionStorage.getItem("illiabum-preloaded")
+    ) {
       setReady(true);
       setDone(true);
       return;
     }
+    sessionStorage.setItem("illiabum-preloaded", "1");
 
     const tl = gsap.timeline({ onComplete: () => setDone(true) });
     tl.from(".preloader-word", {

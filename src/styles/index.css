@@ -2,6 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Overused Grotesk (OFL-1.1) — a única família tipográfica do site.
+   Servida localmente a partir de src/assets/fonts (via @sarap422/font-overused-grotesk). */
+@font-face {
+  font-family: "Overused Grotesk";
+  src: url("../assets/fonts/OverusedGrotesk-Roman.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Overused Grotesk";
+  src: url("../assets/fonts/OverusedGrotesk-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Overused Grotesk";
+  src: url("../assets/fonts/OverusedGrotesk-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Overused Grotesk";
+  src: url("../assets/fonts/OverusedGrotesk-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Overused Grotesk";
+  src: url("../assets/fonts/OverusedGrotesk-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Overused Grotesk";
+  src: url("../assets/fonts/OverusedGrotesk-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   /* Design tokens shadcn/ui — mapeados às cores do Illiabum Clube.
      primary = amarelo (cor de ação) · secondary = bordô (cor de marca) */
@@ -74,8 +119,15 @@
     @apply mx-auto w-full max-w-site px-5 md:px-8;
   }
 
+  /* Toda a tipografia é Overused Grotesk — o registo "display" é a mesma
+     família em Black (900). Reforçar o peso aqui garante que qualquer uso
+     de font-display herda o peso certo sem repetir font-black em todo o lado. */
+  .font-display {
+    font-weight: 900;
+  }
+
   .display-title {
-    @apply font-display uppercase leading-[0.95] tracking-tight;
+    @apply font-display uppercase leading-[0.92] tracking-tight;
   }
 
   .eyebrow {

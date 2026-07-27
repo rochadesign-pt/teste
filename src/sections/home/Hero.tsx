@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -145,12 +144,12 @@ export function Hero() {
           <div className="hero-fade flex flex-wrap gap-4 opacity-0">
             <Magnetic>
               <Button asChild size="lg">
-                <Link to="/jogos">Ver Jogos</Link>
+                <a href="/jogos">Ver Jogos</a>
               </Button>
             </Magnetic>
             <Magnetic>
               <Button asChild variant="outline-light" size="lg">
-                <Link to="/clube">O Clube</Link>
+                <a href="/clube">O Clube</a>
               </Button>
             </Magnetic>
           </div>

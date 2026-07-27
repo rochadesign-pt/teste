@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { Reveal } from "@/components/motion/Reveal";
@@ -89,7 +88,7 @@ export function NextGame() {
                 {nextGame.round} · {nextGame.venue}
               </p>
               <Button asChild variant="outline-light" size="sm" className="mt-2">
-                <Link to="/jogos">Calendário completo</Link>
+                <a href="/jogos">Calendário completo</a>
               </Button>
             </div>
           </div>

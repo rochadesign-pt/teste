@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 
 import { Magnetic } from "@/components/motion/Magnetic";
 import { Marquee } from "@/components/motion/Marquee";
@@ -34,12 +33,12 @@ export function JoinCTA() {
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Magnetic>
               <Button asChild size="lg">
-                <Link to="/contactos#socios">Torna-te Sócio</Link>
+                <a href="/contactos#socios">Torna-te Sócio</a>
               </Button>
             </Magnetic>
             <Magnetic>
               <Button asChild variant="outline-light" size="lg">
-                <Link to="/equipas">Inscrições na formação</Link>
+                <a href="/equipas">Inscrições na formação</a>
               </Button>
             </Magnetic>
           </div>

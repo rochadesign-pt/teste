@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import { NewsCard } from "@/components/NewsCard";
@@ -22,7 +21,7 @@ export function NewsPreview() {
           </div>
           <Reveal delay={0.1}>
             <Button asChild variant="outline">
-              <Link to="/noticias">Todas as notícias</Link>
+              <a href="/noticias">Todas as notícias</a>
             </Button>
           </Reveal>
         </div>

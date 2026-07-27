@@ -2,12 +2,15 @@
 
 Website institucional do Illiabum Clube (basquetebol, Ílhavo, fundado em 1943).
 Design system: bordô `#5c0e1e` · amarelo `#ffc72c` · preto `#0c0a0c` · cinza · branco.
-Direção de arte inspirada em sites da NBA e de clubes de futebol: tipografia display
-condensada (Anton), blocos de cor, texturas de campo e halftone, ritmo de cartaz desportivo.
+Direção de arte inspirada em sites da NBA e de clubes de futebol: **Overused Grotesk**
+(OFL) como única família tipográfica — Black para display, Roman/Medium para corpo —
+blocos de cor, texturas de campo e halftone, ritmo de cartaz desportivo.
 
 ## Stack
 
-- **Vite + React 18 + TypeScript**
+- **Astro 7 + ilhas React 18 + TypeScript** — páginas estáticas em `src/pages/*.astro`,
+  views/secções interativas em React (`src/views`, `src/sections`), View Transitions
+  nativas com cortina GSAP entre páginas (`src/layouts/Layout.astro`)
 - **Design system estilo shadcn/ui** — tokens em CSS variables (`src/styles/index.css`),
   `components.json` compatível com o CLI, primitivos vendored em `src/components/ui/`
   (Button, Badge, Card, Input, Label, Textarea, Select, Tabs) sobre Radix + CVA.
@@ -28,18 +31,24 @@ o `components.json` já aponta para os aliases e tokens certos.
 
 ```bash
 npm install
-npm run dev      # desenvolvimento
-npm run build    # build de produção (dist/)
+npm run dev             # desenvolvimento (astro dev)
+npm run build           # build de produção estática (dist/)
+npm run preview         # servir a build
+npm run build:artifact  # preview single-file (dist-artifact/) para partilha
 ```
 
 ## Estrutura
 
 ```
 src/
-  components/     # UI primitivos, layout (navbar/footer), motion, cartões
+  pages/          # Rotas Astro (index, clube, equipas, jogos, noticias, contactos)
+  layouts/        # Layout.astro — head/SEO, ilhas globais, cortina de transição
+  views/          # Páginas React montadas como ilhas (uma por rota)
   sections/home/  # Secções da homepage (hero, ticker, próximo jogo, stats…)
-  pages/          # Home, Clube, Equipas, Jogos, Notícias, Contactos
+  components/     # UI shadcn, layout (navbar/footer), motion, cartões
   data/           # Conteúdo editável (clube, equipas, jogos, notícias)
+  assets/fonts/   # Overused Grotesk (woff2, self-hosted)
+  preview/        # Harness Vite para o build single-file de partilha
 ```
 
 Todo o conteúdo vive em `src/data/` — é aí que se editam jogos, notícias e escalões.

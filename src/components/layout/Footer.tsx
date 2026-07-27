@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 
 import { Crest } from "@/components/Logo";
 import { Marquee } from "@/components/motion/Marquee";
@@ -39,12 +38,12 @@ export function Footer() {
             <ul className="space-y-2">
               {nav.map((item) => (
                 <li key={item.to}>
-                  <Link
-                    to={item.to}
+                  <a
+                    href={item.to}
                     className="text-sm text-white/70 transition-colors hover:text-gold-500"
                   >
                     {item.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
