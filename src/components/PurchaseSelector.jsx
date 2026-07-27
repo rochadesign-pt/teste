@@ -28,22 +28,22 @@ export function PurchaseSelector({ activeType, onRow, format, pickKit, pickBundl
   return (
     <div>
       {/* segmented control */}
-      <div role="tablist" aria-label="Opções de compra" className="flex gap-1 rounded-full bg-page p-1">
+      <div role="tablist" aria-label="Opções de compra" className="flex gap-1 rounded-lg border border-line bg-page p-1">
         {TABS.map((t) => (
           <button
             key={t.id}
             role="tab"
             aria-selected={activeType === t.id}
             onClick={() => onRow(t.id, FIRST[t.id](format))}
-            className={`relative flex-1 rounded-full px-3 py-2 text-xs font-medium whitespace-nowrap transition-colors duration-200 sm:text-sm ${
-              activeType === t.id ? 'text-white' : 'opacity-60 hover:opacity-100'
+            className={`relative flex-1 rounded-md px-3 py-1.5 text-xs font-medium whitespace-nowrap transition-colors duration-200 sm:text-sm ${
+              activeType === t.id ? 'text-white' : 'text-muted hover:text-ink'
             }`}
           >
             {activeType === t.id && (
               <motion.span
                 layoutId="buy-tab"
                 transition={{ duration: reduce ? 0 : 0.35, ease: EASE }}
-                className="absolute inset-0 rounded-full bg-ink"
+                className="absolute inset-0 rounded-md bg-ink"
               />
             )}
             <span className="relative">{t.label}</span>
@@ -51,7 +51,7 @@ export function PurchaseSelector({ activeType, onRow, format, pickKit, pickBundl
         ))}
       </div>
 
-      <p className="mt-3 mb-3 text-xs leading-relaxed opacity-50">{HINTS[activeType]}</p>
+      <p className="mt-3 mb-3 text-xs leading-relaxed text-muted">{HINTS[activeType]}</p>
 
       {/* lists */}
       <AnimatePresence mode="wait">

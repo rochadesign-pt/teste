@@ -142,8 +142,8 @@ export function BuyPanel({ format, setFormat, onAdd, variant = 'tabs' }) {
       </div>
 
       {/* qty + CTA */}
-      <div className="mt-6 flex gap-3">
-        <div className="flex h-14 shrink-0 items-center rounded-2xl border border-line bg-white">
+      <div className="mt-6 flex gap-2.5">
+        <div className="flex h-12 shrink-0 items-center rounded-lg border border-line bg-white">
           <button
             type="button"
             aria-label="Diminuir quantidade"
@@ -168,14 +168,14 @@ export function BuyPanel({ format, setFormat, onAdd, variant = 'tabs' }) {
           whileHover={reduce ? {} : { scale: 1.01 }}
           whileTap={reduce ? {} : { scale: 0.985 }}
           transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-          className="flex h-14 flex-1 items-center justify-center gap-2.5 rounded-2xl bg-ink text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-deep"
+          className="flex h-12 flex-1 items-center justify-center gap-2.5 rounded-lg bg-ink text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-deep"
         >
           Adicionar ao carrinho — {fmt(unit * qty)}
           <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
         </motion.button>
       </div>
 
-      <p className="mt-3 text-center text-[11px] opacity-50">
+      <p className="mt-3 text-center text-[11px] text-muted">
         Expedição em 24–48h · Faturação com NIF · Envio grátis acima de {fmt(product.freeShippingFrom)}
       </p>
 
@@ -187,7 +187,7 @@ export function BuyPanel({ format, setFormat, onAdd, variant = 'tabs' }) {
             <div key={g.title} className="flex flex-col items-center gap-1 text-center">
               <GuaranteeIcon icon={g.icon} className="h-4 w-4 text-accent-deep" />
               <p className="text-[11px] leading-tight font-medium">{g.title}</p>
-              <p className="text-[10px] leading-tight opacity-50">{g.text}</p>
+              <p className="text-[10px] leading-tight text-muted">{g.text}</p>
             </div>
           ))}
         </div>
