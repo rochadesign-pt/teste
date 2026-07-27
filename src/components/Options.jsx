@@ -245,7 +245,7 @@ export function Options({ format, setFormat, onAdd }) {
           </div>
           <motion.button
             type="button"
-            onClick={onAdd}
+            onClick={() => onAdd(picked)}
             whileHover={reduce ? {} : { scale: 1.02 }}
             whileTap={reduce ? {} : { scale: 0.97 }}
             transition={{ type: 'spring', stiffness: 400, damping: 20 }}

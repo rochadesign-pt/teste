@@ -1,0 +1,191 @@
+import { useState } from 'react'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { product } from '../data/product'
+import { PayIcons, GuaranteeIcon, Stars } from './PayIcons'
+
+const EASE = [0.32, 0.72, 0, 1]
+
+const fmt = (n) => `${n.toFixed(2).replace('.', ',')} €`
+const perL = (f) => `${(f.price / f.liters).toFixed(2).replace('.', ',')} €/L`
+
+export function BuyPanel({ format, setFormat, onAdd }) {
+  const reduce = useReducedMotion()
+  const [open, setOpen] = useState(null)
+  const selected = product.formats.find((f) => f.id === format)
+
+  return (
+    <div className="flex flex-col">
+      {/* header */}
+      <div className="mb-1 flex items-center gap-2 text-[11px] font-medium tracking-[0.16em]">
+        <span className="text-accent-deep">{product.brand}</span>
+        <span className="h-1 w-1 rounded-full bg-accent" />
+        <span className="opacity-50">{product.line.toUpperCase()}</span>
+      </div>
+
+      <h1 className="font-display mt-2 text-4xl font-medium sm:text-[2.75rem]">
+        Tiragorduras HTG-30
+      </h1>
+
+      <div className="mt-3 flex items-center gap-2 text-xs">
+        <Stars value={product.rating} />
+        <a href="#" className="font-medium underline-offset-2 hover:underline">
+          {product.rating.toFixed(1).replace('.', ',')} ({product.reviews} avaliações)
+        </a>
+        <span className="opacity-30">·</span>
+        <span className="flex items-center gap-1.5 font-medium text-accent-deep">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
+          Em stock
+        </span>
+      </div>
+
+      <p className="mt-5 text-sm leading-relaxed opacity-75">
+        {product.tagline} Desengordurante alcalino de uso profissional para
+        cozinhas industriais, HORECA e indústria alimentar — para gorduras
+        acumuladas, óleos e sujidades orgânicas.
+      </p>
+
+      {/* benefit checklist */}
+      <ul className="mt-6 divide-y divide-line border-y border-line">
+        {product.checklist.map((c) => (
+          <li key={c} className="flex items-center gap-3 py-2.5 text-[13px]">
+            <svg width="12" height="10" viewBox="0 0 12 10" fill="none" aria-hidden="true" className="shrink-0">
+              <path d="M1 5l3.4 3.4L11 1.6" stroke="#64a70b" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            {c}
+          </li>
+        ))}
+      </ul>
+
+      {/* format option cards */}
+      <div className="mt-7">
+        <p className="mb-2.5 text-[11px] font-medium tracking-[0.16em] opacity-50">VOLUMETRIA</p>
+        <div className="space-y-2" role="radiogroup" aria-label="Volumetria">
+          {product.formats.map((f) => {
+            const active = format === f.id
+            return (
+              <motion.button
+                key={f.id}
+                type="button"
+                role="radio"
+                aria-checked={active}
+                onClick={() => setFormat(f.id)}
+                whileTap={reduce ? {} : { scale: 0.995 }}
+                className={`relative flex w-full items-center gap-3 rounded-2xl border px-4 py-3.5 text-left transition-colors duration-200 ${
+                  active ? 'border-ink bg-white shadow-sm' : 'border-line bg-white/60 hover:border-ink/30'
+                }`}
+              >
+                <span
+                  className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border transition-colors duration-200 ${
+                    active ? 'border-ink' : 'border-ink/25'
+                  }`}
+                  aria-hidden="true"
+                >
+                  <span
+                    className={`h-2 w-2 rounded-full bg-ink transition-transform duration-200 ${active ? 'scale-100' : 'scale-0'}`}
+                  />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="flex items-center gap-2 text-sm font-medium">
+                    {f.label} — {f.detail}
+                    {f.tag && (
+                      <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-medium text-accent-deep">
+                        {f.tag}
+                      </span>
+                    )}
+                  </span>
+                  <span className="block text-xs opacity-50">{perL(f)}</span>
+                </span>
+                <span className="text-sm font-medium tabular-nums">{fmt(f.price)}</span>
+              </motion.button>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* CTA */}
+      <motion.button
+        type="button"
+        onClick={() => onAdd(selected.id)}
+        whileHover={reduce ? {} : { scale: 1.01 }}
+        whileTap={reduce ? {} : { scale: 0.985 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 22 }}
+        className="mt-6 flex h-14 w-full items-center justify-center gap-2.5 rounded-2xl bg-ink text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-deep"
+      >
+        Adicionar ao carrinho ({fmt(selected.price)})
+        <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+      </motion.button>
+
+      <p className="mt-3 text-center text-[11px] opacity-50">
+        Expedição em 24–48h · IVA incluído · Faturação com NIF
+      </p>
+
+      {/* payments + guarantees */}
+      <div className="mt-5 flex flex-col items-center gap-4">
+        <PayIcons className="justify-center" />
+        <div className="grid w-full grid-cols-3 gap-2 border-y border-line py-4">
+          {product.guarantees.map((g) => (
+            <div key={g.title} className="flex flex-col items-center gap-1 text-center">
+              <GuaranteeIcon icon={g.icon} className="h-4 w-4 text-accent-deep" />
+              <p className="text-[11px] leading-tight font-medium">{g.title}</p>
+              <p className="text-[10px] leading-tight opacity-50">{g.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* accordions */}
+      <div className="mt-2 divide-y divide-line">
+        {product.specs.map((spec, i) => {
+          const isOpen = open === i
+          return (
+            <div key={spec.title}>
+              <button
+                type="button"
+                onClick={() => setOpen(isOpen ? null : i)}
+                aria-expanded={isOpen}
+                className="flex w-full items-center justify-between py-4 text-left"
+              >
+                <span className="text-sm font-medium">{spec.title}</span>
+                <motion.span
+                  animate={{ rotate: isOpen ? 45 : 0 }}
+                  transition={{ duration: 0.25, ease: EASE }}
+                  className="text-base opacity-40"
+                  aria-hidden="true"
+                >
+                  +
+                </motion.span>
+              </button>
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: reduce ? 0.1 : 0.35, ease: EASE }}
+                    className="overflow-hidden"
+                  >
+                    <p className="pb-4 text-[13px] leading-relaxed opacity-70">{spec.body}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          )
+        })}
+        <div className="flex flex-wrap gap-2 py-4">
+          {['Ficha técnica (PDF)', 'Ficha de segurança (PDF)'].map((doc) => (
+            <a
+              key={doc}
+              href="#"
+              className="group flex items-center gap-2 rounded-full border border-ink/15 bg-white px-3.5 py-2 text-[11px] font-medium transition-colors duration-200 hover:border-ink"
+            >
+              <svg width="10" height="12" viewBox="0 0 12 14" fill="none" aria-hidden="true" className="transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-y-0.5">
+                <path d="M6 1v8m0 0L3 6.2M6 9l3-2.8M1 12.5h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              {doc}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
-export function Nav({ cartCount = 0 }) {
+export function Nav({ cartCount = 0, onCartOpen }) {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -60,6 +60,7 @@ export function Nav({ cartCount = 0 }) {
           </button>
           <button
             type="button"
+            onClick={onCartOpen}
             className="flex h-10 items-center gap-2 rounded-full bg-ink px-4 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-deep"
           >
             Carrinho

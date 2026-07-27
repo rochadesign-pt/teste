@@ -7,11 +7,27 @@ export const product = {
   description:
     'Poderoso desengordurante com elevada alcalinidade, ideal para garantir o desagregamento das gorduras. Remove gorduras acumuladas, óleos, sujidades orgânicas e manchas de todas as superfícies laváveis e equipamentos.',
   price: 4.35,
+  rating: 4.8,
+  reviews: 132,
+  checklist: [
+    'Desagrega gorduras carbonizadas e óleos acumulados',
+    'Realça o brilho de superfícies em aço inoxidável',
+    'Aplicável a quente — fornos, grelhadores e chapas',
+    'Diluível até 10% para pavimentos e manutenção',
+    'Compatível com madeira, plástico, vidro e pintados',
+  ],
   formats: [
-    { id: '750ml', label: '750 mL', detail: 'Pulverizador', price: 4.35 },
-    { id: '5lt', label: '5 LT', detail: 'Recarga', price: 15.9 },
-    { id: '10lt', label: '10 LT', detail: 'Recarga', price: 28.5 },
-    { id: '20lt', label: '20 LT', detail: 'Recarga', price: 52.0 },
+    { id: '750ml', label: '750 mL', detail: 'Pulverizador', price: 4.35, liters: 0.75, tag: 'Mais vendido' },
+    { id: '5lt', label: '5 LT', detail: 'Recarga', price: 15.9, liters: 5 },
+    { id: '10lt', label: '10 LT', detail: 'Recarga', price: 28.5, liters: 10 },
+    { id: '20lt', label: '20 LT', detail: 'Recarga', price: 52.0, liters: 20, tag: 'Melhor €/L' },
+  ],
+  freeShippingFrom: 30,
+  payments: ['Visa', 'Mastercard', 'MB Way', 'Multibanco', 'PayPal', 'Apple Pay'],
+  guarantees: [
+    { icon: 'shield', title: 'Pagamento seguro', text: 'Transações encriptadas SSL' },
+    { icon: 'truck', title: 'Expedição 24–48h', text: 'Portugal continental' },
+    { icon: 'return', title: 'Devoluções em 14 dias', text: 'Sem complicações' },
   ],
   benefits: [
     {
@@ -113,3 +129,18 @@ export const product = {
     },
   ],
 }
+
+export const catalog = Object.fromEntries([
+  ...product.formats.map((f) => [
+    f.id,
+    { id: f.id, name: `Tiragorduras HTG-30 · ${f.label}`, detail: f.detail, price: f.price, kind: 'format' },
+  ]),
+  ...product.combos.map((c) => [
+    c.code,
+    { id: c.code, name: c.name, detail: c.detail, price: c.price, kind: 'combo' },
+  ]),
+  ...product.bundles.map((b) => [
+    b.name,
+    { id: b.name, name: b.name, detail: b.items, price: b.price, full: b.full, kind: 'bundle' },
+  ]),
+])
