@@ -11,13 +11,13 @@ export function Bottle({ className }) {
       {/* spray head */}
       <path
         d="M60 52c0-9 7-16 16-16h96c30 0 54 20 54 48v14H92L60 74V52z"
-        fill="#191c17"
+        fill="#0b0d0e"
       />
       <rect x="34" y="46" width="34" height="22" rx="6" fill="#64a70b" />
       {/* trigger */}
       <path
         d="M78 98h30v52c0 20-12 34-26 40l-10 4c-4-30 2-66 6-96z"
-        fill="#191c17"
+        fill="#0b0d0e"
       />
       {/* neck */}
       <rect x="140" y="98" width="64" height="34" rx="6" fill="#e0d8c6" />
@@ -37,7 +37,7 @@ export function Bottle({ className }) {
         opacity="0.55"
       />
       {/* label */}
-      <rect x="96" y="196" width="152" height="150" rx="14" fill="#191c17" />
+      <rect x="96" y="196" width="152" height="150" rx="14" fill="#0b0d0e" />
       <text
         x="172"
         y="242"
@@ -69,7 +69,7 @@ export function Bottle({ className }) {
         TIRAGORDURAS
       </text>
       {/* volume tag */}
-      <rect x="120" y="452" width="104" height="34" rx="17" fill="#191c17" />
+      <rect x="120" y="452" width="104" height="34" rx="17" fill="#0b0d0e" />
       <text
         x="172"
         y="474"
