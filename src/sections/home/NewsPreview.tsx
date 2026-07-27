@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 
 import { NewsCard } from "@/components/NewsCard";
 import { Reveal, staggerContainer, staggerItem } from "@/components/motion/Reveal";
+import { SplitReveal } from "@/components/motion/SplitReveal";
 import { Button } from "@/components/ui/button";
 import { articles } from "@/data/news";
 
@@ -11,12 +12,14 @@ export function NewsPreview() {
     <section className="bg-neutral-100 py-16 md:py-24">
       <div className="container-site">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6 md:mb-14">
-          <Reveal>
-            <p className="eyebrow mb-3">Notícias</p>
-            <h2 className="display-title text-4xl md:text-6xl">
+          <div>
+            <Reveal>
+              <p className="eyebrow mb-3">Notícias</p>
+            </Reveal>
+            <SplitReveal className="display-title text-4xl md:text-6xl">
               O que se passa <span className="text-bordeaux-800">no clube</span>
-            </h2>
-          </Reveal>
+            </SplitReveal>
+          </div>
           <Reveal delay={0.1}>
             <Button asChild variant="outline">
               <Link to="/noticias">Todas as notícias</Link>

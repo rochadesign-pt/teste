@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { Crest } from "@/components/Logo";
+import { Marquee } from "@/components/motion/Marquee";
 import { club, contacts } from "@/data/club";
 
 const nav = [
@@ -13,7 +14,14 @@ const nav = [
 
 export function Footer() {
   return (
-    <footer className="bg-ink-950 text-white">
+    <footer className="overflow-hidden bg-ink-950 text-white">
+      {/* Wordmark gigante em marquee no topo do footer */}
+      <Marquee className="border-b border-white/10 py-6" duration={38}>
+        <span className="text-outline pr-10 font-display text-7xl uppercase leading-none md:text-9xl">
+          Illiabum Clube · Illiabum Clube ·&nbsp;
+        </span>
+      </Marquee>
+
       <div className="container-site pb-10 pt-16 md:pt-20">
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr]">
           <div>

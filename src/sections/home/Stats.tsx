@@ -1,21 +1,62 @@
+import { useRef } from "react";
 import { motion } from "framer-motion";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { Counter } from "@/components/motion/Counter";
-import { Reveal, staggerContainer, staggerItem } from "@/components/motion/Reveal";
+import { staggerContainer, staggerItem } from "@/components/motion/Reveal";
+import { SplitReveal } from "@/components/motion/SplitReveal";
 import { stats } from "@/data/club";
 
-// Base estrutural: Relume Stats 15/16 (stats sobre fundo escuro),
-// com contadores GSAP e tipografia de marcador.
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+// Base estrutural: Relume Stats 15/16. Contadores GSAP + ano de fundação
+// gigante em outline a atravessar a secção ao ritmo do scroll.
 export function Stats() {
+  const section = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      gsap.fromTo(
+        ".stats-year",
+        { xPercent: 12 },
+        {
+          xPercent: -22,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        },
+      );
+    },
+    { scope: section },
+  );
+
   return (
-    <section className="court-lines bg-bordeaux-900 py-16 text-white md:py-24">
-      <div className="container-site">
-        <Reveal className="mb-12 max-w-2xl md:mb-16">
+    <section
+      ref={section}
+      className="court-lines relative overflow-hidden bg-bordeaux-900 py-20 text-white md:py-28"
+    >
+      {/* Ano de fundação gigante em parallax */}
+      <span
+        aria-hidden="true"
+        className="stats-year text-outline pointer-events-none absolute -top-6 left-0 font-display text-[16rem] leading-none md:text-[26rem]"
+      >
+        1943
+      </span>
+
+      <div className="container-site relative">
+        <div className="mb-12 max-w-2xl md:mb-16">
           <p className="eyebrow-light mb-3">O clube em números</p>
-          <h2 className="display-title text-4xl md:text-6xl">
+          <SplitReveal className="display-title text-4xl text-white md:text-6xl">
             Mais do que um clube, <span className="text-gold-500">uma cidade inteira</span>
-          </h2>
-        </Reveal>
+          </SplitReveal>
+        </div>
 
         <motion.dl
           variants={staggerContainer}

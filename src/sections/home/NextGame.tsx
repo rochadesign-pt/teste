@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { motion, useReducedMotion } from "framer-motion";
 
 import { Reveal } from "@/components/motion/Reveal";
+import { SplitReveal } from "@/components/motion/SplitReveal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { isIlliabum, nextGame } from "@/data/games";
@@ -37,20 +39,36 @@ function TeamBlock({ name }: { name: string }) {
   );
 }
 
-// Cartão "próximo jogo" ao estilo dos matchups NBA: dois emblemas, hora ao
-// centro, competição e pavilhão por baixo.
+// Cartão "próximo jogo" ao estilo dos matchups NBA, com entrada em
+// clip-reveal a abrir de baixo para cima.
 export function NextGame() {
+  const reduce = useReducedMotion();
+
   return (
     <section className="bg-white py-16 md:py-24">
       <div className="container-site">
         <Reveal>
           <p className="eyebrow mb-3">Próximo jogo</p>
-          <h2 className="display-title text-4xl md:text-6xl">
-            Dia de jogo <span className="text-bordeaux-800">no pavilhão</span>
-          </h2>
         </Reveal>
+        <SplitReveal className="display-title text-4xl md:text-6xl">
+          Dia de jogo <span className="text-bordeaux-800">no pavilhão</span>
+        </SplitReveal>
 
-        <Reveal delay={0.1} className="mt-10 md:mt-14">
+        <motion.div
+          initial={
+            reduce
+              ? { opacity: 0 }
+              : { opacity: 0, clipPath: "inset(100% 0% 0% 0%)", y: 40 }
+          }
+          whileInView={
+            reduce
+              ? { opacity: 1 }
+              : { opacity: 1, clipPath: "inset(0% 0% 0% 0%)", y: 0 }
+          }
+          transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+          viewport={{ once: true, margin: "-15%" }}
+          className="mt-10 md:mt-14"
+        >
           <div className="court-lines relative overflow-hidden bg-ink-950 px-6 py-12 text-white md:px-16 md:py-16">
             <div className="relative grid items-center gap-10 md:grid-cols-[1fr_auto_1fr]">
               <TeamBlock name={nextGame.home} />
@@ -75,7 +93,7 @@ export function NextGame() {
               </Button>
             </div>
           </div>
-        </Reveal>
+        </motion.div>
       </div>
     </section>
   );

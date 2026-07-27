@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 import { Logo } from "@/components/Logo";
+import { Magnetic } from "@/components/motion/Magnetic";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -65,9 +66,11 @@ export function Navbar() {
               {link.label}
             </NavLink>
           ))}
-          <Button asChild size="sm" className="ml-3">
-            <Link to="/contactos#socios">Torna-te Sócio</Link>
-          </Button>
+          <Magnetic strength={0.25} className="ml-3">
+            <Button asChild size="sm">
+              <Link to="/contactos#socios">Torna-te Sócio</Link>
+            </Button>
+          </Magnetic>
         </nav>
 
         <button
