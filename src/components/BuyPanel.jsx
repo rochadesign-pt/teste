@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
-import { product } from '../data/product'
+import { product, catalog } from '../data/product'
 import { PayIcons, GuaranteeIcon, Stars } from './PayIcons'
+import { PurchaseSelector } from './PurchaseSelector'
 
 const EASE = [0.32, 0.72, 0, 1]
 
@@ -13,7 +14,21 @@ export function BuyPanel({ format, setFormat, onAdd }) {
   const [open, setOpen] = useState(null)
   const [qty, setQty] = useState(1)
   const [saved, setSaved] = useState(false)
-  const selected = product.formats.find((f) => f.id === format)
+  const [tab, setTab] = useState('volumetria')
+  const [pickKit, setPickKit] = useState(product.kits[0].name)
+  const [pickBundle, setPickBundle] = useState(product.bundles[0].name)
+
+  const selectedFormat = product.formats.find((f) => f.id === format)
+
+  // active purchase selection follows the visible tab
+  const selectionId =
+    tab === 'kits' ? pickKit : tab === 'bundles' ? pickBundle : format
+  const selection = catalog[selectionId]
+  const unit = selection.price
+  const context =
+    tab === 'volumetria'
+      ? `${perL(selectedFormat)} · IVA incluído`
+      : `Poupa ${fmt(selection.full - selection.price)} · IVA incluído`
 
   return (
     <div className="flex flex-col">
@@ -56,8 +71,8 @@ export function BuyPanel({ format, setFormat, onAdd }) {
 
       <div className="mt-4 flex items-center gap-2 text-xs">
         <Stars value={product.rating} />
-        <a href="#" className="font-medium underline-offset-2 hover:underline">
-          {product.rating.toFixed(1).replace('.', ',')} · {product.reviews} avaliações
+        <a href="#reviews" className="font-medium underline-offset-2 hover:underline">
+          {product.rating.toFixed(1).replace('.', ',')} · {product.reviewSummary.total} avaliações
         </a>
         <span className="opacity-30">·</span>
         <span className="flex items-center gap-1.5 font-medium text-accent-deep">
@@ -66,23 +81,21 @@ export function BuyPanel({ format, setFormat, onAdd }) {
         </span>
       </div>
 
-      {/* price */}
+      {/* price — follows active selection */}
       <div className="mt-5 flex items-baseline gap-2.5">
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.p
-            key={selected.id}
+            key={selectionId}
             initial={{ opacity: 0, y: reduce ? 0 : 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: reduce ? 0 : -8 }}
             transition={{ duration: 0.25, ease: EASE }}
             className="font-display text-3xl font-semibold tabular-nums"
           >
-            {fmt(selected.price)}
+            {fmt(unit)}
           </motion.p>
         </AnimatePresence>
-        <p className="text-xs opacity-50">
-          {perL(selected)} · IVA incluído
-        </p>
+        <p className="text-xs opacity-50">{context}</p>
       </div>
 
       <p className="mt-5 border-t border-line pt-5 text-sm leading-relaxed opacity-75">
@@ -103,50 +116,18 @@ export function BuyPanel({ format, setFormat, onAdd }) {
         ))}
       </ul>
 
-      {/* format option cards */}
+      {/* unified purchase selector: volumetrias / kits / bundles */}
       <div className="mt-7">
-        <p className="mb-2.5 text-xs font-medium opacity-50">Volumetria</p>
-        <div className="space-y-2" role="radiogroup" aria-label="Volumetria">
-          {product.formats.map((f) => {
-            const active = format === f.id
-            return (
-              <motion.button
-                key={f.id}
-                type="button"
-                role="radio"
-                aria-checked={active}
-                onClick={() => setFormat(f.id)}
-                whileTap={reduce ? {} : { scale: 0.995 }}
-                className={`relative flex w-full items-center gap-3 rounded-2xl border px-4 py-3.5 text-left transition-colors duration-200 ${
-                  active ? 'border-ink bg-white shadow-sm' : 'border-line bg-white/60 hover:border-ink/30'
-                }`}
-              >
-                <span
-                  className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border transition-colors duration-200 ${
-                    active ? 'border-ink' : 'border-ink/25'
-                  }`}
-                  aria-hidden="true"
-                >
-                  <span
-                    className={`h-2 w-2 rounded-full bg-ink transition-transform duration-200 ${active ? 'scale-100' : 'scale-0'}`}
-                  />
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="flex items-center gap-2 text-sm font-medium">
-                    {f.label} — {f.detail}
-                    {f.tag && (
-                      <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-medium text-accent-deep">
-                        {f.tag}
-                      </span>
-                    )}
-                  </span>
-                  <span className="block text-xs opacity-50">{perL(f)}</span>
-                </span>
-                <span className="text-sm font-medium tabular-nums">{fmt(f.price)}</span>
-              </motion.button>
-            )
-          })}
-        </div>
+        <PurchaseSelector
+          tab={tab}
+          setTab={setTab}
+          format={format}
+          setFormat={setFormat}
+          pickKit={pickKit}
+          setPickKit={setPickKit}
+          pickBundle={pickBundle}
+          setPickBundle={setPickBundle}
+        />
       </div>
 
       {/* qty + CTA */}
@@ -172,13 +153,13 @@ export function BuyPanel({ format, setFormat, onAdd }) {
         </div>
         <motion.button
           type="button"
-          onClick={() => onAdd(selected.id, qty)}
+          onClick={() => onAdd(selectionId, qty)}
           whileHover={reduce ? {} : { scale: 1.01 }}
           whileTap={reduce ? {} : { scale: 0.985 }}
           transition={{ type: 'spring', stiffness: 400, damping: 22 }}
           className="flex h-14 flex-1 items-center justify-center gap-2.5 rounded-2xl bg-ink text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-deep"
         >
-          Adicionar ao carrinho — {fmt(selected.price * qty)}
+          Adicionar ao carrinho — {fmt(unit * qty)}
           <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
         </motion.button>
       </div>

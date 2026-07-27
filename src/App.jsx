@@ -6,7 +6,8 @@ import { Marquee } from './components/Marquee'
 import { Benefits } from './components/Benefits'
 import { Steps } from './components/Steps'
 import { Stats } from './components/Stats'
-import { Options } from './components/Options'
+import { Reviews } from './components/Reviews'
+import { Faq } from './components/Faq'
 import { StickyBar } from './components/StickyBar'
 import { Cart } from './components/Cart'
 import { Footer } from './components/Footer'
@@ -46,17 +47,6 @@ function App() {
     })
   }, [])
 
-  // Options module: add the whole configured selection at once
-  const addSelection = useCallback(
-    (picked) => {
-      addItem(format, 1, false)
-      picked.combos.forEach((code) => addItem(code, 1, false))
-      if (picked.bundle) addItem(picked.bundle, 1, false)
-      setCartOpen(true)
-    },
-    [addItem, format],
-  )
-
   const count = items.reduce((s, it) => s + it.qty, 0)
 
   return (
@@ -68,7 +58,8 @@ function App() {
         <Benefits />
         <Steps />
         <Stats />
-        <Options format={format} setFormat={setFormat} onAdd={addSelection} />
+        <Reviews />
+        <Faq />
       </main>
       <Footer />
       <StickyBar format={format} onAdd={() => addItem(format)} />
