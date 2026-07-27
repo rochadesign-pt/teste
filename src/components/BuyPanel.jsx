@@ -3,32 +3,48 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { product, catalog } from '../data/product'
 import { PayIcons, GuaranteeIcon, Stars } from './PayIcons'
 import { PurchaseSelector } from './PurchaseSelector'
+import { PurchaseSelectorOpen } from './PurchaseSelectorOpen'
 
 const EASE = [0.32, 0.72, 0, 1]
 
 const fmt = (n) => `${n.toFixed(2).replace('.', ',')} €`
 const perL = (f) => `${(f.price / f.liters).toFixed(2).replace('.', ',')} €/L`
 
-export function BuyPanel({ format, setFormat, onAdd }) {
+export function BuyPanel({ format, setFormat, onAdd, variant = 'tabs' }) {
   const reduce = useReducedMotion()
   const [open, setOpen] = useState(null)
   const [qty, setQty] = useState(1)
   const [saved, setSaved] = useState(false)
-  const [tab, setTab] = useState('volumetria')
+  const [activeType, setActiveType] = useState('volumetria')
   const [pickKit, setPickKit] = useState(product.kits[0].name)
   const [pickBundle, setPickBundle] = useState(product.bundles[0].name)
 
   const selectedFormat = product.formats.find((f) => f.id === format)
 
-  // active purchase selection follows the visible tab
+  // single source of truth: one active purchase across all groups
+  const onRow = (type, id) => {
+    setActiveType(type)
+    if (type === 'volumetria') setFormat(id)
+    else if (type === 'kit') setPickKit(id)
+    else setPickBundle(id)
+  }
+
   const selectionId =
-    tab === 'kits' ? pickKit : tab === 'bundles' ? pickBundle : format
+    activeType === 'kit' ? pickKit : activeType === 'bundle' ? pickBundle : format
   const selection = catalog[selectionId]
   const unit = selection.price
   const context =
-    tab === 'volumetria'
+    activeType === 'volumetria'
       ? `${perL(selectedFormat)} · IVA incluído`
       : `Poupa ${fmt(selection.full - selection.price)} · IVA incluído`
+
+  const selectorProps = {
+    activeType,
+    onRow,
+    format,
+    pickKit,
+    pickBundle,
+  }
 
   return (
     <div className="flex flex-col">
@@ -118,16 +134,11 @@ export function BuyPanel({ format, setFormat, onAdd }) {
 
       {/* unified purchase selector: volumetrias / kits / bundles */}
       <div className="mt-7">
-        <PurchaseSelector
-          tab={tab}
-          setTab={setTab}
-          format={format}
-          setFormat={setFormat}
-          pickKit={pickKit}
-          setPickKit={setPickKit}
-          pickBundle={pickBundle}
-          setPickBundle={setPickBundle}
-        />
+        {variant === 'open' ? (
+          <PurchaseSelectorOpen {...selectorProps} />
+        ) : (
+          <PurchaseSelector {...selectorProps} />
+        )}
       </div>
 
       {/* qty + CTA */}

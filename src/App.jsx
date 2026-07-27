@@ -11,11 +11,28 @@ import { Faq } from './components/Faq'
 import { StickyBar } from './components/StickyBar'
 import { Cart } from './components/Cart'
 import { Footer } from './components/Footer'
+import { LayoutToggle } from './components/LayoutToggle'
 
 function App() {
   const [format, setFormat] = useState('750ml')
   const [items, setItems] = useState([])
   const [cartOpen, setCartOpen] = useState(false)
+  const [variant, setVariant] = useState(() => {
+    try {
+      return localStorage.getItem('mistolin-buy-variant') || 'open'
+    } catch {
+      return 'open'
+    }
+  })
+
+  const changeVariant = useCallback((v) => {
+    setVariant(v)
+    try {
+      localStorage.setItem('mistolin-buy-variant', v)
+    } catch {
+      /* ignore */
+    }
+  }, [])
 
   const addItem = useCallback((id, qty = 1, open = true) => {
     setItems((prev) => {
@@ -53,7 +70,7 @@ function App() {
     <SmoothScroll>
       <Nav cartCount={count} onCartOpen={() => setCartOpen(true)} />
       <main>
-        <Hero format={format} setFormat={setFormat} onAdd={(id, qty) => addItem(id, qty)} />
+        <Hero format={format} setFormat={setFormat} onAdd={(id, qty) => addItem(id, qty)} variant={variant} />
         <Marquee />
         <Benefits />
         <Steps />
@@ -63,6 +80,7 @@ function App() {
       </main>
       <Footer />
       <StickyBar format={format} onAdd={() => addItem(format)} />
+      <LayoutToggle variant={variant} onChange={changeVariant} />
       <Cart
         open={cartOpen}
         onClose={() => setCartOpen(false)}

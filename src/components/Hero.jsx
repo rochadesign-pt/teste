@@ -4,7 +4,7 @@ import { BuyPanel } from './BuyPanel'
 
 const EASE = [0.32, 0.72, 0, 1]
 
-export function Hero({ format, setFormat, onAdd }) {
+export function Hero({ format, setFormat, onAdd, variant }) {
   const reduce = useReducedMotion()
 
   return (
@@ -80,7 +80,7 @@ export function Hero({ format, setFormat, onAdd }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}
       >
-        <BuyPanel format={format} setFormat={setFormat} onAdd={onAdd} />
+        <BuyPanel format={format} setFormat={setFormat} onAdd={onAdd} variant={variant} />
       </motion.div>
     </section>
   )
