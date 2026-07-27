@@ -141,12 +141,12 @@ export function Options({ format, setFormat, onAdd }) {
               OPÇÕES DE COMPRA
             </p>
             <h2 className="font-display text-3xl font-extrabold uppercase sm:text-4xl">
-              À tua medida.
+              À medida da operação.
             </h2>
           </div>
           <p className="max-w-[220px] text-xs leading-relaxed opacity-50">
-            Escolhe a volumetria, junta produtos da linha cozinha ou poupa com um
-            bundle.
+            Selecione a volumetria, complemente com a linha cozinha ou otimize o
+            custo com um bundle.
           </p>
         </div>
 
@@ -191,10 +191,16 @@ export function Options({ format, setFormat, onAdd }) {
         </AnimatePresence>
 
         <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
-          <p className="text-xs opacity-50">
+          <p className="text-xs leading-relaxed opacity-50">
             {extras > 0
-              ? `${extras} extra${extras > 1 ? 's' : ''} selecionado${extras > 1 ? 's' : ''} além do HTG-30`
-              : 'Seleção atual: apenas o HTG-30'}
+              ? `${extras} extra${extras > 1 ? 's' : ''} selecionado${extras > 1 ? 's' : ''} além do HTG-30.`
+              : 'Seleção atual: apenas o HTG-30.'}
+            <br />
+            Volumes industriais ou revenda?{' '}
+            <a href="#" className="font-semibold text-accent-deep underline-offset-2 hover:underline">
+              Peça uma proposta
+            </a>
+            .
           </p>
           <motion.button
             type="button"

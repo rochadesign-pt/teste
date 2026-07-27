@@ -48,8 +48,8 @@ export function Steps() {
             </h2>
           </div>
           <p className="max-w-xs text-sm leading-relaxed opacity-60">
-            Em pavimentos e limpezas de manutenção, utiliza o HTG-30 numa
-            diluição até 10%.
+            Em pavimentos e limpezas de manutenção, recomenda-se a utilização
+            do HTG-30 numa diluição até 10%.
           </p>
         </div>
 

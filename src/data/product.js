@@ -35,17 +35,17 @@ export const product = {
     {
       n: '01',
       title: 'Pulverizar',
-      text: 'Aplica o produto diretamente sobre a superfície — fogões, fornos, grelhadores ou filtros de exaustor, mesmo a quente.',
+      text: 'Aplicar o produto diretamente sobre a superfície — fogões, fornos, grelhadores ou filtros de exaustão, mesmo a quente.',
     },
     {
       n: '02',
       title: 'Deixar atuar 5 min',
-      text: 'A fórmula alcalina desagrega a gordura por ti. Em pavimentos, dilui até 10% e aplica com mopa ou máquina.',
+      text: 'A fórmula alcalina desagrega a gordura sem ação mecânica intensiva. Em pavimentos, aplicar numa diluição até 10%, com mopa ou máquina de lavar.',
     },
     {
       n: '03',
       title: 'Enxaguar',
-      text: 'Enxagua abundantemente com água e deixa secar. O inox fica limpo, desengordurado e com brilho.',
+      text: 'Enxaguar abundantemente com água e deixar secar. Superfícies limpas, desengorduradas e com o brilho do inox realçado.',
     },
   ],
   stats: [

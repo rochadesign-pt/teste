@@ -55,9 +55,10 @@ export function Hero({ format, setFormat, onAdd }) {
         </motion.h1>
 
         <motion.p variants={item} className="mt-8 max-w-md text-lg leading-relaxed opacity-80">
-          {product.tagline} Desengordurante profissional de elevada alcalinidade
-          para cozinhas industriais — remove gorduras acumuladas, óleos e
-          sujidades orgânicas de todas as superfícies laváveis.
+          {product.tagline} Desengordurante alcalino de uso profissional para
+          cozinhas industriais, HORECA e indústria alimentar — remove gorduras
+          acumuladas, óleos e sujidades orgânicas de todas as superfícies
+          laváveis e equipamentos.
         </motion.p>
 
         {/* format picker */}
@@ -99,9 +100,9 @@ export function Hero({ format, setFormat, onAdd }) {
             </span>
           </motion.button>
           <p className="text-xs leading-relaxed opacity-50">
-            IVA incluído.
+            IVA incluído · Faturação com NIF.
             <br />
-            Envio em 24–48h.
+            Expedição em 24–48h, em Portugal continental.
           </p>
         </motion.div>
       </motion.div>

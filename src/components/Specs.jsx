@@ -21,9 +21,23 @@ export function Specs() {
           <h2 className="font-display text-4xl leading-[1.02] font-black uppercase sm:text-5xl">
             Tudo o que
             <br />
-            precisas de saber.
+            precisa de saber.
           </h2>
           <p className="mt-6 max-w-sm leading-relaxed opacity-70">{product.description}</p>
+          <div className="mt-8 flex flex-wrap gap-2">
+            {['Ficha técnica (PDF)', 'Ficha de dados de segurança (PDF)'].map((doc) => (
+              <a
+                key={doc}
+                href="#"
+                className="flex items-center gap-2 rounded-full border border-ink/15 bg-white px-4 py-2.5 text-xs font-semibold transition-colors duration-200 hover:border-ink"
+              >
+                <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true">
+                  <path d="M6 1v8m0 0L3 6.2M6 9l3-2.8M1 12.5h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                {doc}
+              </a>
+            ))}
+          </div>
         </motion.div>
 
         <div className="divide-y divide-ink/10 border-y border-ink/10">
