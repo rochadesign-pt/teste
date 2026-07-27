@@ -90,7 +90,9 @@ export const product = {
       price: 3.8,
     },
   ],
-  // Kits: conjuntos funcionais onde o HTG-30 está incluído
+  // Kits: conjuntos funcionais onde o HTG-30 está incluído.
+  // `image`: caminho para a foto do conjunto (ex.: '/kits/cozinha.jpg').
+  // Enquanto for null, o tile mostra um fallback ilustrado.
   kits: [
     {
       name: 'Kit Cozinha Profissional',
@@ -98,6 +100,7 @@ export const product = {
       items: ['HTG-30 750 mL', 'Desinfetante DDA-90', 'Brilha Inox INX-25'],
       price: 13.9,
       full: 15.65,
+      image: null,
     },
     {
       name: 'Kit Arranque HORECA',
@@ -105,6 +108,7 @@ export const product = {
       items: ['HTG-30 5 LT', 'Lava-Tudo LTP-40 5 LT', '2 pulverizadores doseadores'],
       price: 34.5,
       full: 40.4,
+      image: null,
     },
   ],
   // Bundles: conjuntos promocionais do próprio HTG-30
@@ -115,6 +119,7 @@ export const product = {
       items: ['2× HTG-30 750 mL', '1× recarga HTG-30 5 LT'],
       price: 21.9,
       full: 24.6,
+      image: null,
     },
     {
       name: 'Fornecimento Trimestral',
@@ -122,6 +127,7 @@ export const product = {
       items: ['4× HTG-30 5 LT', 'Envio prioritário incluído'],
       price: 56.9,
       full: 63.6,
+      image: null,
     },
   ],
   reviewSummary: {
