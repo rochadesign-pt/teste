@@ -24,7 +24,7 @@ export function Benefits() {
         transition={{ duration: 0.6, ease: EASE }}
         className="mb-14 max-w-2xl"
       >
-        <p className="mb-4 text-xs font-bold tracking-[0.2em] text-orange">PORQUÊ O HTG-30</p>
+        <p className="mb-4 text-xs font-bold tracking-[0.2em] text-accent">PORQUÊ O HTG-30</p>
         <h2 className="font-display text-4xl leading-[1.02] font-black uppercase sm:text-5xl lg:text-6xl">
           Feito para a gordura
           <br />
@@ -46,7 +46,7 @@ export function Benefits() {
             whileHover={reduce ? {} : { y: -6 }}
             transition={{ type: 'spring', stiffness: 300, damping: 24 }}
             className={`flex min-h-[280px] flex-col justify-between rounded-3xl p-7 ${
-              i === 0 ? 'bg-orange text-cream' : i === 3 ? 'bg-green text-cream' : 'bg-sand'
+              i === 0 ? 'bg-accent text-white' : i === 3 ? 'bg-ink text-white' : 'bg-white shadow-sm'
             }`}
           >
             <span className="font-display text-sm font-extrabold opacity-50">

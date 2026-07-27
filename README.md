@@ -6,6 +6,12 @@ Coffee Kings (Significa).
 
 > Conceito não-oficial — exercício de design. Não afiliado à Mistolin Solutions.
 
+## Direção gráfica
+
+- Accent único: `#64A70B` (verde Mistolin)
+- Fundo `#F5F5F5`, cards a branco
+- Tipografia: **Karla** (display) + **Inter** (corpo)
+
 ## Stack
 
 - **Vite + React**
@@ -36,7 +42,7 @@ src/
     Steps.jsx            # modo de utilização em 3 passos (timeline GSAP)
     Stats.jsx            # counters técnicos (pH, tempo, diluição)
     Specs.jsx            # accordion de detalhes técnicos
-    Formats.jsx          # formatos 750mL / 5LT / 10LT / 20LT
+    Options.jsx          # opções de compra: volumetrias / combinações / bundles
     StickyBar.jsx        # barra de compra persistente on-scroll
     Footer.jsx
 ```

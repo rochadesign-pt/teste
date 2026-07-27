@@ -36,11 +36,11 @@ export function Steps() {
   )
 
   return (
-    <section ref={container} className="bg-ink text-cream">
+    <section ref={container} className="bg-ink text-white">
       <div className="mx-auto max-w-[1440px] px-6 py-24 lg:px-12 lg:py-32">
         <div className="steps-headline mb-16 flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="mb-4 text-xs font-bold tracking-[0.2em] text-orange">MODO DE UTILIZAÇÃO</p>
+            <p className="mb-4 text-xs font-bold tracking-[0.2em] text-accent">MODO DE UTILIZAÇÃO</p>
             <h2 className="font-display text-4xl leading-[1.02] font-black uppercase sm:text-5xl lg:text-6xl">
               Três passos.
               <br />
@@ -53,13 +53,13 @@ export function Steps() {
           </p>
         </div>
 
-        <div className="divide-y divide-cream/10">
+        <div className="divide-y divide-white/10">
           {product.steps.map((step) => (
             <div
               key={step.n}
               className="step-row group grid grid-cols-1 items-baseline gap-4 py-10 md:grid-cols-[120px_1fr_1.2fr]"
             >
-              <span className="font-display text-5xl font-black text-orange lg:text-6xl">
+              <span className="font-display text-5xl font-black text-accent lg:text-6xl">
                 {step.n}
               </span>
               <h3 className="font-display text-3xl font-extrabold uppercase transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-2 lg:text-4xl">

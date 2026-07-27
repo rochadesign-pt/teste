@@ -37,8 +37,8 @@ export function Hero({ format, setFormat, onAdd }) {
         className="flex flex-col justify-center py-8 lg:pr-12"
       >
         <motion.div variants={item} className="mb-6 flex items-center gap-3 text-xs font-bold tracking-[0.2em]">
-          <span className="text-green">{product.brand}</span>
-          <span className="h-1 w-1 rounded-full bg-orange" />
+          <span className="text-accent">{product.brand}</span>
+          <span className="h-1 w-1 rounded-full bg-accent" />
           <span className="opacity-50">{product.line.toUpperCase()}</span>
         </motion.div>
 
@@ -49,7 +49,7 @@ export function Hero({ format, setFormat, onAdd }) {
           Tira
           <br />
           gorduras
-          <span className="mt-3 block font-narrow text-[0.45em] font-extrabold text-orange">
+          <span className="mt-3 block font-display text-[0.45em] font-extrabold text-accent">
             HTG-30 · 750 mL
           </span>
         </motion.h1>
@@ -72,7 +72,7 @@ export function Hero({ format, setFormat, onAdd }) {
                 aria-pressed={format === f.id}
                 className={`rounded-full border px-5 py-2.5 text-sm font-bold transition-colors duration-200 ${
                   format === f.id
-                    ? 'border-ink bg-ink text-cream'
+                    ? 'border-ink bg-ink text-white'
                     : 'border-ink/20 hover:border-ink'
                 }`}
               >
@@ -91,10 +91,10 @@ export function Hero({ format, setFormat, onAdd }) {
             whileHover={reduce ? {} : { scale: 1.02 }}
             whileTap={reduce ? {} : { scale: 0.97 }}
             transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-            className="group flex h-16 items-center gap-4 rounded-full bg-orange pr-2 pl-6 text-base font-bold whitespace-nowrap text-cream shadow-[0_12px_32px_-12px_rgba(255,92,31,0.7)] transition-colors duration-200 hover:bg-orange-deep sm:gap-6 sm:pl-8"
+            className="group flex h-16 items-center gap-4 rounded-full bg-accent pr-2 pl-6 text-base font-bold whitespace-nowrap text-white shadow-[0_12px_32px_-12px_rgba(100,167,11,0.7)] transition-colors duration-200 hover:bg-accent-deep sm:gap-6 sm:pl-8"
           >
             {added ? 'Adicionado ✓' : 'Adicionar ao carrinho'}
-            <span className="flex h-12 items-center rounded-full bg-ink px-5 text-cream tabular-nums whitespace-nowrap">
+            <span className="flex h-12 items-center rounded-full bg-ink px-5 text-white tabular-nums whitespace-nowrap">
               {fmt(selected.price)}
             </span>
           </motion.button>
@@ -111,12 +111,12 @@ export function Hero({ format, setFormat, onAdd }) {
         initial={{ opacity: 0, scale: reduce ? 1 : 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
-        className="relative flex items-center justify-center overflow-hidden rounded-[2.5rem] bg-orange"
+        className="relative flex items-center justify-center overflow-hidden rounded-[2.5rem] bg-white shadow-sm"
       >
         {/* oversized watermark type */}
         <span
           aria-hidden="true"
-          className="font-display absolute top-6 left-1/2 -translate-x-1/2 text-[9rem] leading-none font-black whitespace-nowrap text-cream/15 select-none lg:text-[11rem]"
+          className="font-display absolute top-6 left-1/2 -translate-x-1/2 text-[9rem] leading-none font-black whitespace-nowrap text-accent/10 select-none lg:text-[11rem]"
         >
           HTG-30
         </span>
@@ -133,16 +133,16 @@ export function Hero({ format, setFormat, onAdd }) {
 
         {/* floating badges */}
         <div className="absolute right-6 bottom-6 flex flex-col items-end gap-2">
-          <span className="rounded-full bg-ink px-4 py-2 text-xs font-bold text-cream">
+          <span className="rounded-full bg-ink px-4 py-2 text-xs font-bold text-white">
             pH 13–14 · alcalino
           </span>
-          <span className="rounded-full bg-cream px-4 py-2 text-xs font-bold text-ink">
+          <span className="rounded-full bg-accent-soft px-4 py-2 text-xs font-bold text-accent-deep">
             Uso profissional
           </span>
         </div>
 
-        <div className="absolute bottom-6 left-6 hidden items-center gap-2 rounded-full bg-cream/90 px-4 py-2 text-xs font-bold backdrop-blur lg:flex">
-          <span className="h-2 w-2 animate-pulse rounded-full bg-green" />
+        <div className="absolute bottom-6 left-6 hidden items-center gap-2 rounded-full bg-page px-4 py-2 text-xs font-bold lg:flex">
+          <span className="h-2 w-2 animate-pulse rounded-full bg-accent" />
           Em stock
         </div>
       </motion.div>

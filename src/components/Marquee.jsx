@@ -33,7 +33,7 @@ export function Marquee({ dark = false }) {
     <div
       ref={container}
       className={`overflow-hidden border-y py-5 ${
-        dark ? 'border-cream/10 bg-ink text-cream' : 'border-ink/10 bg-cream'
+        dark ? 'border-white/10 bg-ink text-white' : 'border-ink/10 bg-white'
       }`}
       aria-hidden="true"
     >
@@ -46,7 +46,7 @@ export function Marquee({ dark = false }) {
                 className="font-display flex items-center gap-6 pr-6 text-2xl font-extrabold whitespace-nowrap uppercase lg:text-3xl"
               >
                 {item}
-                <svg width="18" height="18" viewBox="0 0 18 18" className="text-orange" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 18 18" className="text-accent" aria-hidden="true">
                   <path d="M9 0l2.2 6.8H18l-5.6 4.1 2.1 6.9L9 13.6l-5.5 4.2 2.1-6.9L0 6.8h6.8z" fill="currentColor" />
                 </svg>
               </span>

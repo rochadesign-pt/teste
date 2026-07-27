@@ -54,6 +54,46 @@ export const product = {
     { value: 30, suffix: '%', label: 'matéria ativa total' },
     { value: 10, suffix: '%', label: 'diluição em pavimentos' },
   ],
+  combos: [
+    {
+      code: 'DDA-90',
+      name: 'Desinfetante Alimentar DDA-90',
+      detail: 'Desinfeção de superfícies em contacto com alimentos',
+      price: 5.2,
+    },
+    {
+      code: 'INX-25',
+      name: 'Brilha Inox INX-25',
+      detail: 'Acabamento e proteção de bancadas em aço inoxidável',
+      price: 6.1,
+    },
+    {
+      code: 'LTP-40',
+      name: 'Lava-Tudo Pavimentos LTP-40',
+      detail: 'Manutenção diária de pavimentos de cozinha',
+      price: 3.8,
+    },
+  ],
+  bundles: [
+    {
+      name: 'Pack Tiragorduras',
+      items: '2× HTG-30 750 mL + recarga 5 LT',
+      price: 21.9,
+      full: 24.6,
+    },
+    {
+      name: 'Kit Cozinha Profissional',
+      items: 'HTG-30 750 mL + DDA-90 + INX-25',
+      price: 13.9,
+      full: 15.65,
+    },
+    {
+      name: 'Kit Arranque HORECA',
+      items: 'HTG-30 5 LT + LTP-40 5 LT + 2 pulverizadores doseadores',
+      price: 34.5,
+      full: 40.4,
+    },
+  ],
   specs: [
     {
       title: 'Aplicações',

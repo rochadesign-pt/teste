@@ -11,20 +11,20 @@ export function Bottle({ className }) {
       {/* spray head */}
       <path
         d="M60 52c0-9 7-16 16-16h96c30 0 54 20 54 48v14H92L60 74V52z"
-        fill="#16241c"
+        fill="#191c17"
       />
-      <rect x="34" y="46" width="34" height="22" rx="6" fill="#ff5c1f" />
+      <rect x="34" y="46" width="34" height="22" rx="6" fill="#64a70b" />
       {/* trigger */}
       <path
         d="M78 98h30v52c0 20-12 34-26 40l-10 4c-4-30 2-66 6-96z"
-        fill="#16241c"
+        fill="#191c17"
       />
       {/* neck */}
       <rect x="140" y="98" width="64" height="34" rx="6" fill="#e0d8c6" />
       {/* shoulder + body */}
       <path
         d="M110 132h124c26 34 38 60 38 96 0 28-12 44-12 70v186c0 26-20 46-46 46H128c-26 0-46-20-46-46V298c0-26-12-42-12-70 0-36 14-62 40-96z"
-        fill="#f8f6f0"
+        fill="#f0efeb"
       />
       {/* liquid */}
       <path
@@ -37,7 +37,7 @@ export function Bottle({ className }) {
         opacity="0.55"
       />
       {/* label */}
-      <rect x="96" y="196" width="152" height="150" rx="14" fill="#16241c" />
+      <rect x="96" y="196" width="152" height="150" rx="14" fill="#191c17" />
       <text
         x="172"
         y="242"
@@ -54,7 +54,7 @@ export function Bottle({ className }) {
         x="172"
         y="292"
         textAnchor="middle"
-        fill="#ff5c1f"
+        fill="#64a70b"
         style={{ font: '900 44px Archivo, sans-serif', letterSpacing: '-0.01em' }}
       >
         HTG-30
@@ -69,7 +69,7 @@ export function Bottle({ className }) {
         TIRAGORDURAS
       </text>
       {/* volume tag */}
-      <rect x="120" y="452" width="104" height="34" rx="17" fill="#16241c" />
+      <rect x="120" y="452" width="104" height="34" rx="17" fill="#191c17" />
       <text
         x="172"
         y="474"
@@ -94,14 +94,14 @@ export function Bottle({ className }) {
 export function SprayMist({ className }) {
   return (
     <svg viewBox="0 0 120 90" fill="none" className={className} aria-hidden="true">
-      <circle cx="14" cy="46" r="5" fill="#ff5c1f" />
-      <circle cx="38" cy="24" r="4" fill="#ff5c1f" opacity="0.8" />
-      <circle cx="42" cy="62" r="4" fill="#ff5c1f" opacity="0.8" />
-      <circle cx="66" cy="12" r="3" fill="#ff5c1f" opacity="0.6" />
-      <circle cx="72" cy="42" r="3.5" fill="#ff5c1f" opacity="0.6" />
-      <circle cx="68" cy="74" r="3" fill="#ff5c1f" opacity="0.6" />
-      <circle cx="98" cy="28" r="2.5" fill="#ff5c1f" opacity="0.4" />
-      <circle cx="104" cy="56" r="2.5" fill="#ff5c1f" opacity="0.4" />
+      <circle cx="14" cy="46" r="5" fill="#64a70b" />
+      <circle cx="38" cy="24" r="4" fill="#64a70b" opacity="0.8" />
+      <circle cx="42" cy="62" r="4" fill="#64a70b" opacity="0.8" />
+      <circle cx="66" cy="12" r="3" fill="#64a70b" opacity="0.6" />
+      <circle cx="72" cy="42" r="3.5" fill="#64a70b" opacity="0.6" />
+      <circle cx="68" cy="74" r="3" fill="#64a70b" opacity="0.6" />
+      <circle cx="98" cy="28" r="2.5" fill="#64a70b" opacity="0.4" />
+      <circle cx="104" cy="56" r="2.5" fill="#64a70b" opacity="0.4" />
     </svg>
   )
 }

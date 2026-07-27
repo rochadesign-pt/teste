@@ -17,7 +17,7 @@ export function Specs() {
           viewport={{ once: true, margin: '-10%' }}
           transition={{ duration: 0.6, ease: EASE }}
         >
-          <p className="mb-4 text-xs font-bold tracking-[0.2em] text-orange">DETALHES</p>
+          <p className="mb-4 text-xs font-bold tracking-[0.2em] text-accent">DETALHES</p>
           <h2 className="font-display text-4xl leading-[1.02] font-black uppercase sm:text-5xl">
             Tudo o que
             <br />
@@ -44,7 +44,7 @@ export function Specs() {
                     animate={{ rotate: isOpen ? 45 : 0 }}
                     transition={{ duration: 0.25, ease: EASE }}
                     className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-xl font-medium transition-colors duration-200 ${
-                      isOpen ? 'bg-orange text-cream' : 'bg-ink/5'
+                      isOpen ? 'bg-accent text-white' : 'bg-ink/5'
                     }`}
                     aria-hidden="true"
                   >

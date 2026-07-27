@@ -7,7 +7,7 @@ import { Benefits } from './components/Benefits'
 import { Steps } from './components/Steps'
 import { Stats } from './components/Stats'
 import { Specs } from './components/Specs'
-import { Formats } from './components/Formats'
+import { Options } from './components/Options'
 import { StickyBar } from './components/StickyBar'
 import { Footer } from './components/Footer'
 
@@ -27,7 +27,7 @@ function App() {
         <Steps />
         <Stats />
         <Specs />
-        <Formats setFormat={setFormat} />
+        <Options format={format} setFormat={setFormat} onAdd={addToCart} />
       </main>
       <Footer />
       <StickyBar format={format} onAdd={addToCart} />

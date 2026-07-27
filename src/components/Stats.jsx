@@ -38,12 +38,12 @@ export function Stats() {
     <section ref={container} className="mx-auto max-w-[1440px] px-6 py-20 lg:px-12">
       <div className="grid grid-cols-2 gap-y-12 lg:grid-cols-4">
         {product.stats.map((stat) => (
-          <div key={stat.label} className="border-l-2 border-orange pl-6">
+          <div key={stat.label} className="border-l-2 border-accent pl-6">
             <p className="font-display text-6xl font-black tabular-nums lg:text-7xl">
               <span className="stat-value" data-value={stat.value}>
                 0
               </span>
-              <span className="text-orange">{stat.suffix}</span>
+              <span className="text-accent">{stat.suffix}</span>
             </p>
             <p className="mt-2 text-sm font-semibold opacity-60">{stat.label}</p>
           </div>
