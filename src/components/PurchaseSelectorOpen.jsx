@@ -1,5 +1,5 @@
 import { product } from '../data/product'
-import { SetTile, VolumeRow } from './OptionCards'
+import { SetTile, BundleCard, VolumeRow } from './OptionCards'
 
 // All options visible at once — one radiogroup across the three groups,
 // separated by quiet section labels. Only one option is ever selected.
@@ -54,12 +54,11 @@ export function PurchaseSelectorOpen({ activeType, onRow, format, pickKit, pickB
           </p>
           <p className="truncate text-[11px] opacity-40">Preço reduzido por tempo limitado</p>
         </div>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="space-y-2">
           {product.bundles.map((b) => (
-            <SetTile
+            <BundleCard
               key={b.name}
               o={b}
-              promo
               active={activeType === 'bundle' && pickBundle === b.name}
               onSelect={() => onRow('bundle', b.name)}
             />

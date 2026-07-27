@@ -135,3 +135,65 @@ export function SetTile({ o, active, onSelect, promo = false }) {
     </motion.button>
   )
 }
+
+// Bundle card — a deliberately different, promo-forward format: a dark
+// full-width offer strip with a light photo thumb, so bundles read as
+// "deals" and never get mistaken for the light kit tiles.
+export function BundleCard({ o, active, onSelect }) {
+  const reduce = useReducedMotion()
+  return (
+    <motion.button
+      type="button"
+      role="radio"
+      aria-checked={active}
+      onClick={onSelect}
+      whileTap={reduce ? {} : { scale: 0.995 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+      className={`relative flex w-full items-stretch gap-3 overflow-hidden rounded-2xl border p-2 text-left text-white transition-colors duration-200 ${
+        active ? 'border-accent bg-ink ring-1 ring-accent' : 'border-ink/80 bg-ink hover:border-accent/60'
+      }`}
+    >
+      {/* accent edge */}
+      <span className="absolute inset-y-0 left-0 w-1 bg-accent" aria-hidden="true" />
+
+      {/* thumb */}
+      <div className="relative h-[74px] w-[74px] shrink-0 overflow-hidden rounded-xl">
+        <SetVisual o={o} promo />
+      </div>
+
+      {/* info */}
+      <div className="flex min-w-0 flex-1 flex-col py-0.5 pr-1">
+        <div className="flex items-center gap-2">
+          <span className="flex items-center gap-1 rounded-full bg-accent px-2 py-0.5 text-[9px] font-semibold tracking-[0.1em] text-white">
+            <span className="h-1 w-1 rounded-full bg-white" />
+            PROMO
+          </span>
+          <span className="text-[10px] tracking-[0.08em] text-white/50">TEMPO LIMITADO</span>
+          <span className="ml-auto">
+            <span
+              className={`flex h-5 w-5 items-center justify-center rounded-full border ${
+                active ? 'border-accent bg-accent' : 'border-white/40'
+              }`}
+              aria-hidden="true"
+            >
+              <svg width="9" height="7" viewBox="0 0 10 8" fill="none" className={active ? 'opacity-100' : 'opacity-0'}>
+                <path d="M1 4l2.8 2.8L9 1.4" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" />
+              </svg>
+            </span>
+          </span>
+        </div>
+
+        <p className="mt-1.5 truncate text-sm font-medium">{o.name}</p>
+        <p className="truncate text-[11px] text-white/50">{o.items.join(' · ')}</p>
+
+        <div className="mt-auto flex items-end gap-2 pt-1.5">
+          <span className="text-lg font-semibold tabular-nums">{fmt(o.price)}</span>
+          <span className="pb-0.5 text-[11px] tabular-nums text-white/40 line-through">{fmt(o.full)}</span>
+          <span className="ml-auto rounded-full bg-accent px-2.5 py-1 text-[11px] font-semibold tabular-nums text-white">
+            −{save(o)}% · poupa {fmt(o.full - o.price)}
+          </span>
+        </div>
+      </div>
+    </motion.button>
+  )
+}

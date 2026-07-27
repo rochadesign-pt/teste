@@ -1,6 +1,6 @@
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { product } from '../data/product'
-import { SetTile, VolumeRow } from './OptionCards'
+import { SetTile, BundleCard, VolumeRow } from './OptionCards'
 
 const EASE = [0.32, 0.72, 0, 1]
 
@@ -61,7 +61,7 @@ export function PurchaseSelector({ activeType, onRow, format, pickKit, pickBundl
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: reduce ? 0 : -6 }}
           transition={{ duration: 0.25, ease: EASE }}
-          className={activeType === 'volumetria' ? 'space-y-2' : 'grid grid-cols-2 gap-2'}
+          className={activeType === 'kit' ? 'grid grid-cols-2 gap-2' : 'space-y-2'}
           role="radiogroup"
         >
           {activeType === 'volumetria' &&
@@ -74,7 +74,7 @@ export function PurchaseSelector({ activeType, onRow, format, pickKit, pickBundl
             ))}
           {activeType === 'bundle' &&
             product.bundles.map((b) => (
-              <SetTile key={b.name} o={b} promo active={pickBundle === b.name} onSelect={() => onRow('bundle', b.name)} />
+              <BundleCard key={b.name} o={b} active={pickBundle === b.name} onSelect={() => onRow('bundle', b.name)} />
             ))}
         </motion.div>
       </AnimatePresence>
