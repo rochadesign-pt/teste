@@ -29,8 +29,8 @@ body {
 }
 
 .font-display {
-  font-family: 'Karla', 'Inter', sans-serif;
-  letter-spacing: -0.03em;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.035em;
 }
 
 ::selection {

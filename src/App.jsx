@@ -63,7 +63,7 @@ function App() {
     <SmoothScroll>
       <Nav cartCount={count} onCartOpen={() => setCartOpen(true)} />
       <main>
-        <Hero format={format} setFormat={setFormat} onAdd={(id) => addItem(id)} />
+        <Hero format={format} setFormat={setFormat} onAdd={(id, qty) => addItem(id, qty)} />
         <Marquee />
         <Benefits />
         <Steps />

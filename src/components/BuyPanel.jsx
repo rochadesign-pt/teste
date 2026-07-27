@@ -11,25 +11,53 @@ const perL = (f) => `${(f.price / f.liters).toFixed(2).replace('.', ',')} €/L`
 export function BuyPanel({ format, setFormat, onAdd }) {
   const reduce = useReducedMotion()
   const [open, setOpen] = useState(null)
+  const [qty, setQty] = useState(1)
+  const [saved, setSaved] = useState(false)
   const selected = product.formats.find((f) => f.id === format)
 
   return (
     <div className="flex flex-col">
-      {/* header */}
-      <div className="mb-1 flex items-center gap-2 text-[11px] font-medium tracking-[0.16em]">
-        <span className="text-accent-deep">{product.brand}</span>
-        <span className="h-1 w-1 rounded-full bg-accent" />
-        <span className="opacity-50">{product.line.toUpperCase()}</span>
+      {/* category + wishlist */}
+      <div className="flex items-center justify-between">
+        <span className="rounded-full bg-accent-soft px-3 py-1.5 text-xs font-medium text-accent-deep">
+          Linha Cozinha
+        </span>
+        <button
+          type="button"
+          aria-label={saved ? 'Remover dos favoritos' : 'Guardar nos favoritos'}
+          aria-pressed={saved}
+          onClick={() => setSaved(!saved)}
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-line bg-white transition-colors duration-200 hover:border-ink/30"
+        >
+          <motion.svg
+            width="15"
+            height="14"
+            viewBox="0 0 16 15"
+            animate={reduce ? {} : { scale: saved ? [1, 1.3, 1] : 1 }}
+            transition={{ duration: 0.3, ease: EASE }}
+            aria-hidden="true"
+          >
+            <path
+              d="M8 14.2S1 10 1 5.2C1 2.9 2.8 1 5.1 1 6.3 1 7.4 1.6 8 2.5 8.6 1.6 9.7 1 10.9 1 13.2 1 15 2.9 15 5.2c0 4.8-7 9-7 9z"
+              fill={saved ? '#64a70b' : 'none'}
+              stroke={saved ? '#64a70b' : '#191c17'}
+              strokeWidth="1.3"
+              strokeLinejoin="round"
+            />
+          </motion.svg>
+        </button>
       </div>
 
-      <h1 className="font-display mt-2 text-4xl font-medium sm:text-[2.75rem]">
+      {/* two-line title: muted category + product name */}
+      <h1 className="font-display mt-5 text-4xl leading-[1.06] font-semibold sm:text-[2.9rem]">
+        <span className="block font-medium text-ink/35">Desengordurante</span>
         Tiragorduras HTG-30
       </h1>
 
-      <div className="mt-3 flex items-center gap-2 text-xs">
+      <div className="mt-4 flex items-center gap-2 text-xs">
         <Stars value={product.rating} />
         <a href="#" className="font-medium underline-offset-2 hover:underline">
-          {product.rating.toFixed(1).replace('.', ',')} ({product.reviews} avaliações)
+          {product.rating.toFixed(1).replace('.', ',')} · {product.reviews} avaliações
         </a>
         <span className="opacity-30">·</span>
         <span className="flex items-center gap-1.5 font-medium text-accent-deep">
@@ -38,16 +66,35 @@ export function BuyPanel({ format, setFormat, onAdd }) {
         </span>
       </div>
 
-      <p className="mt-5 text-sm leading-relaxed opacity-75">
+      {/* price */}
+      <div className="mt-5 flex items-baseline gap-2.5">
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.p
+            key={selected.id}
+            initial={{ opacity: 0, y: reduce ? 0 : 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: reduce ? 0 : -8 }}
+            transition={{ duration: 0.25, ease: EASE }}
+            className="font-display text-3xl font-semibold tabular-nums"
+          >
+            {fmt(selected.price)}
+          </motion.p>
+        </AnimatePresence>
+        <p className="text-xs opacity-50">
+          {perL(selected)} · IVA incluído
+        </p>
+      </div>
+
+      <p className="mt-5 border-t border-line pt-5 text-sm leading-relaxed opacity-75">
         {product.tagline} Desengordurante alcalino de uso profissional para
         cozinhas industriais, HORECA e indústria alimentar — para gorduras
         acumuladas, óleos e sujidades orgânicas.
       </p>
 
       {/* benefit checklist */}
-      <ul className="mt-6 divide-y divide-line border-y border-line">
+      <ul className="mt-5 space-y-2">
         {product.checklist.map((c) => (
-          <li key={c} className="flex items-center gap-3 py-2.5 text-[13px]">
+          <li key={c} className="flex items-center gap-3 text-[13px]">
             <svg width="12" height="10" viewBox="0 0 12 10" fill="none" aria-hidden="true" className="shrink-0">
               <path d="M1 5l3.4 3.4L11 1.6" stroke="#64a70b" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -58,7 +105,7 @@ export function BuyPanel({ format, setFormat, onAdd }) {
 
       {/* format option cards */}
       <div className="mt-7">
-        <p className="mb-2.5 text-[11px] font-medium tracking-[0.16em] opacity-50">VOLUMETRIA</p>
+        <p className="mb-2.5 text-xs font-medium opacity-50">Volumetria</p>
         <div className="space-y-2" role="radiogroup" aria-label="Volumetria">
           {product.formats.map((f) => {
             const active = format === f.id
@@ -102,21 +149,42 @@ export function BuyPanel({ format, setFormat, onAdd }) {
         </div>
       </div>
 
-      {/* CTA */}
-      <motion.button
-        type="button"
-        onClick={() => onAdd(selected.id)}
-        whileHover={reduce ? {} : { scale: 1.01 }}
-        whileTap={reduce ? {} : { scale: 0.985 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-        className="mt-6 flex h-14 w-full items-center justify-center gap-2.5 rounded-2xl bg-ink text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-deep"
-      >
-        Adicionar ao carrinho ({fmt(selected.price)})
-        <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
-      </motion.button>
+      {/* qty + CTA */}
+      <div className="mt-6 flex gap-3">
+        <div className="flex h-14 shrink-0 items-center rounded-2xl border border-line bg-white">
+          <button
+            type="button"
+            aria-label="Diminuir quantidade"
+            onClick={() => setQty(Math.max(1, qty - 1))}
+            className="flex h-full w-11 items-center justify-center transition-opacity hover:opacity-60"
+          >
+            −
+          </button>
+          <span className="w-6 text-center text-sm font-medium tabular-nums">{qty}</span>
+          <button
+            type="button"
+            aria-label="Aumentar quantidade"
+            onClick={() => setQty(qty + 1)}
+            className="flex h-full w-11 items-center justify-center transition-opacity hover:opacity-60"
+          >
+            +
+          </button>
+        </div>
+        <motion.button
+          type="button"
+          onClick={() => onAdd(selected.id, qty)}
+          whileHover={reduce ? {} : { scale: 1.01 }}
+          whileTap={reduce ? {} : { scale: 0.985 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 22 }}
+          className="flex h-14 flex-1 items-center justify-center gap-2.5 rounded-2xl bg-ink text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-deep"
+        >
+          Adicionar ao carrinho — {fmt(selected.price * qty)}
+          <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+        </motion.button>
+      </div>
 
       <p className="mt-3 text-center text-[11px] opacity-50">
-        Expedição em 24–48h · IVA incluído · Faturação com NIF
+        Expedição em 24–48h · Faturação com NIF · Envio grátis acima de {fmt(product.freeShippingFrom)}
       </p>
 
       {/* payments + guarantees */}
