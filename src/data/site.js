@@ -77,6 +77,8 @@ export const nav = {
 }
 
 export const home = {
+  // Slides do hero — imagem full-bleed com texto sobreposto.
+  // `image`: caminho para a fotografia real; enquanto null usa a cena.
   slides: [
     {
       id: 'htg30',
@@ -85,34 +87,92 @@ export const home = {
       text: 'Tiragorduras HTG-30 — o desengordurante alcalino de eleição das cozinhas profissionais. Atua em 5 minutos, mesmo a quente.',
       cta: 'Comprar HTG-30',
       href: '/produto/htg-30',
-      tone: 'light',
-      price: '4,35 €',
+      scene: 'kitchen',
+      image: null,
+      card: { name: 'Tiragorduras HTG-30', detail: '750 mL', price: '4,35 €' },
     },
     {
       id: 'bundles',
-      eyebrow: 'OPORTUNIDADES',
+      eyebrow: 'OPORTUNIDADES · TEMPO LIMITADO',
       title: 'Bundles com até 15% de poupança.',
-      text: 'Packs promocionais por tempo limitado — do pack do dia a dia ao fornecimento trimestral da sua operação.',
+      text: 'Packs promocionais — do pack do dia a dia ao fornecimento trimestral da sua operação.',
       cta: 'Ver bundles',
       href: '/produto/htg-30',
-      tone: 'dark',
+      scene: 'green',
+      image: null,
       badge: '−15%',
     },
     {
       id: 'pro',
       eyebrow: 'PARA EMPRESAS',
       title: 'Condições dedicadas para volume.',
-      text: 'Faturação com NIF, fichas técnicas e de segurança, apoio técnico especializado e propostas para revenda.',
+      text: 'Faturação com NIF, fichas técnicas e FDS, apoio técnico especializado e propostas para revenda.',
       cta: 'Pedir proposta',
       href: '#',
-      tone: 'accent',
+      scene: 'steel',
+      image: null,
     },
   ],
   categories: [
-    { title: 'Cozinha', text: 'Desengordurantes, loiça e fornos', count: 42 },
-    { title: 'Lavandaria', text: 'Detergentes e amaciadores', count: 28 },
-    { title: 'Superfícies', text: 'Multiusos, pavimentos e inox', count: 35 },
-    { title: 'Desinfeção', text: 'Alimentar, virucida e WC', count: 31 },
+    { title: 'Cozinha', text: 'Desengordurantes, loiça e fornos', count: 42, scene: 'kitchen', subject: 'bottle' },
+    { title: 'Lavandaria', text: 'Detergentes e amaciadores', count: 28, scene: 'cream', subject: 'bottle' },
+    { title: 'Superfícies', text: 'Multiusos, pavimentos e inox', count: 35, scene: 'steel', subject: 'bottle' },
+    { title: 'Desinfeção', text: 'Alimentar, virucida e WC', count: 31, scene: 'green', subject: 'bottle' },
+  ],
+  science: {
+    eyebrow: 'PORQUÊ MISTOLIN PRO',
+    title: 'Química profissional, resultados visíveis.',
+    text: 'Formulações desenvolvidas com equipas técnicas e testadas em operação real — não em laboratório apenas.',
+    points: [
+      'Fórmulas de elevada concentração — rendem mais por litro',
+      'Fichas técnicas e de segurança para todos os produtos',
+      'Compatibilidade testada com os materiais da sua cozinha',
+      'Fabricado em Portugal, stock e entrega garantidos',
+    ],
+    stats: [
+      { value: '2.400+', label: 'operações servidas' },
+      { value: '35 anos', label: 'de indústria' },
+      { value: '98%', label: 'entregas em 48h' },
+    ],
+  },
+  beforeAfter: {
+    eyebrow: 'RESULTADOS REAIS',
+    title: 'Da gordura carbonizada ao brilho, em 5 minutos.',
+    before: { label: 'Antes', text: 'Gordura acumulada de semanas de serviço' },
+    after: { label: 'Depois', text: 'Uma aplicação de HTG-30, sem esfregar' },
+  },
+  testimonials: [
+    {
+      quote: 'Dissolve gordura carbonizada que antes exigia horas de esfrega. Insubstituível.',
+      name: 'Ricardo M.',
+      role: 'Chef executivo · Braga',
+      rating: 5,
+    },
+    {
+      quote: 'Passámos para as recargas de 20 LT e o custo por litro compensa muito.',
+      name: 'Sónia P.',
+      role: 'Governanta · Hotel 4★, Albufeira',
+      rating: 5,
+    },
+    {
+      quote: 'Entrega rápida, fatura certa e apoio técnico que responde. Raro.',
+      name: 'António F.',
+      role: 'Compras · Cozinha industrial',
+      rating: 4,
+    },
+    {
+      quote: 'Os fornos de convecção estavam impossíveis. Uma aplicação e saiu tudo.',
+      name: 'Marta L.',
+      role: 'Proprietária · Pastelaria',
+      rating: 5,
+    },
+  ],
+  gallery: [
+    { scene: 'kitchen', subject: 'bottle', label: '@cozinha.doporto' },
+    { scene: 'steel', subject: 'mist', label: '@hotelmar.algarve' },
+    { scene: 'green', subject: 'set', label: '@grupohoreca.pt' },
+    { scene: 'cream', subject: 'bottle', label: '@pastelaria.central' },
+    { scene: 'kitchen', subject: 'mist', label: '@churrasqueira.lx' },
   ],
   featured: [
     { id: '750ml', name: 'Tiragorduras HTG-30', detail: '750 mL · Pulverizador', price: 4.35, tag: 'Mais vendido', href: '/produto/htg-30' },

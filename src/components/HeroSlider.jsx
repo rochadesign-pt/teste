@@ -2,68 +2,11 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { home } from '../data/site'
-import { Bottle, SprayMist } from './Bottle'
+import { FauxPhoto } from './FauxPhoto'
+import { Bottle } from './Bottle'
 
 const EASE = [0.32, 0.72, 0, 1]
-const AUTOPLAY = 6000
-
-const TONES = {
-  light: 'bg-white text-ink',
-  dark: 'bg-ink text-white',
-  accent: 'bg-accent text-white',
-}
-
-function SlideVisual({ slide }) {
-  if (slide.id === 'bundles') {
-    return (
-      <div className="relative flex h-full items-end justify-center">
-        {[0, 1, 2].map((i) => (
-          <div
-            key={i}
-            style={{ zIndex: 3 - i, marginLeft: i ? '-14%' : 0 }}
-            className="w-[30%] max-w-[150px] translate-y-[8%] drop-shadow-[0_20px_28px_rgba(0,0,0,0.25)]"
-          >
-            <Bottle className="w-full" />
-          </div>
-        ))}
-        <span className="font-display absolute top-6 right-6 rounded-lg bg-white px-3 py-2 text-2xl font-bold text-ink shadow-lg">
-          {slide.badge}
-        </span>
-      </div>
-    )
-  }
-  if (slide.id === 'pro') {
-    return (
-      <div className="flex h-full flex-col items-center justify-center gap-3 px-8">
-        {['Faturação com NIF', 'Fichas técnicas e FDS', 'Apoio técnico dedicado'].map((t, i) => (
-          <div
-            key={t}
-            className="flex w-full max-w-[280px] items-center gap-2.5 rounded-lg bg-white/15 px-4 py-3 text-sm font-medium backdrop-blur"
-            style={{ marginLeft: `${i * 14}px` }}
-          >
-            <svg width="12" height="10" viewBox="0 0 12 10" fill="none" aria-hidden="true">
-              <path d="M1 5l3.4 3.4L11 1.6" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            {t}
-          </div>
-        ))}
-      </div>
-    )
-  }
-  return (
-    <div className="relative flex h-full items-center justify-center">
-      <SprayMist className="absolute top-[16%] left-[12%] w-16" />
-      <div className="w-[38%] max-w-[190px] drop-shadow-[0_24px_36px_rgba(0,0,0,0.2)]">
-        <Bottle className="w-full" />
-      </div>
-      {slide.price && (
-        <span className="absolute top-6 right-6 rounded-md bg-ink px-3 py-1.5 text-sm font-semibold text-white">
-          {slide.price}
-        </span>
-      )}
-    </div>
-  )
-}
+const AUTOPLAY = 6500
 
 export function HeroSlider() {
   const reduce = useReducedMotion()
@@ -81,87 +24,118 @@ export function HeroSlider() {
 
   return (
     <section
-      className="mx-auto max-w-[1280px] px-6 pt-28 lg:px-12 lg:pt-32"
+      className="mx-auto max-w-[1280px] px-4 pt-24 sm:px-6 lg:px-8 lg:pt-28"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       aria-roledescription="carousel"
       aria-label="Promoções em destaque"
     >
-      <div className="relative overflow-hidden rounded-xl border border-line shadow-xs">
+      <div className="relative min-h-[440px] overflow-hidden rounded-xl lg:min-h-[520px]">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={slide.id}
-            initial={{ opacity: 0, x: reduce ? 0 : 32 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: reduce ? 0 : -24 }}
-            transition={{ duration: 0.45, ease: EASE }}
-            className={`grid min-h-[380px] grid-cols-1 md:grid-cols-2 ${TONES[slide.tone]}`}
+            initial={{ opacity: 0, scale: reduce ? 1 : 1.02 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.55, ease: EASE }}
+            className="absolute inset-0"
           >
-            {/* copy */}
-            <div className="flex flex-col justify-center p-8 lg:p-12">
-              <p
-                className={`text-[11px] font-medium tracking-[0.16em] ${
-                  slide.tone === 'light' ? 'text-accent-deep' : 'text-white/70'
-                }`}
+            <FauxPhoto
+              src={slide.image}
+              alt=""
+              scene={slide.scene}
+              subject={slide.id === 'bundles' ? 'set' : slide.id === 'htg30' ? 'mist' : null}
+              className="h-full w-full"
+            >
+              {/* readability gradient */}
+              <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(0,0,0,0.62)_0%,rgba(0,0,0,0.34)_46%,transparent_75%)]" />
+            </FauxPhoto>
+
+            {/* copy overlay */}
+            <div className="absolute inset-0 flex flex-col justify-center p-8 text-white lg:p-14">
+              <motion.p
+                initial={{ opacity: 0, y: reduce ? 0 : 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: EASE, delay: 0.15 }}
+                className="text-[11px] font-medium tracking-[0.18em] text-white/80"
               >
                 {slide.eyebrow}
-              </p>
-              <h1 className="font-display mt-3 max-w-md text-3xl leading-[1.08] font-semibold sm:text-4xl lg:text-[2.6rem]">
+              </motion.p>
+              <motion.h1
+                initial={{ opacity: 0, y: reduce ? 0 : 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, ease: EASE, delay: 0.22 }}
+                className="font-display mt-4 max-w-xl text-4xl leading-[1.05] font-semibold sm:text-5xl lg:text-[3.4rem]"
+              >
                 {slide.title}
-              </h1>
-              <p
-                className={`mt-4 max-w-md text-sm leading-relaxed ${
-                  slide.tone === 'light' ? 'text-muted' : 'text-white/70'
-                }`}
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: reduce ? 0 : 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: EASE, delay: 0.3 }}
+                className="mt-4 max-w-md text-sm leading-relaxed text-white/80"
               >
                 {slide.text}
-              </p>
-              <div className="mt-7">
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: reduce ? 0 : 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: EASE, delay: 0.38 }}
+                className="mt-8"
+              >
                 <Link
                   to={slide.href}
-                  className={`inline-flex h-11 items-center gap-2.5 rounded-lg px-6 text-sm font-semibold transition-colors duration-200 ${
-                    slide.tone === 'light'
-                      ? 'bg-ink text-white hover:bg-accent-deep'
-                      : 'bg-white text-ink hover:bg-accent-soft'
-                  }`}
+                  className="inline-flex h-12 items-center gap-2.5 rounded-lg bg-white px-7 text-sm font-semibold text-ink transition-colors duration-200 hover:bg-accent hover:text-white"
                 >
                   {slide.cta}
                   <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
                 </Link>
-              </div>
+              </motion.div>
             </div>
 
-            {/* visual */}
-            <div
-              className={`relative hidden md:block ${
-                slide.tone === 'light' ? 'bg-page' : 'bg-white/5'
-              }`}
-            >
-              <SlideVisual slide={slide} />
-            </div>
+            {/* floating product card */}
+            {slide.card && (
+              <motion.div
+                initial={{ opacity: 0, y: reduce ? 0 : 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, ease: EASE, delay: 0.45 }}
+                className="absolute right-6 bottom-20 hidden items-center gap-3 rounded-lg border border-white/20 bg-white/95 p-2.5 pr-4 shadow-lg backdrop-blur md:flex"
+              >
+                <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-md bg-page">
+                  <Bottle className="h-10 w-auto" />
+                </div>
+                <div>
+                  <p className="text-[12px] leading-tight font-semibold text-ink">{slide.card.name}</p>
+                  <p className="text-[11px] text-muted">
+                    {slide.card.detail} · <span className="font-semibold text-ink">{slide.card.price}</span>
+                  </p>
+                </div>
+              </motion.div>
+            )}
+            {slide.badge && (
+              <span className="font-display absolute top-6 right-6 hidden rounded-lg bg-white px-3.5 py-2 text-2xl font-bold text-ink shadow-lg md:block">
+                {slide.badge}
+              </span>
+            )}
           </motion.div>
         </AnimatePresence>
 
         {/* controls */}
-        <div className="absolute bottom-4 left-8 z-10 flex items-center gap-3 lg:left-12">
-          <div className="flex gap-1.5" role="tablist" aria-label="Slides">
-            {home.slides.map((s, i) => (
-              <button
-                key={s.id}
-                role="tab"
-                aria-selected={i === index}
-                aria-label={`Slide ${i + 1}`}
-                onClick={() => setIndex(i)}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === index
-                    ? 'w-6 bg-accent'
-                    : `w-1.5 ${slide.tone === 'light' ? 'bg-ink/20' : 'bg-white/30'}`
-                }`}
-              />
-            ))}
-          </div>
+        <div className="absolute bottom-5 left-8 z-10 flex gap-1.5 lg:left-14" role="tablist" aria-label="Slides">
+          {home.slides.map((s, i) => (
+            <button
+              key={s.id}
+              role="tab"
+              aria-selected={i === index}
+              aria-label={`Slide ${i + 1}`}
+              onClick={() => setIndex(i)}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === index ? 'w-6 bg-accent' : 'w-1.5 bg-white/40 hover:bg-white/70'
+              }`}
+            />
+          ))}
         </div>
-        <div className="absolute right-4 bottom-3 z-10 flex gap-1.5">
+        <div className="absolute right-5 bottom-4 z-10 hidden gap-1.5 md:flex">
           {[
             { dir: -1, label: 'Slide anterior', d: 'M7 1L2 6l5 5' },
             { dir: 1, label: 'Slide seguinte', d: 'M2 1l5 5-5 5' },
@@ -171,11 +145,7 @@ export function HeroSlider() {
               type="button"
               aria-label={b.label}
               onClick={() => go(b.dir)}
-              className={`flex h-8 w-8 items-center justify-center rounded-md border transition-colors duration-200 ${
-                slide.tone === 'light'
-                  ? 'border-line bg-white hover:border-ink/30'
-                  : 'border-white/20 bg-white/10 text-white hover:border-white/50'
-              }`}
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/25 bg-white/10 text-white backdrop-blur transition-colors duration-200 hover:bg-white hover:text-ink"
             >
               <svg width="9" height="12" viewBox="0 0 9 12" fill="none" aria-hidden="true">
                 <path d={b.d} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
