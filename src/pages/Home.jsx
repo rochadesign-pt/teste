@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { home } from '../data/site'
 import { HeroBanner } from '../components/HeroBanner'
+import { DealOfDay } from '../components/DealOfDay'
 import { ProductCard } from '../components/ProductCard'
 import { GuaranteeIcon, Stars } from '../components/PayIcons'
 import { FauxPhoto } from '../components/FauxPhoto'
@@ -282,6 +283,64 @@ function Testimonials() {
   )
 }
 
+/* ——— Certificações / logos ——— */
+function Brands() {
+  return (
+    <section className="border-y border-line bg-white">
+      <div className={`${WRAP} flex flex-wrap items-center justify-center gap-x-10 gap-y-4 py-7 sm:justify-between`}>
+        <span className="text-[11px] font-medium tracking-[0.16em] text-muted">CONFIANÇA & CERTIFICAÇÕES</span>
+        {home.brands.map((b) => (
+          <span key={b} className="text-sm font-semibold text-ink/40 transition-colors duration-200 hover:text-ink">
+            {b}
+          </span>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+/* ——— Blog ——— */
+function Blog() {
+  return (
+    <section className={`${WRAP} py-14`}>
+      <SectionHead
+        eyebrow="RECURSOS"
+        title="Guias e boas práticas"
+        action={
+          <a href="#" className="text-sm font-medium text-accent-deep underline-offset-2 hover:underline">
+            Ver blog →
+          </a>
+        }
+      />
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        {home.articles.map((a, i) => (
+          <motion.a
+            key={a.title}
+            href="#"
+            {...reveal}
+            transition={{ ...reveal.transition, delay: (i % 3) * 0.06 }}
+            className="group flex flex-col overflow-hidden rounded-xl border border-line bg-white shadow-xs"
+          >
+            <FauxPhoto scene={a.scene} subject="bottle" zoom className="aspect-[16/10] border-b border-line">
+              <span className="absolute top-3 left-3 rounded-md bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-ink">
+                {a.category}
+              </span>
+            </FauxPhoto>
+            <div className="flex flex-1 flex-col p-5">
+              <h3 className="text-[15px] leading-snug font-semibold transition-colors duration-200 group-hover:text-accent-deep">
+                {a.title}
+              </h3>
+              <p className="mt-auto pt-4 text-[11px] text-muted">
+                {a.date} · {a.read} de leitura
+              </p>
+            </div>
+          </motion.a>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 /* ——— Newsletter ——— */
 function Newsletter() {
   const reduce = useReducedMotion()
@@ -335,11 +394,14 @@ export function Home({ addItem }) {
       <HeroBanner />
       <Usps />
       <CategoryStrip />
+      <DealOfDay addItem={addItem} />
       <ProductTabs addItem={addItem} />
       <GridBanners />
       <Showcase addItem={addItem} />
       <PromoBanner />
+      <Brands />
       <Testimonials />
+      <Blog />
       <Newsletter />
     </main>
   )

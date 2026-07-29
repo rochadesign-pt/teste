@@ -77,36 +77,67 @@ export const nav = {
 }
 
 export const home = {
-  // ——— Hero (Hyper): banner promocional + collection cards ———
-  hero: {
-    banner: {
+  // ——— Hero (Hyper): sidebar de departamentos + slideshow + 2 mini-banners ———
+  departments: [
+    { title: 'Cozinha', icon: 'flame' },
+    { title: 'Lavandaria', icon: 'drop' },
+    { title: 'Superfícies', icon: 'sparkle' },
+    { title: 'Desinfeção', icon: 'shield' },
+    { title: 'Mãos & Pele', icon: 'hand' },
+    { title: 'Auto & Detailing', icon: 'car' },
+    { title: 'Agroalimentar', icon: 'leaf' },
+    { title: 'Acessórios & Doseadores', icon: 'tool' },
+  ],
+  slides: [
+    {
+      id: 'htg30',
       eyebrow: 'LINHA COZINHA · MAIS VENDIDO',
       title: 'O fim das gorduras difíceis.',
-      text: 'Tiragorduras HTG-30 — o desengordurante alcalino de eleição das cozinhas profissionais. Atua em 5 minutos, mesmo a quente.',
+      text: 'Tiragorduras HTG-30 — o desengordurante alcalino de eleição das cozinhas profissionais.',
       cta: 'Comprar HTG-30',
       href: '/produto/htg-30',
       scene: 'kitchen',
-      image: null,
       price: '4,35 €',
     },
-    cards: [
-      {
-        title: 'Bundles até −15%',
-        text: 'Packs promocionais por tempo limitado',
-        cta: 'Ver oportunidades',
-        href: '/produto/htg-30',
-        scene: 'green',
-        badge: 'PROMO',
-      },
-      {
-        title: 'Compra a volume',
-        text: 'Condições dedicadas para empresas',
-        cta: 'Pedir proposta',
-        href: '#',
-        scene: 'steel',
-      },
-    ],
+    {
+      id: 'bundles',
+      eyebrow: 'OPORTUNIDADES · TEMPO LIMITADO',
+      title: 'Bundles com até 15% de poupança.',
+      text: 'Packs promocionais — do dia a dia ao fornecimento trimestral.',
+      cta: 'Ver oportunidades',
+      href: '/produto/htg-30',
+      scene: 'green',
+      badge: '−15%',
+    },
+    {
+      id: 'pro',
+      eyebrow: 'PARA EMPRESAS',
+      title: 'Condições dedicadas para volume.',
+      text: 'Faturação com NIF, fichas técnicas e apoio especializado.',
+      cta: 'Pedir proposta',
+      href: '#',
+      scene: 'steel',
+    },
+  ],
+  heroMiniBanners: [
+    { title: 'Recargas económicas', text: 'Até −40% por litro', cta: 'Ver recargas', href: '/produto/htg-30', scene: 'steel' },
+    { title: 'Novidade agroalimentar', text: 'Linha certificada', cta: 'Descobrir', href: '#', scene: 'green' },
+  ],
+  // ——— Deal of the day ———
+  deal: {
+    eyebrow: 'OFERTA DO DIA',
+    key: 'pack',
+    stock: { sold: 68, total: 100 },
+    endsInHours: 8,
   },
+  // ——— Logos / certificações ———
+  brands: ['HACCP', 'ISO 9001', 'Fabricado em Portugal', 'Biodegradável', 'Notificado DGS', 'Vegan OK'],
+  // ——— Blog / conteúdo ———
+  articles: [
+    { category: 'Guia', title: 'Como desengordurar um forno de convecção em 5 minutos', date: '12 Jul 2026', read: '4 min', scene: 'kitchen' },
+    { category: 'Boas práticas', title: 'Diluições certas: quanto produto por litro de água?', date: '3 Jul 2026', read: '6 min', scene: 'steel' },
+    { category: 'HORECA', title: 'Plano de higienização para cozinhas profissionais', date: '28 Jun 2026', read: '8 min', scene: 'green' },
+  ],
   categories: [
     { title: 'Cozinha', text: 'Desengordurantes, loiça e fornos', count: 42, scene: 'kitchen', subject: 'bottle' },
     { title: 'Lavandaria', text: 'Detergentes e amaciadores', count: 28, scene: 'cream', subject: 'bottle' },
