@@ -22,6 +22,13 @@ export const product = {
     { id: '10lt', label: '10 LT', detail: 'Recarga', price: 28.5, liters: 10 },
     { id: '20lt', label: '20 LT', detail: 'Recarga', price: 52.0, liters: 20, tag: 'Melhor €/L' },
   ],
+  // Galeria do produto — caminhos para fotos reais (ex.: '/produto/main.jpg').
+  // Enquanto null, são usados fallbacks ilustrados.
+  gallery: {
+    main: null,
+    details: [null, null],
+    lifestyle: null,
+  },
   freeShippingFrom: 30,
   payments: ['Visa', 'Mastercard', 'MB Way', 'Multibanco', 'PayPal', 'Apple Pay'],
   guarantees: [

@@ -1,38 +1,23 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { SmoothScroll } from './components/SmoothScroll'
 import { Nav } from './components/Nav'
-import { Hero } from './components/Hero'
-import { Marquee } from './components/Marquee'
-import { Benefits } from './components/Benefits'
-import { Steps } from './components/Steps'
-import { Stats } from './components/Stats'
-import { Reviews } from './components/Reviews'
-import { Faq } from './components/Faq'
-import { StickyBar } from './components/StickyBar'
 import { Cart } from './components/Cart'
 import { Footer } from './components/Footer'
-import { LayoutToggle } from './components/LayoutToggle'
+import { Home } from './pages/Home'
+import { Product } from './pages/Product'
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
 
 function App() {
-  const [format, setFormat] = useState('750ml')
   const [items, setItems] = useState([])
   const [cartOpen, setCartOpen] = useState(false)
-  const [variant, setVariant] = useState(() => {
-    try {
-      return localStorage.getItem('mistolin-buy-variant') || 'open'
-    } catch {
-      return 'open'
-    }
-  })
-
-  const changeVariant = useCallback((v) => {
-    setVariant(v)
-    try {
-      localStorage.setItem('mistolin-buy-variant', v)
-    } catch {
-      /* ignore */
-    }
-  }, [])
 
   const addItem = useCallback((id, qty = 1, open = true) => {
     setItems((prev) => {
@@ -67,30 +52,26 @@ function App() {
   const count = items.reduce((s, it) => s + it.qty, 0)
 
   return (
-    <SmoothScroll>
-      <Nav cartCount={count} onCartOpen={() => setCartOpen(true)} />
-      <main>
-        <Hero format={format} setFormat={setFormat} onAdd={(id, qty) => addItem(id, qty)} variant={variant} />
-        <Marquee />
-        <Benefits />
-        <Steps />
-        <Stats />
-        <Reviews />
-        <Faq />
-      </main>
-      <Footer />
-      <StickyBar format={format} onAdd={() => addItem(format)} />
-      <LayoutToggle variant={variant} onChange={changeVariant} />
-      <Cart
-        open={cartOpen}
-        onClose={() => setCartOpen(false)}
-        items={items}
-        setQty={setQty}
-        removeItem={removeItem}
-        addItem={addItem}
-        swapItem={swapItem}
-      />
-    </SmoothScroll>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <SmoothScroll>
+        <ScrollToTop />
+        <Nav cartCount={count} onCartOpen={() => setCartOpen(true)} />
+        <Routes>
+          <Route path="/" element={<Home addItem={addItem} />} />
+          <Route path="/produto/htg-30" element={<Product addItem={addItem} />} />
+        </Routes>
+        <Footer />
+        <Cart
+          open={cartOpen}
+          onClose={() => setCartOpen(false)}
+          items={items}
+          setQty={setQty}
+          removeItem={removeItem}
+          addItem={addItem}
+          swapItem={swapItem}
+        />
+      </SmoothScroll>
+    </BrowserRouter>
   )
 }
 

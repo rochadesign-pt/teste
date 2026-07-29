@@ -1,13 +1,20 @@
 import { product } from '../data/product'
-import { SetTile, BundleCard, VolumeRow } from './OptionCards'
+import { KitRow, BundleCard, VolumeRow } from './OptionCards'
 
 // All options visible at once — one radiogroup across the three groups,
 // separated by quiet section labels. Only one option is ever selected.
-function GroupLabel({ children, hint }) {
+function GroupLabel({ children, hint, promo = false }) {
   return (
     <div className="mb-2 flex items-baseline justify-between gap-3">
-      <p className="text-xs font-medium">{children}</p>
-      <p className="truncate text-[11px] opacity-40">{hint}</p>
+      <p className="flex items-center gap-1.5 text-xs font-medium">
+        {children}
+        {promo && (
+          <span className="rounded-md bg-accent px-1.5 py-0.5 text-[9px] font-semibold tracking-[0.08em] text-white">
+            PROMO
+          </span>
+        )}
+      </p>
+      <p className="truncate text-[11px] text-muted">{hint}</p>
     </div>
   )
 }
@@ -31,9 +38,9 @@ export function PurchaseSelectorOpen({ activeType, onRow, format, pickKit, pickB
 
       <div>
         <GroupLabel hint="Conjuntos onde o HTG-30 entra">Kits</GroupLabel>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {product.kits.map((k) => (
-            <SetTile
+            <KitRow
               key={k.name}
               o={k}
               active={activeType === 'kit' && pickKit === k.name}
@@ -44,17 +51,10 @@ export function PurchaseSelectorOpen({ activeType, onRow, format, pickKit, pickB
       </div>
 
       <div>
-        <div className="mb-2 flex items-baseline justify-between gap-3">
-          <p className="flex items-center gap-1.5 text-xs font-medium">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-            Bundles
-            <span className="rounded-full bg-accent px-2 py-0.5 text-[9px] font-semibold tracking-[0.08em] text-white">
-              PROMO
-            </span>
-          </p>
-          <p className="truncate text-[11px] opacity-40">Preço reduzido por tempo limitado</p>
-        </div>
-        <div className="space-y-2">
+        <GroupLabel hint="Preço reduzido por tempo limitado" promo>
+          Bundles
+        </GroupLabel>
+        <div className="grid grid-cols-2 gap-2">
           {product.bundles.map((b) => (
             <BundleCard
               key={b.name}

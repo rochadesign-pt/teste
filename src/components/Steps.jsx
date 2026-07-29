@@ -17,16 +17,16 @@ export function Steps() {
       })
       tl.from('.steps-headline', {
         opacity: 0,
-        y: reduce ? 0 : 28,
+        y: reduce ? 0 : 24,
         duration: 0.6,
         ease: 'power3.out',
       }).from(
-        '.step-row',
+        '.step-card',
         {
           opacity: 0,
-          y: reduce ? 0 : 32,
-          duration: 0.65,
-          stagger: 0.18,
+          y: reduce ? 0 : 24,
+          duration: 0.55,
+          stagger: 0.14,
           ease: 'power3.out',
         },
         '-=0.2',
@@ -37,36 +37,29 @@ export function Steps() {
 
   return (
     <section ref={container} className="bg-ink text-white">
-      <div className="mx-auto max-w-[1440px] px-6 py-24 lg:px-12 lg:py-32">
-        <div className="steps-headline mb-16 flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <p className="mb-4 text-[11px] font-medium tracking-[0.16em] text-accent">MODO DE UTILIZAÇÃO</p>
-            <h2 className="font-display text-4xl leading-[1.02] font-medium sm:text-5xl lg:text-6xl">
-              Três passos.
-              <br />
-              Zero gordura.
-            </h2>
-          </div>
-          <p className="max-w-xs text-sm leading-relaxed opacity-60">
-            Em pavimentos e limpezas de manutenção, recomenda-se a utilização
-            do HTG-30 numa diluição até 10%.
+      <div className="mx-auto max-w-[1280px] px-6 py-20 lg:px-12 lg:py-24">
+        <div className="steps-headline mb-10 flex flex-wrap items-end justify-between gap-6">
+          <h2 className="font-display text-3xl font-semibold sm:text-4xl">
+            Como aplicar o HTG-30
+          </h2>
+          <p className="max-w-xs text-sm leading-relaxed text-white/50">
+            Em pavimentos e limpezas de manutenção, recomenda-se a utilização do
+            HTG-30 numa diluição até 10%.
           </p>
         </div>
 
-        <div className="divide-y divide-white/10">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
           {product.steps.map((step) => (
-            <div
+            <article
               key={step.n}
-              className="step-row group grid grid-cols-1 items-baseline gap-4 py-10 md:grid-cols-[120px_1fr_1.2fr]"
+              className="step-card group rounded-lg border border-white/10 bg-white/[0.04] p-6 transition-colors duration-300 hover:border-accent/40"
             >
-              <span className="font-display text-5xl font-medium text-accent lg:text-6xl">
-                {step.n}
-              </span>
-              <h3 className="font-display text-3xl font-medium transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1 lg:text-4xl">
+              <p className="text-[11px] font-medium tracking-[0.14em] text-white/40">{step.n}</p>
+              <h3 className="mt-14 text-lg font-semibold transition-colors duration-300 group-hover:text-accent">
                 {step.title}
               </h3>
-              <p className="max-w-lg leading-relaxed opacity-70">{step.text}</p>
-            </div>
+              <p className="mt-2 text-[13px] leading-relaxed text-white/60">{step.text}</p>
+            </article>
           ))}
         </div>
       </div>

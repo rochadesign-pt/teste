@@ -48,20 +48,20 @@ export function VolumeRow({ f, active, onSelect }) {
   )
 }
 
-// Visual for a kit/bundle tile: real photo when provided, otherwise a
-// composed fallback that stacks the bottles to suggest a set.
-function SetVisual({ o, promo }) {
+// Visual for a bundle card: real photo when provided, otherwise a composed
+// fallback that stacks the bottles to suggest a set.
+function SetVisual({ o }) {
   if (o.image) {
     return <img src={o.image} alt={o.name} loading="lazy" className="h-full w-full object-cover" />
   }
   const n = Math.min(3, o.items.length)
   return (
-    <div className={`flex h-full items-end justify-center ${promo ? 'bg-accent-soft/60' : 'bg-page'}`}>
+    <div className="flex h-full items-end justify-center bg-page">
       {Array.from({ length: n }).map((_, i) => (
         <div
           key={i}
           style={{ zIndex: n - i, marginLeft: i ? '-16%' : 0 }}
-          className="w-[30%] translate-y-[14%] drop-shadow-[0_8px_12px_rgba(0,0,0,0.12)]"
+          className="w-[26%] translate-y-[12%] drop-shadow-[0_8px_12px_rgba(0,0,0,0.12)]"
         >
           <Bottle className="w-full" />
         </div>
@@ -70,8 +70,37 @@ function SetVisual({ o, promo }) {
   )
 }
 
-// Kit tile — clean shadcn-style card: image banner on top, quiet info below.
-export function SetTile({ o, active, onSelect }) {
+// Kit — compact text row per the mockup: name + role left, price right.
+export function KitRow({ o, active, onSelect }) {
+  const reduce = useReducedMotion()
+  return (
+    <motion.button
+      type="button"
+      role="radio"
+      aria-checked={active}
+      onClick={onSelect}
+      whileTap={reduce ? {} : { scale: 0.995 }}
+      title={o.items.join(' + ')}
+      className={`flex h-full w-full items-center gap-2.5 rounded-lg border bg-white px-3.5 py-3 text-left transition-colors duration-200 ${
+        active ? 'border-accent ring-2 ring-accent/15' : 'border-line hover:border-ink/25'
+      }`}
+    >
+      <Radio active={active} />
+      <span className="min-w-0 flex-1">
+        <span className="block truncate text-[13px] leading-tight font-medium">{o.name}</span>
+        <span className="block truncate text-[11px] text-muted">{o.role}</span>
+      </span>
+      <span className="shrink-0 text-right">
+        <span className="block text-[13px] font-semibold tabular-nums">{fmt(o.price)}</span>
+        <span className="block text-[10px] text-muted/70 tabular-nums line-through">{fmt(o.full)}</span>
+      </span>
+    </motion.button>
+  )
+}
+
+// Bundle — light image card with a green ring, per the mockup: photo on top
+// with a discount tag, name + role below, strikethrough + price at the bottom.
+export function BundleCard({ o, active, onSelect }) {
   const reduce = useReducedMotion()
   return (
     <motion.button
@@ -82,12 +111,15 @@ export function SetTile({ o, active, onSelect }) {
       whileTap={reduce ? {} : { scale: 0.99 }}
       transition={{ type: 'spring', stiffness: 300, damping: 24 }}
       className={`relative flex h-full flex-col overflow-hidden rounded-lg border bg-white text-left shadow-xs transition-colors duration-200 ${
-        active ? 'border-accent ring-2 ring-accent/15' : 'border-line hover:border-ink/25'
+        active ? 'border-accent ring-2 ring-accent/25' : 'border-line hover:border-accent/50'
       }`}
     >
-      {/* image banner */}
-      <div className="relative h-24 w-full overflow-hidden border-b border-line">
+      {/* image */}
+      <div className="relative h-28 w-full overflow-hidden border-b border-line">
         <SetVisual o={o} />
+        <span className="absolute top-2 left-2 rounded-md bg-accent px-1.5 py-0.5 text-[10px] font-semibold text-white">
+          −{save(o)}%
+        </span>
         <span className="absolute top-2 right-2">
           <span
             className={`flex h-4 w-4 items-center justify-center rounded-full border transition-colors ${
@@ -100,82 +132,15 @@ export function SetTile({ o, active, onSelect }) {
             </svg>
           </span>
         </span>
-        <span className="absolute top-2 left-2 rounded-md bg-white/90 px-1.5 py-0.5 text-[10px] font-medium text-ink shadow-xs">
-          poupa {save(o)}%
-        </span>
       </div>
 
       {/* info */}
       <div className="flex flex-1 flex-col p-3">
-        <p className="text-sm leading-tight font-medium">{o.name}</p>
-        <p className="mt-1 text-[11px] leading-snug text-muted">{o.role}</p>
-        <p className="mt-1.5 flex-1 text-[11px] leading-snug text-muted/70">{o.items.join(' · ')}</p>
-
-        <div className="mt-2.5 flex items-baseline gap-1.5 border-t border-line pt-2.5">
+        <p className="text-[13px] leading-tight font-medium">{o.name}</p>
+        <p className="mt-0.5 flex-1 text-[11px] leading-snug text-muted">{o.role}</p>
+        <div className="mt-2.5 flex items-baseline gap-1.5">
+          <span className="text-[11px] text-muted/60 tabular-nums line-through">{fmt(o.full)}</span>
           <span className="text-sm font-semibold tabular-nums">{fmt(o.price)}</span>
-          <span className="text-[11px] tabular-nums text-muted/60 line-through">{fmt(o.full)}</span>
-        </div>
-      </div>
-    </motion.button>
-  )
-}
-
-// Bundle card — a deliberately different, promo-forward format: a dark
-// full-width offer strip with a light photo thumb, so bundles read as
-// "deals" and never get mistaken for the light kit tiles.
-export function BundleCard({ o, active, onSelect }) {
-  const reduce = useReducedMotion()
-  return (
-    <motion.button
-      type="button"
-      role="radio"
-      aria-checked={active}
-      onClick={onSelect}
-      whileTap={reduce ? {} : { scale: 0.995 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-      className={`relative flex w-full items-stretch gap-3 overflow-hidden rounded-lg border p-2 text-left text-white shadow-xs transition-colors duration-200 ${
-        active ? 'border-accent bg-ink ring-2 ring-accent/30' : 'border-ink bg-ink hover:border-accent/60'
-      }`}
-    >
-      {/* accent edge */}
-      <span className="absolute inset-y-0 left-0 w-1 bg-accent" aria-hidden="true" />
-
-      {/* thumb */}
-      <div className="relative h-[74px] w-[74px] shrink-0 overflow-hidden rounded-md">
-        <SetVisual o={o} promo />
-      </div>
-
-      {/* info */}
-      <div className="flex min-w-0 flex-1 flex-col py-0.5 pr-1">
-        <div className="flex items-center gap-2">
-          <span className="flex items-center gap-1 rounded-full bg-accent px-2 py-0.5 text-[9px] font-semibold tracking-[0.1em] text-white">
-            <span className="h-1 w-1 rounded-full bg-white" />
-            PROMO
-          </span>
-          <span className="text-[10px] tracking-[0.08em] text-white/50">TEMPO LIMITADO</span>
-          <span className="ml-auto">
-            <span
-              className={`flex h-5 w-5 items-center justify-center rounded-full border ${
-                active ? 'border-accent bg-accent' : 'border-white/40'
-              }`}
-              aria-hidden="true"
-            >
-              <svg width="9" height="7" viewBox="0 0 10 8" fill="none" className={active ? 'opacity-100' : 'opacity-0'}>
-                <path d="M1 4l2.8 2.8L9 1.4" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" />
-              </svg>
-            </span>
-          </span>
-        </div>
-
-        <p className="mt-1.5 truncate text-sm font-medium">{o.name}</p>
-        <p className="truncate text-[11px] text-white/50">{o.items.join(' · ')}</p>
-
-        <div className="mt-auto flex items-end gap-2 pt-1.5">
-          <span className="text-lg font-semibold tabular-nums">{fmt(o.price)}</span>
-          <span className="pb-0.5 text-[11px] tabular-nums text-white/40 line-through">{fmt(o.full)}</span>
-          <span className="ml-auto rounded-full bg-accent px-2.5 py-1 text-[11px] font-semibold tabular-nums text-white">
-            −{save(o)}% · poupa {fmt(o.full - o.price)}
-          </span>
         </div>
       </div>
     </motion.button>
