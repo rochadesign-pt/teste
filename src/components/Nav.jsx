@@ -24,7 +24,7 @@ function Chevron({ open }) {
 
 function MegaProdutos({ onNavigate }) {
   return (
-    <div className="mx-auto grid max-w-[1280px] grid-cols-[repeat(4,1fr)_260px] gap-8 px-6 py-8 lg:px-12">
+    <div className="mx-auto grid max-w-[1600px] grid-cols-[repeat(4,1fr)_300px] gap-10 px-6 py-10 lg:px-10">
       {nav.produtos.columns.map((col) => (
         <div key={col.title}>
           <a href={col.href} className="text-[13px] font-semibold hover:text-accent-deep">
@@ -89,12 +89,12 @@ function MegaProdutos({ onNavigate }) {
 
 function MegaSolucoes() {
   return (
-    <div className="mx-auto grid max-w-[1280px] grid-cols-2 gap-2 px-6 py-8 sm:grid-cols-3 lg:px-12">
+    <div className="mx-auto grid max-w-[1600px] grid-cols-2 gap-2.5 px-6 py-10 sm:grid-cols-3 lg:px-10">
       {nav.solucoes.sectors.map((s) => (
         <a
           key={s.title}
           href="#"
-          className="group rounded-lg border border-line bg-white p-4 transition-colors duration-150 hover:border-accent"
+          className="group rounded-lg border border-line bg-white p-5 transition-colors duration-150 hover:border-accent hover:bg-page/50"
         >
           <p className="text-sm font-semibold group-hover:text-accent-deep">{s.title}</p>
           <p className="mt-0.5 text-[12px] text-muted">{s.text}</p>
@@ -155,9 +155,9 @@ export function Nav({ cartCount = 0, onCartOpen }) {
               : 'bg-white/85 backdrop-blur-md'
           }`}
         >
-          <nav className="mx-auto flex h-14 max-w-[1280px] items-center justify-between px-6 lg:px-12">
+          <nav className="flex h-16 w-full items-center justify-between px-6 lg:px-10">
             <Link to="/" className="flex items-baseline gap-2 text-ink">
-              <span className="font-display text-lg font-bold tracking-tight">MISTOLIN</span>
+              <span className="font-display text-xl font-bold tracking-tight">MISTOLIN</span>
               <span className="rounded-md bg-accent px-1.5 py-0.5 text-[10px] font-bold text-white">
                 PRO
               </span>

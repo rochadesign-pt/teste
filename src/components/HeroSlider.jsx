@@ -24,13 +24,13 @@ export function HeroSlider() {
 
   return (
     <section
-      className="mx-auto max-w-[1280px] px-4 pt-24 sm:px-6 lg:px-8 lg:pt-28"
+      className="w-full pt-[92px]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       aria-roledescription="carousel"
       aria-label="Promoções em destaque"
     >
-      <div className="relative min-h-[440px] overflow-hidden rounded-xl lg:min-h-[520px]">
+      <div className="relative min-h-[520px] overflow-hidden lg:min-h-[640px]">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={slide.id}
@@ -52,7 +52,7 @@ export function HeroSlider() {
             </FauxPhoto>
 
             {/* copy overlay */}
-            <div className="absolute inset-0 flex flex-col justify-center p-8 text-white lg:p-14">
+            <div className="absolute inset-0 mx-auto flex max-w-[1600px] flex-col justify-center px-6 text-white lg:px-10">
               <motion.p
                 initial={{ opacity: 0, y: reduce ? 0 : 14 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -99,7 +99,7 @@ export function HeroSlider() {
                 initial={{ opacity: 0, y: reduce ? 0 : 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, ease: EASE, delay: 0.45 }}
-                className="absolute right-6 bottom-20 hidden items-center gap-3 rounded-lg border border-white/20 bg-white/95 p-2.5 pr-4 shadow-lg backdrop-blur md:flex"
+                className="absolute right-6 bottom-20 hidden items-center gap-3 rounded-lg border border-white/20 bg-white/95 p-2.5 pr-4 shadow-lg backdrop-blur md:flex lg:right-10"
               >
                 <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-md bg-page">
                   <Bottle className="h-10 w-auto" />
@@ -121,7 +121,7 @@ export function HeroSlider() {
         </AnimatePresence>
 
         {/* controls */}
-        <div className="absolute bottom-5 left-8 z-10 flex gap-1.5 lg:left-14" role="tablist" aria-label="Slides">
+        <div className="absolute bottom-6 left-6 z-10 flex gap-1.5 lg:left-10" role="tablist" aria-label="Slides">
           {home.slides.map((s, i) => (
             <button
               key={s.id}
@@ -135,7 +135,7 @@ export function HeroSlider() {
             />
           ))}
         </div>
-        <div className="absolute right-5 bottom-4 z-10 hidden gap-1.5 md:flex">
+        <div className="absolute right-6 bottom-6 z-10 hidden gap-1.5 md:flex lg:right-10">
           {[
             { dir: -1, label: 'Slide anterior', d: 'M7 1L2 6l5 5' },
             { dir: 1, label: 'Slide seguinte', d: 'M2 1l5 5-5 5' },

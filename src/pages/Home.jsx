@@ -102,10 +102,11 @@ function Categories() {
             <FauxPhoto
               scene={c.scene}
               subject={c.subject}
-              className="aspect-[4/5] rounded-lg shadow-xs"
+              zoom
+              className="aspect-[4/5] rounded-xl shadow-xs"
             >
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(0,0,0,0.55)_100%)] transition-opacity duration-300 group-hover:opacity-90" />
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4 text-white">
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,rgba(0,0,0,0.6)_100%)] transition-opacity duration-300 group-hover:opacity-90" />
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5 text-white">
                 <div>
                   <p className="text-base font-semibold">{c.title}</p>
                   <p className="text-[11px] text-white/70">{c.count} produtos</p>
@@ -196,7 +197,8 @@ function Featured({ addItem }) {
             <Link to={p.href} className="block">
               <FauxPhoto
                 scene={CARD_SCENES[i % CARD_SCENES.length]}
-                className="relative aspect-square rounded-lg shadow-xs"
+                zoom
+                className="relative aspect-square rounded-xl shadow-xs"
               >
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-[34%] drop-shadow-[0_16px_24px_rgba(0,0,0,0.3)] transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105">
@@ -360,7 +362,7 @@ function Gallery() {
             transition={{ ...reveal.transition, delay: i * 0.05 }}
             className={`group ${i === 0 ? 'col-span-2 row-span-2 sm:col-span-1 lg:col-span-2 lg:row-span-1' : ''}`}
           >
-            <FauxPhoto scene={g.scene} subject={g.subject} className="aspect-square rounded-lg shadow-xs">
+            <FauxPhoto scene={g.scene} subject={g.subject} zoom className="aspect-square rounded-xl shadow-xs">
               <div className="absolute inset-0 bg-ink/0 transition-colors duration-300 group-hover:bg-ink/30" />
               <span className="absolute bottom-3 left-3 rounded-md bg-ink/60 px-2 py-1 text-[10px] font-medium text-white opacity-0 backdrop-blur transition-opacity duration-300 group-hover:opacity-100">
                 {g.label}

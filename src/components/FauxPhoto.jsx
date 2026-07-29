@@ -15,13 +15,21 @@ const SCENES = {
     'bg-[linear-gradient(135deg,#efece5_0%,#f7f5f0_45%,#e4e0d6_100%)]',
 }
 
-export function FauxPhoto({ src, alt = '', scene = 'cream', subject, className = '', children }) {
+export function FauxPhoto({ src, alt = '', scene = 'cream', subject, className = '', zoom = false, children }) {
+  const zoomCls = zoom
+    ? 'transition-transform duration-[600ms] ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.04]'
+    : ''
   return (
     <div className={`relative overflow-hidden ${className}`}>
       {src ? (
-        <img src={src} alt={alt} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          className={`absolute inset-0 h-full w-full object-cover ${zoomCls}`}
+        />
       ) : (
-        <>
+        <div className={`absolute inset-0 ${zoomCls}`}>
           <div className={`absolute inset-0 ${SCENES[scene]}`} />
           {/* light streak */}
           <div className="absolute inset-0 bg-[linear-gradient(115deg,transparent_30%,rgba(255,255,255,0.14)_44%,transparent_58%)]" />
@@ -50,7 +58,7 @@ export function FauxPhoto({ src, alt = '', scene = 'cream', subject, className =
           {subject === 'mist' && (
             <SprayMist className="absolute top-[16%] left-[10%] w-1/3 opacity-70" />
           )}
-        </>
+        </div>
       )}
       {children}
     </div>
