@@ -9,7 +9,7 @@ export const nav = {
     columns: [
       {
         title: 'Cozinha',
-        href: '#',
+        slug: 'cozinha',
         links: [
           'Desengordurantes',
           'Loiça manual',
@@ -20,7 +20,7 @@ export const nav = {
       },
       {
         title: 'Lavandaria',
-        href: '#',
+        slug: 'lavandaria',
         links: [
           'Detergentes de roupa',
           'Amaciadores',
@@ -30,7 +30,7 @@ export const nav = {
       },
       {
         title: 'Superfícies',
-        href: '#',
+        slug: 'superficies',
         links: [
           'Multiusos',
           'Pavimentos',
@@ -41,7 +41,7 @@ export const nav = {
       },
       {
         title: 'Desinfeção',
-        href: '#',
+        slug: 'desinfecao',
         links: [
           'Desinfetantes alimentares',
           'Virucidas e bactericidas',

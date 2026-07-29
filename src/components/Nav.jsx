@@ -27,27 +27,33 @@ function MegaProdutos({ onNavigate }) {
     <div className="mx-auto grid max-w-[1600px] grid-cols-[repeat(4,1fr)_300px] gap-10 px-6 py-10 lg:px-10">
       {nav.produtos.columns.map((col) => (
         <div key={col.title}>
-          <a href={col.href} className="text-[13px] font-semibold hover:text-accent-deep">
+          <Link
+            to={`/categoria/${col.slug}`}
+            onClick={onNavigate}
+            className="text-[13px] font-semibold hover:text-accent-deep"
+          >
             {col.title}
-          </a>
+          </Link>
           <ul className="mt-3 space-y-2">
             {col.links.map((l) => (
               <li key={l}>
-                <a
-                  href="#"
+                <Link
+                  to={`/categoria/${col.slug}`}
+                  onClick={onNavigate}
                   className="text-[13px] text-muted transition-colors duration-150 hover:text-ink"
                 >
                   {l}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
-          <a
-            href={col.href}
+          <Link
+            to={`/categoria/${col.slug}`}
+            onClick={onNavigate}
             className="mt-3 inline-block text-[12px] font-medium text-accent-deep underline-offset-2 hover:underline"
           >
             Ver tudo →
-          </a>
+          </Link>
         </div>
       ))}
 
@@ -294,15 +300,33 @@ export function Nav({ cartCount = 0, onCartOpen }) {
               transition={{ duration: 0.35, ease: EASE }}
               className="fixed top-0 left-0 z-50 flex h-full w-[86%] max-w-sm flex-col overflow-y-auto bg-white p-6 pt-20"
             >
+              <Link
+                to="/categorias"
+                onClick={() => setOpen(null)}
+                className="mb-2 flex items-center justify-between border-b border-line py-4 text-sm font-semibold"
+              >
+                Todas as categorias
+                <span aria-hidden="true">→</span>
+              </Link>
               {nav.produtos.columns.map((col) => (
                 <div key={col.title} className="border-b border-line py-4">
-                  <p className="text-sm font-semibold">{col.title}</p>
+                  <Link
+                    to={`/categoria/${col.slug}`}
+                    onClick={() => setOpen(null)}
+                    className="text-sm font-semibold"
+                  >
+                    {col.title}
+                  </Link>
                   <ul className="mt-2 space-y-2">
                     {col.links.map((l) => (
                       <li key={l}>
-                        <a href="#" className="text-[13px] text-muted">
+                        <Link
+                          to={`/categoria/${col.slug}`}
+                          onClick={() => setOpen(null)}
+                          className="text-[13px] text-muted"
+                        >
                           {l}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>

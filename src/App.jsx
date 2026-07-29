@@ -6,6 +6,8 @@ import { Cart } from './components/Cart'
 import { Footer } from './components/Footer'
 import { Home } from './pages/Home'
 import { Product } from './pages/Product'
+import { Categories } from './pages/Categories'
+import { Category } from './pages/Category'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -58,6 +60,8 @@ function App() {
         <Nav cartCount={count} onCartOpen={() => setCartOpen(true)} />
         <Routes>
           <Route path="/" element={<Home addItem={addItem} />} />
+          <Route path="/categorias" element={<Categories />} />
+          <Route path="/categoria/:slug" element={<Category addItem={addItem} />} />
           <Route path="/produto/htg-30" element={<Product addItem={addItem} />} />
         </Routes>
         <Footer />

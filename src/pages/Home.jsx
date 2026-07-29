@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { home } from '../data/site'
+import { shopCategories, countByCat } from '../data/catalog'
 import { HeroBanner } from '../components/HeroBanner'
 import { DealOfDay } from '../components/DealOfDay'
 import { ProductCard } from '../components/ProductCard'
@@ -59,28 +60,24 @@ function CategoryStrip() {
         eyebrow="CATEGORIAS"
         title="Compre por categoria"
         action={
-          <a href="#" className="text-sm font-medium text-accent-deep underline-offset-2 hover:underline">
+          <Link to="/categorias" className="text-sm font-medium text-accent-deep underline-offset-2 hover:underline">
             Ver catálogo completo →
-          </a>
+          </Link>
         }
       />
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
-        {home.categories.map((c, i) => (
-          <motion.a
-            key={c.title}
-            href="#"
-            {...reveal}
-            transition={{ ...reveal.transition, delay: (i % 6) * 0.05 }}
-            className="group"
-          >
-            <FauxPhoto scene={c.scene} subject={c.subject} zoom className="aspect-[4/5] rounded-xl shadow-xs">
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_42%,rgba(0,0,0,0.62)_100%)]" />
-              <div className="absolute inset-x-0 bottom-0 p-4 text-white">
-                <p className="text-sm font-semibold">{c.title}</p>
-                <p className="text-[11px] text-white/70">{c.count} produtos</p>
-              </div>
-            </FauxPhoto>
-          </motion.a>
+        {shopCategories.slice(0, 6).map((c, i) => (
+          <motion.div key={c.slug} {...reveal} transition={{ ...reveal.transition, delay: (i % 6) * 0.05 }}>
+            <Link to={`/categoria/${c.slug}`} className="group block">
+              <FauxPhoto scene={c.scene} subject={c.subject} zoom className="aspect-[4/5] rounded-xl shadow-xs">
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_42%,rgba(0,0,0,0.62)_100%)]" />
+                <div className="absolute inset-x-0 bottom-0 p-4 text-white">
+                  <p className="text-sm font-semibold">{c.title}</p>
+                  <p className="text-[11px] text-white/70">{countByCat(c.slug)} produtos</p>
+                </div>
+              </FauxPhoto>
+            </Link>
+          </motion.div>
         ))}
       </div>
     </section>
