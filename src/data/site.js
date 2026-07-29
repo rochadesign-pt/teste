@@ -77,51 +77,50 @@ export const nav = {
 }
 
 export const home = {
-  // ——— Hero (Hyper): sidebar de departamentos + slideshow + 2 mini-banners ———
-  departments: [
-    { title: 'Cozinha', icon: 'flame' },
-    { title: 'Lavandaria', icon: 'drop' },
-    { title: 'Superfícies', icon: 'sparkle' },
-    { title: 'Desinfeção', icon: 'shield' },
-    { title: 'Mãos & Pele', icon: 'hand' },
-    { title: 'Auto & Detailing', icon: 'car' },
-    { title: 'Agroalimentar', icon: 'leaf' },
-    { title: 'Acessórios & Doseadores', icon: 'tool' },
-  ],
+  // ——— Hero: slideshow full-width de novidades (3–4 banners) ———
   slides: [
     {
       id: 'htg30',
       eyebrow: 'LINHA COZINHA · MAIS VENDIDO',
       title: 'O fim das gorduras difíceis.',
-      text: 'Tiragorduras HTG-30 — o desengordurante alcalino de eleição das cozinhas profissionais.',
+      text: 'Tiragorduras HTG-30 — o desengordurante alcalino de eleição das cozinhas profissionais. Atua em 5 minutos, mesmo a quente.',
       cta: 'Comprar HTG-30',
       href: '/produto/htg-30',
       scene: 'kitchen',
+      subject: 'mist',
       price: '4,35 €',
     },
     {
       id: 'bundles',
       eyebrow: 'OPORTUNIDADES · TEMPO LIMITADO',
       title: 'Bundles com até 15% de poupança.',
-      text: 'Packs promocionais — do dia a dia ao fornecimento trimestral.',
+      text: 'Packs promocionais — do pack do dia a dia ao fornecimento trimestral da sua operação.',
       cta: 'Ver oportunidades',
       href: '/produto/htg-30',
       scene: 'green',
+      subject: 'set',
       badge: '−15%',
+    },
+    {
+      id: 'agro',
+      eyebrow: 'NOVIDADE',
+      title: 'Nova linha agroalimentar certificada.',
+      text: 'Higienização aprovada para a indústria de transformação — HACCP e notificação DGS.',
+      cta: 'Descobrir a linha',
+      href: '#',
+      scene: 'steel',
+      subject: 'bottle',
     },
     {
       id: 'pro',
       eyebrow: 'PARA EMPRESAS',
       title: 'Condições dedicadas para volume.',
-      text: 'Faturação com NIF, fichas técnicas e apoio especializado.',
+      text: 'Faturação com NIF, fichas técnicas e de segurança, apoio técnico especializado e propostas para revenda.',
       cta: 'Pedir proposta',
       href: '#',
-      scene: 'steel',
+      scene: 'green',
+      subject: 'bottle',
     },
-  ],
-  heroMiniBanners: [
-    { title: 'Recargas económicas', text: 'Até −40% por litro', cta: 'Ver recargas', href: '/produto/htg-30', scene: 'steel' },
-    { title: 'Novidade agroalimentar', text: 'Linha certificada', cta: 'Descobrir', href: '#', scene: 'green' },
   ],
   // ——— Deal of the day ———
   deal: {
