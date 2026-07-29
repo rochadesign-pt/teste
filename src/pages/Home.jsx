@@ -1,66 +1,39 @@
 import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { home } from '../data/site'
-import { catalog } from '../data/product'
-import { HeroSlider } from '../components/HeroSlider'
-import { Marquee } from '../components/Marquee'
+import { HeroBanner } from '../components/HeroBanner'
+import { ProductCard } from '../components/ProductCard'
 import { GuaranteeIcon, Stars } from '../components/PayIcons'
 import { FauxPhoto } from '../components/FauxPhoto'
-import { Bottle } from '../components/Bottle'
 
 const EASE = [0.32, 0.72, 0, 1]
-const fmt = (n) => `${n.toFixed(2).replace('.', ',')} €`
+const WRAP = 'mx-auto max-w-[1600px] px-6 lg:px-10'
 
 const reveal = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 18 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-10%' },
-  transition: { duration: 0.55, ease: EASE },
+  viewport: { once: true, margin: '-8%' },
+  transition: { duration: 0.5, ease: EASE },
 }
 
-function SectionHead({ eyebrow, title, action, light = false }) {
+function SectionHead({ eyebrow, title, action }) {
   return (
-    <motion.div {...reveal} className="mb-8 flex flex-wrap items-end justify-between gap-4">
+    <motion.div {...reveal} className="mb-6 flex flex-wrap items-end justify-between gap-4">
       <div>
-        <p className={`mb-2 text-[11px] font-medium tracking-[0.16em] ${light ? 'text-accent' : 'text-accent-deep'}`}>
-          {eyebrow}
-        </p>
-        <h2 className="font-display text-3xl font-semibold sm:text-4xl">{title}</h2>
+        {eyebrow && <p className="mb-1.5 text-[11px] font-medium tracking-[0.16em] text-accent-deep">{eyebrow}</p>}
+        <h2 className="font-display text-2xl font-semibold sm:text-3xl">{title}</h2>
       </div>
       {action}
     </motion.div>
   )
 }
 
-function Arrows({ onPrev, onNext }) {
-  return (
-    <div className="flex gap-1.5">
-      {[
-        { fn: onPrev, label: 'Anterior', d: 'M7 1L2 6l5 5' },
-        { fn: onNext, label: 'Seguinte', d: 'M2 1l5 5-5 5' },
-      ].map((b) => (
-        <button
-          key={b.label}
-          type="button"
-          aria-label={b.label}
-          onClick={b.fn}
-          className="flex h-9 w-9 items-center justify-center rounded-md border border-line bg-white transition-colors duration-200 hover:border-ink/30"
-        >
-          <svg width="9" height="12" viewBox="0 0 9 12" fill="none" aria-hidden="true">
-            <path d={b.d} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-      ))}
-    </div>
-  )
-}
-
 /* ——— USPs ——— */
 function Usps() {
   return (
-    <section className="mt-10 border-y border-line bg-white">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-2 gap-6 px-6 py-7 lg:grid-cols-4 lg:px-12">
+    <section className="mt-3 border-y border-line bg-white">
+      <div className={`${WRAP} grid grid-cols-2 gap-6 py-6 lg:grid-cols-4`}>
         {home.usps.map((u) => (
           <div key={u.title} className="flex items-center gap-3">
             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-accent-soft text-accent-deep">
@@ -77,45 +50,33 @@ function Usps() {
   )
 }
 
-/* ——— Categorias — image tiles ——— */
-function Categories() {
+/* ——— Shop by category — 6 tiles ——— */
+function CategoryStrip() {
   return (
-    <section className="mx-auto max-w-[1280px] px-6 py-16 lg:px-12">
+    <section className={`${WRAP} py-14`}>
       <SectionHead
         eyebrow="CATEGORIAS"
         title="Compre por categoria"
         action={
           <a href="#" className="text-sm font-medium text-accent-deep underline-offset-2 hover:underline">
-            Ver todos os produtos →
+            Ver catálogo completo →
           </a>
         }
       />
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
         {home.categories.map((c, i) => (
           <motion.a
             key={c.title}
             href="#"
             {...reveal}
-            transition={{ ...reveal.transition, delay: i * 0.06 }}
+            transition={{ ...reveal.transition, delay: (i % 6) * 0.05 }}
             className="group"
           >
-            <FauxPhoto
-              scene={c.scene}
-              subject={c.subject}
-              zoom
-              className="aspect-[4/5] rounded-xl shadow-xs"
-            >
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,rgba(0,0,0,0.6)_100%)] transition-opacity duration-300 group-hover:opacity-90" />
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5 text-white">
-                <div>
-                  <p className="text-base font-semibold">{c.title}</p>
-                  <p className="text-[11px] text-white/70">{c.count} produtos</p>
-                </div>
-                <span className="flex h-8 w-8 items-center justify-center rounded-md bg-white/15 backdrop-blur transition-colors duration-200 group-hover:bg-accent">
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-                    <path d="M1 9L9 1M9 1H3M9 1v6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </span>
+            <FauxPhoto scene={c.scene} subject={c.subject} zoom className="aspect-[4/5] rounded-xl shadow-xs">
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_42%,rgba(0,0,0,0.62)_100%)]" />
+              <div className="absolute inset-x-0 bottom-0 p-4 text-white">
+                <p className="text-sm font-semibold">{c.title}</p>
+                <p className="text-[11px] text-white/70">{c.count} produtos</p>
               </div>
             </FauxPhoto>
           </motion.a>
@@ -125,161 +86,143 @@ function Categories() {
   )
 }
 
-/* ——— Image with text — porquê Mistolin PRO ——— */
-function Science() {
-  const s = home.science
+/* ——— Featured products tabs (Hyper) ——— */
+function ProductTabs({ addItem }) {
+  const reduce = useReducedMotion()
+  const [tab, setTab] = useState(home.productTabs[0].id)
+  const items = home.products.filter((p) => p.tabs.includes(tab)).slice(0, 10)
+
   return (
     <section className="bg-white">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-10 px-6 py-16 lg:grid-cols-2 lg:gap-16 lg:px-12 lg:py-20">
-        <motion.div {...reveal}>
-          <FauxPhoto scene="kitchen" subject="bottle" className="aspect-[4/4.6] rounded-xl shadow-xs">
-            <span className="absolute top-4 left-4 rounded-md bg-white/90 px-2.5 py-1 text-[11px] font-medium text-ink">
-              Testado em operação real
-            </span>
-          </FauxPhoto>
-        </motion.div>
-
-        <motion.div {...reveal} transition={{ ...reveal.transition, delay: 0.08 }}>
-          <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-accent-deep">{s.eyebrow}</p>
-          <h2 className="font-display max-w-md text-3xl leading-[1.1] font-semibold sm:text-4xl">{s.title}</h2>
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">{s.text}</p>
-
-          <ul className="mt-6 space-y-3">
-            {s.points.map((p) => (
-              <li key={p} className="flex items-center gap-3 text-sm">
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-soft">
-                  <svg width="10" height="8" viewBox="0 0 12 10" fill="none" aria-hidden="true">
-                    <path d="M1 5l3.4 3.4L11 1.6" stroke="#518708" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </span>
-                {p}
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-8 grid grid-cols-3 gap-4 border-t border-line pt-6">
-            {s.stats.map((st) => (
-              <div key={st.label}>
-                <p className="font-display text-2xl font-semibold">{st.value}</p>
-                <p className="text-[11px] text-muted">{st.label}</p>
-              </div>
+      <div className={`${WRAP} py-14`}>
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+          <div role="tablist" aria-label="Coleções" className="flex gap-1 rounded-lg border border-line bg-page p-1">
+            {home.productTabs.map((t) => (
+              <button
+                key={t.id}
+                role="tab"
+                aria-selected={tab === t.id}
+                onClick={() => setTab(t.id)}
+                className={`relative rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors duration-200 ${
+                  tab === t.id ? 'text-white' : 'text-muted hover:text-ink'
+                }`}
+              >
+                {tab === t.id && (
+                  <motion.span
+                    layoutId="prodtab"
+                    transition={{ duration: reduce ? 0 : 0.3, ease: EASE }}
+                    className="absolute inset-0 rounded-md bg-ink"
+                  />
+                )}
+                <span className="relative">{t.label}</span>
+              </button>
             ))}
           </div>
-        </motion.div>
+          <a href="#" className="text-sm font-medium text-accent-deep underline-offset-2 hover:underline">
+            Ver todos →
+          </a>
+        </div>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={tab}
+            initial={{ opacity: 0, y: reduce ? 0 : 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: reduce ? 0 : -6 }}
+            transition={{ duration: 0.25, ease: EASE }}
+            className="grid grid-cols-2 gap-x-3 gap-y-7 sm:grid-cols-3 lg:grid-cols-5"
+          >
+            {items.map((p) => (
+              <ProductCard key={p.key} p={p} addItem={addItem} />
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   )
 }
 
-/* ——— Produtos em destaque ——— */
-const CARD_SCENES = ['cream', 'steel', 'green', 'kitchen', 'cream', 'steel']
-
-function Featured({ addItem }) {
-  const track = useRef(null)
-  const scroll = (dir) => track.current?.scrollBy({ left: dir * 300, behavior: 'smooth' })
-
+/* ——— Grid banners ——— */
+function GridBanners() {
   return (
-    <section className="mx-auto max-w-[1280px] px-6 py-16 lg:px-12">
-      <SectionHead
-        eyebrow="MAIS VENDIDOS"
-        title="Os preferidos dos profissionais"
-        action={<Arrows onPrev={() => scroll(-1)} onNext={() => scroll(1)} />}
-      />
-      <div
-        ref={track}
-        className="-mx-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-2 [scrollbar-width:none] lg:-mx-12 lg:px-12"
-      >
-        {home.featured.map((p, i) => (
-          <article
-            key={p.id + p.detail}
-            className="group w-[250px] shrink-0 snap-start"
+    <section className={`${WRAP} py-14`}>
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+        {home.banners.map((b, i) => (
+          <motion.div
+            key={b.title}
+            {...reveal}
+            transition={{ ...reveal.transition, delay: i * 0.08 }}
           >
-            <Link to={p.href} className="block">
-              <FauxPhoto
-                scene={CARD_SCENES[i % CARD_SCENES.length]}
-                zoom
-                className="relative aspect-square rounded-xl shadow-xs"
-              >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-[34%] drop-shadow-[0_16px_24px_rgba(0,0,0,0.3)] transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105">
-                    <Bottle className="w-full" />
-                  </div>
-                </div>
-                {p.tag && (
-                  <span
-                    className={`absolute top-2.5 left-2.5 rounded-md px-1.5 py-0.5 text-[10px] font-semibold ${
-                      p.tag === 'Bundle' ? 'bg-accent text-white' : 'bg-white/95 text-ink shadow-xs'
-                    }`}
-                  >
-                    {p.tag}
+            <Link to={b.href} className="group block">
+              <FauxPhoto scene={b.scene} subject={b.subject} zoom className="relative min-h-[220px] rounded-xl">
+                <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(0,0,0,0.6)_0%,rgba(0,0,0,0.25)_60%,transparent_85%)]" />
+                <div className="relative flex h-full min-h-[220px] flex-col justify-center p-7 text-white">
+                  <p className="text-[11px] font-medium tracking-[0.14em] text-white/70">{b.eyebrow}</p>
+                  <h3 className="font-display mt-2 max-w-xs text-2xl leading-tight font-semibold">{b.title}</h3>
+                  <p className="mt-2 max-w-xs text-[13px] text-white/75">{b.text}</p>
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-semibold">
+                    {b.cta}
+                    <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
                   </span>
-                )}
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    catalog[p.id] && addItem(p.id)
-                  }}
-                  aria-label={`Adicionar ${p.name} ao carrinho`}
-                  className="absolute right-2.5 bottom-2.5 flex h-9 w-9 items-center justify-center rounded-md bg-white/95 text-ink opacity-0 shadow-xs transition-all duration-200 group-hover:opacity-100 hover:bg-ink hover:text-white"
-                >
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                    <path d="M6 1v10M1 6h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                  </svg>
-                </button>
+                </div>
               </FauxPhoto>
             </Link>
-            <div className="px-1 pt-3">
-              <p className="truncate text-[13px] font-medium">{p.name}</p>
-              <p className="text-[11px] text-muted">{p.detail}</p>
-              <p className="mt-1 text-sm font-semibold tabular-nums">
-                {p.full && (
-                  <span className="mr-1.5 text-[11px] font-normal text-muted/60 line-through">{fmt(p.full)}</span>
-                )}
-                {fmt(p.price)}
-              </p>
-            </div>
-          </article>
+          </motion.div>
         ))}
       </div>
     </section>
   )
 }
 
-/* ——— Antes / Depois ——— */
-function BeforeAfter() {
-  const b = home.beforeAfter
+/* ——— Coleção em destaque ——— */
+function Showcase({ addItem }) {
+  const s = home.showcase
+  const items = s.keys.map((k) => home.products.find((p) => p.key === k)).filter(Boolean)
   return (
-    <section className="mx-auto max-w-[1280px] px-6 py-8 lg:px-12">
-      <SectionHead eyebrow={b.eyebrow} title={b.title} />
-      <motion.div {...reveal} className="grid grid-cols-1 gap-3 md:grid-cols-2">
-        <FauxPhoto scene="kitchen" className="aspect-[16/10] rounded-lg shadow-xs">
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_50%,rgba(0,0,0,0.6)_100%)]" />
-          <span className="absolute top-4 left-4 rounded-md bg-ink/80 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur">
-            {b.before.label}
-          </span>
-          <p className="absolute bottom-4 left-4 max-w-xs text-sm text-white/90">{b.before.text}</p>
-        </FauxPhoto>
-        <FauxPhoto scene="steel" subject="bottle" className="aspect-[16/10] rounded-lg shadow-xs">
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_50%,rgba(0,0,0,0.45)_100%)]" />
-          <span className="absolute top-4 left-4 rounded-md bg-accent px-2.5 py-1 text-[11px] font-semibold text-white">
-            {b.after.label}
-          </span>
-          <p className="absolute bottom-4 left-4 max-w-xs text-sm text-white/90">{b.after.text}</p>
-        </FauxPhoto>
-      </motion.div>
+    <section className="bg-white">
+      <div className={`${WRAP} py-14`}>
+        <SectionHead
+          eyebrow={s.eyebrow}
+          title={s.title}
+          action={
+            <a href={s.href} className="text-sm font-medium text-accent-deep underline-offset-2 hover:underline">
+              Ver coleção →
+            </a>
+          }
+        />
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-[1.1fr_2fr]">
+          {/* feature tile */}
+          <motion.div {...reveal}>
+            <Link to="/produto/htg-30" className="group block h-full">
+              <FauxPhoto scene="kitchen" subject="bottle" zoom className="relative h-full min-h-[280px] rounded-xl">
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,rgba(0,0,0,0.6)_100%)]" />
+                <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+                  <p className="text-[11px] font-medium tracking-[0.14em] text-white/70">{s.text}</p>
+                  <p className="font-display mt-1 text-xl font-semibold">{s.title}</p>
+                </div>
+              </FauxPhoto>
+            </Link>
+          </motion.div>
+          {/* product grid */}
+          <motion.div {...reveal} transition={{ ...reveal.transition, delay: 0.06 }} className="grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-4 lg:grid-cols-4">
+            {items.map((p) => (
+              <ProductCard key={p.key} p={p} addItem={addItem} />
+            ))}
+          </motion.div>
+        </div>
+      </div>
     </section>
   )
 }
 
-/* ——— Banner promocional (imagem) ——— */
+/* ——— Banner bundles ——— */
 function PromoBanner() {
   return (
-    <section className="mx-auto max-w-[1280px] px-6 py-16 lg:px-12">
+    <section className={`${WRAP} py-6`}>
       <motion.div {...reveal}>
         <FauxPhoto scene="green" subject="set" className="rounded-xl">
-          <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(0,0,0,0.55)_0%,rgba(0,0,0,0.25)_55%,transparent_80%)]" />
-          <div className="relative flex min-h-[280px] flex-col justify-center p-8 text-white lg:p-14">
+          <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(0,0,0,0.55)_0%,rgba(0,0,0,0.25)_55%,transparent_82%)]" />
+          <div className="relative flex min-h-[240px] flex-col justify-center p-8 text-white lg:p-12">
             <p className="flex items-center gap-2 text-[11px] font-medium tracking-[0.14em]">
               <span className="rounded-md bg-white px-1.5 py-0.5 text-[9px] font-semibold text-ink">PROMO</span>
               <span className="text-white/70">POR TEMPO LIMITADO</span>
@@ -288,9 +231,9 @@ function PromoBanner() {
               Bundles com até 15% de poupança
             </h2>
             <p className="mt-3 max-w-sm text-sm text-white/75">
-              Do pack do dia a dia ao fornecimento trimestral — stock garantido e envio grátis acima de 30 €.
+              Stock garantido e envio grátis acima de 30 €.
             </p>
-            <div className="mt-7">
+            <div className="mt-6">
               <Link
                 to="/produto/htg-30"
                 className="inline-flex h-11 items-center gap-2.5 rounded-lg bg-white px-6 text-sm font-semibold text-ink transition-colors duration-200 hover:bg-ink hover:text-white"
@@ -308,67 +251,31 @@ function PromoBanner() {
 
 /* ——— Testemunhos ——— */
 function Testimonials() {
-  const track = useRef(null)
-  const scroll = (dir) => track.current?.scrollBy({ left: dir * 340, behavior: 'smooth' })
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-[1280px] px-6 py-16 lg:px-12">
-        <SectionHead
-          eyebrow="TESTEMUNHOS"
-          title="Quem usa, confia"
-          action={<Arrows onPrev={() => scroll(-1)} onNext={() => scroll(1)} />}
-        />
-        <div
-          ref={track}
-          className="-mx-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-2 [scrollbar-width:none] lg:-mx-12 lg:px-12"
-        >
-          {home.testimonials.map((t) => (
-            <figure
-              key={t.name}
-              className="flex w-[320px] shrink-0 snap-start flex-col justify-between rounded-lg border border-line bg-page p-6"
-            >
-              <div>
-                <Stars value={t.rating} />
-                <blockquote className="mt-3 text-sm leading-relaxed">“{t.quote}”</blockquote>
-              </div>
-              <figcaption className="mt-5 flex items-center gap-3">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-soft text-sm font-semibold text-accent-deep">
-                  {t.name.charAt(0)}
-                </span>
-                <div>
-                  <p className="text-[13px] font-semibold">{t.name}</p>
-                  <p className="text-[11px] text-muted">{t.role}</p>
-                </div>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ——— Galeria UGC ——— */
-function Gallery() {
-  return (
-    <section className="mx-auto max-w-[1280px] px-6 py-16 lg:px-12">
-      <SectionHead eyebrow="COMUNIDADE" title="Nas cozinhas de todo o país" />
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-        {home.gallery.map((g, i) => (
-          <motion.a
-            key={g.label}
-            href="#"
+    <section className={`${WRAP} py-14`}>
+      <SectionHead eyebrow="TESTEMUNHOS" title="Quem usa, confia" />
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {home.testimonials.map((t, i) => (
+          <motion.figure
+            key={t.name}
             {...reveal}
-            transition={{ ...reveal.transition, delay: i * 0.05 }}
-            className={`group ${i === 0 ? 'col-span-2 row-span-2 sm:col-span-1 lg:col-span-2 lg:row-span-1' : ''}`}
+            transition={{ ...reveal.transition, delay: (i % 4) * 0.05 }}
+            className="flex flex-col justify-between rounded-xl border border-line bg-white p-5"
           >
-            <FauxPhoto scene={g.scene} subject={g.subject} zoom className="aspect-square rounded-xl shadow-xs">
-              <div className="absolute inset-0 bg-ink/0 transition-colors duration-300 group-hover:bg-ink/30" />
-              <span className="absolute bottom-3 left-3 rounded-md bg-ink/60 px-2 py-1 text-[10px] font-medium text-white opacity-0 backdrop-blur transition-opacity duration-300 group-hover:opacity-100">
-                {g.label}
+            <div>
+              <Stars value={t.rating} />
+              <blockquote className="mt-3 text-[13px] leading-relaxed">“{t.quote}”</blockquote>
+            </div>
+            <figcaption className="mt-5 flex items-center gap-3">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft text-[13px] font-semibold text-accent-deep">
+                {t.name.charAt(0)}
               </span>
-            </FauxPhoto>
-          </motion.a>
+              <div>
+                <p className="text-[12px] font-semibold">{t.name}</p>
+                <p className="text-[11px] text-muted">{t.role}</p>
+              </div>
+            </figcaption>
+          </motion.figure>
         ))}
       </div>
     </section>
@@ -380,7 +287,7 @@ function Newsletter() {
   const reduce = useReducedMotion()
   const [done, setDone] = useState(false)
   return (
-    <section className="mx-auto max-w-[1280px] px-6 pb-16 lg:px-12">
+    <section className={`${WRAP} pb-16`}>
       <motion.div {...reveal}>
         <FauxPhoto scene="cream" subject="mist" className="rounded-xl border border-line">
           <div className="relative grid grid-cols-1 items-center gap-8 p-8 lg:grid-cols-2 lg:p-12">
@@ -425,17 +332,14 @@ function Newsletter() {
 export function Home({ addItem }) {
   return (
     <main>
-      <HeroSlider />
+      <HeroBanner />
       <Usps />
-      <Categories />
-      <Science />
-      <Featured addItem={addItem} />
-      <BeforeAfter />
+      <CategoryStrip />
+      <ProductTabs addItem={addItem} />
+      <GridBanners />
+      <Showcase addItem={addItem} />
       <PromoBanner />
       <Testimonials />
-      <Gallery />
-      <Marquee />
-      <div className="h-12" />
       <Newsletter />
     </main>
   )

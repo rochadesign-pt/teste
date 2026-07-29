@@ -77,69 +77,92 @@ export const nav = {
 }
 
 export const home = {
-  // Slides do hero — imagem full-bleed com texto sobreposto.
-  // `image`: caminho para a fotografia real; enquanto null usa a cena.
-  slides: [
-    {
-      id: 'htg30',
-      eyebrow: 'LINHA COZINHA',
+  // ——— Hero (Hyper): banner promocional + collection cards ———
+  hero: {
+    banner: {
+      eyebrow: 'LINHA COZINHA · MAIS VENDIDO',
       title: 'O fim das gorduras difíceis.',
       text: 'Tiragorduras HTG-30 — o desengordurante alcalino de eleição das cozinhas profissionais. Atua em 5 minutos, mesmo a quente.',
       cta: 'Comprar HTG-30',
       href: '/produto/htg-30',
       scene: 'kitchen',
       image: null,
-      card: { name: 'Tiragorduras HTG-30', detail: '750 mL', price: '4,35 €' },
+      price: '4,35 €',
     },
-    {
-      id: 'bundles',
-      eyebrow: 'OPORTUNIDADES · TEMPO LIMITADO',
-      title: 'Bundles com até 15% de poupança.',
-      text: 'Packs promocionais — do pack do dia a dia ao fornecimento trimestral da sua operação.',
-      cta: 'Ver bundles',
-      href: '/produto/htg-30',
-      scene: 'green',
-      image: null,
-      badge: '−15%',
-    },
-    {
-      id: 'pro',
-      eyebrow: 'PARA EMPRESAS',
-      title: 'Condições dedicadas para volume.',
-      text: 'Faturação com NIF, fichas técnicas e FDS, apoio técnico especializado e propostas para revenda.',
-      cta: 'Pedir proposta',
-      href: '#',
-      scene: 'steel',
-      image: null,
-    },
-  ],
+    cards: [
+      {
+        title: 'Bundles até −15%',
+        text: 'Packs promocionais por tempo limitado',
+        cta: 'Ver oportunidades',
+        href: '/produto/htg-30',
+        scene: 'green',
+        badge: 'PROMO',
+      },
+      {
+        title: 'Compra a volume',
+        text: 'Condições dedicadas para empresas',
+        cta: 'Pedir proposta',
+        href: '#',
+        scene: 'steel',
+      },
+    ],
+  },
   categories: [
     { title: 'Cozinha', text: 'Desengordurantes, loiça e fornos', count: 42, scene: 'kitchen', subject: 'bottle' },
     { title: 'Lavandaria', text: 'Detergentes e amaciadores', count: 28, scene: 'cream', subject: 'bottle' },
     { title: 'Superfícies', text: 'Multiusos, pavimentos e inox', count: 35, scene: 'steel', subject: 'bottle' },
     { title: 'Desinfeção', text: 'Alimentar, virucida e WC', count: 31, scene: 'green', subject: 'bottle' },
+    { title: 'Mãos & Pele', text: 'Sabonetes e gel desinfetante', count: 18, scene: 'cream', subject: 'mist' },
+    { title: 'Auto & Detailing', text: 'Lavagem e acabamento', count: 22, scene: 'steel', subject: 'bottle' },
   ],
-  science: {
-    eyebrow: 'PORQUÊ MISTOLIN PRO',
-    title: 'Química profissional, resultados visíveis.',
-    text: 'Formulações desenvolvidas com equipas técnicas e testadas em operação real — não em laboratório apenas.',
-    points: [
-      'Fórmulas de elevada concentração — rendem mais por litro',
-      'Fichas técnicas e de segurança para todos os produtos',
-      'Compatibilidade testada com os materiais da sua cozinha',
-      'Fabricado em Portugal, stock e entrega garantidos',
-    ],
-    stats: [
-      { value: '2.400+', label: 'operações servidas' },
-      { value: '35 anos', label: 'de indústria' },
-      { value: '98%', label: 'entregas em 48h' },
-    ],
-  },
-  beforeAfter: {
-    eyebrow: 'RESULTADOS REAIS',
-    title: 'Da gordura carbonizada ao brilho, em 5 minutos.',
-    before: { label: 'Antes', text: 'Gordura acumulada de semanas de serviço' },
-    after: { label: 'Depois', text: 'Uma aplicação de HTG-30, sem esfregar' },
+  // ——— Catálogo para as tabs (Novidades / Mais vendidos / Promoções) ———
+  productTabs: [
+    { id: 'mais-vendidos', label: 'Mais vendidos' },
+    { id: 'novidades', label: 'Novidades' },
+    { id: 'promocoes', label: 'Promoções' },
+  ],
+  products: [
+    { key: 'htg750', id: '750ml', name: 'Tiragorduras HTG-30', detail: '750 mL · Pulverizador', price: 4.35, tag: 'Mais vendido', scene: 'kitchen', href: '/produto/htg-30', tabs: ['mais-vendidos'] },
+    { key: 'dda90', id: 'DDA-90', name: 'Desinfetante Alimentar DDA-90', detail: '750 mL · Pulverizador', price: 5.2, tag: 'Novo', scene: 'green', href: '#', tabs: ['novidades', 'mais-vendidos'] },
+    { key: 'inx25', id: 'INX-25', name: 'Brilha Inox INX-25', detail: '750 mL · Pulverizador', price: 6.1, scene: 'steel', href: '#', tabs: ['mais-vendidos'] },
+    { key: 'mup10', id: null, name: 'Multiusos Perfumado MUP-10', detail: '1 LT · Concentrado', price: 2.95, scene: 'cream', href: '#', tabs: ['mais-vendidos', 'novidades'] },
+    { key: 'htg5', id: '5lt', name: 'Tiragorduras HTG-30', detail: '5 LT · Recarga', price: 15.9, tag: 'Melhor €/L', scene: 'kitchen', href: '/produto/htg-30', tabs: ['mais-vendidos'] },
+    { key: 'dlm15', id: null, name: 'Detergente Loiça Manual DLM-15', detail: '1 LT · Concentrado', price: 3.2, tag: 'Novo', scene: 'cream', href: '#', tabs: ['novidades'] },
+    { key: 'amt50', id: null, name: 'Amaciador Têxtil AMT-50', detail: '5 LT · Recarga', price: 4.9, tag: 'Novo', scene: 'cream', href: '#', tabs: ['novidades'] },
+    { key: 'agro', id: null, name: 'Higienizante Agroalimentar AGH-12', detail: '5 LT · Recarga', price: 12.4, tag: 'Novo', scene: 'steel', href: '#', tabs: ['novidades'] },
+    { key: 'pack', id: 'Pack Tiragorduras', name: 'Pack Tiragorduras', detail: '2× 750 mL + recarga 5 LT', price: 21.9, full: 24.6, tag: '−11%', scene: 'green', href: '/produto/htg-30', tabs: ['promocoes'] },
+    { key: 'trim', id: 'Fornecimento Trimestral', name: 'Fornecimento Trimestral', detail: '4× HTG-30 5 LT', price: 56.9, full: 63.6, tag: '−11%', scene: 'green', href: '/produto/htg-30', tabs: ['promocoes'] },
+    { key: 'gdm70', id: null, name: 'Gel Desinfetante Mãos GDM-70', detail: '500 mL · 70% álcool', price: 3.6, full: 4.5, tag: '−20%', scene: 'green', href: '#', tabs: ['promocoes'] },
+    { key: 'ltp40', id: 'LTP-40', name: 'Lava-Tudo Pavimentos LTP-40', detail: '5 LT · Recarga', price: 3.8, full: 4.6, tag: '−17%', scene: 'steel', href: '#', tabs: ['promocoes'] },
+  ],
+  // ——— Grid banners promocionais ———
+  banners: [
+    {
+      eyebrow: 'RECARGAS',
+      title: 'Poupe até 40% por litro',
+      text: 'Formatos de 5, 10 e 20 LT para reabastecer a operação.',
+      cta: 'Ver recargas',
+      href: '/produto/htg-30',
+      scene: 'steel',
+      subject: 'set',
+    },
+    {
+      eyebrow: 'NOVIDADE',
+      title: 'Linha agroalimentar certificada',
+      text: 'Higienização aprovada para indústria de transformação.',
+      cta: 'Descobrir',
+      href: '#',
+      scene: 'green',
+      subject: 'bottle',
+    },
+  ],
+  // ——— Coleção em destaque ———
+  showcase: {
+    eyebrow: 'EM FOCO',
+    title: 'Linha Cozinha',
+    text: 'Do fogão ao pavimento — tudo o que uma cozinha profissional precisa.',
+    href: '#',
+    keys: ['htg750', 'dda90', 'inx25', 'dlm15'],
   },
   testimonials: [
     {
@@ -166,27 +189,6 @@ export const home = {
       role: 'Proprietária · Pastelaria',
       rating: 5,
     },
-  ],
-  gallery: [
-    { scene: 'kitchen', subject: 'bottle', label: '@cozinha.doporto' },
-    { scene: 'steel', subject: 'mist', label: '@hotelmar.algarve' },
-    { scene: 'green', subject: 'set', label: '@grupohoreca.pt' },
-    { scene: 'cream', subject: 'bottle', label: '@pastelaria.central' },
-    { scene: 'kitchen', subject: 'mist', label: '@churrasqueira.lx' },
-  ],
-  featured: [
-    { id: '750ml', name: 'Tiragorduras HTG-30', detail: '750 mL · Pulverizador', price: 4.35, tag: 'Mais vendido', href: '/produto/htg-30' },
-    { id: 'DDA-90', name: 'Desinfetante Alimentar DDA-90', detail: '750 mL · Pulverizador', price: 5.2, href: '#' },
-    { id: 'INX-25', name: 'Brilha Inox INX-25', detail: '750 mL · Pulverizador', price: 6.1, href: '#' },
-    { id: 'LTP-40', name: 'Lava-Tudo Pavimentos LTP-40', detail: '5 LT · Recarga', price: 3.8, href: '#' },
-    { id: '5lt', name: 'Tiragorduras HTG-30', detail: '5 LT · Recarga', price: 15.9, tag: 'Melhor €/L', href: '/produto/htg-30' },
-    { id: 'Pack Tiragorduras', name: 'Pack Tiragorduras', detail: '2× 750 mL + 5 LT', price: 21.9, full: 24.6, tag: 'Bundle', href: '/produto/htg-30' },
-  ],
-  sectors: [
-    { title: 'HORECA', text: 'Cozinhas, salas e quartos impecáveis, turno após turno.' },
-    { title: 'Indústria alimentar', text: 'Higienização certificada para linhas de produção.' },
-    { title: 'Saúde e cuidados', text: 'Desinfeção rigorosa para espaços sensíveis.' },
-    { title: 'Facilities', text: 'Grandes áreas, consumos otimizados.' },
   ],
   usps: [
     { icon: 'truck', title: 'Expedição 24–48h', text: 'Portugal continental' },
