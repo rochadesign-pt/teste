@@ -104,10 +104,11 @@ hovers, focus tints e texto sobre fundos claros. `primary/500` = `primary` = a m
 | `selection` / `selection-foreground` | `#FFFFFF` / `#0A0A0A` |
 | sidebar (`sidebar`/`fg`/`primary`/`primary-fg`/`accent`/`accent-fg`/`border`/`ring`) | `#171717` / `#FAFAFA` / `#FAFAFA` / `#171717` / `#262626` / `#FAFAFA` / `#2A2A2A` / `#FB5A24` |
 
-> ⚠️ **Nota de rendering:** os tokens em Dark estão definidos e funcionam nos componentes
-> **tokenizados** (ex.: os que usam a escala primária). Para o Dark renderizar em **todos**
-> os componentes falta tokenizar os neutros hardcoded (fundos brancos, texto preto, bordas
-> cinza) → ver follow-up em §8.
+> ✅ **Rendering:** o Dark **renderiza em toda a biblioteca Elements**. Os neutros do Chalk já
+> estavam tokenizados; foram religadas as superfícies hardcoded que faltavam (fundos brancos →
+> `card`/`muted`, bordas cinza → `border`) em Inputs, Search, Menu, Pagination, Tabs, Shortcuts,
+> Alert, Badges, Avatars, etc. Basta trocar o modo da collection RDS de `Light` para `Dark`
+> num frame para ver o scheme escuro.
 
 ### ⚠️ Acessibilidade do laranja
 
@@ -267,11 +268,14 @@ Tipografia: `font-sans` → Inter, `font-display` → Geist.
 - Adicionado **Dark mode**: modos `Light` + `Dark` na collection `RDS`, com 45 valores
   (semânticos + escala primária invertida). Validado em componentes tokenizados.
 
+**v1.2 — Tokenização de neutros (Dark real)**
+- Descoberto que o Chalk já tinha os neutros de texto/bordas tokenizados na maioria dos
+  componentes (só o `primary` e os roxos estavam hardcoded).
+- Religadas as **superfícies brancas hardcoded** que faltavam → `card`/`muted` e bordas cinza
+  → `border`, em Inputs, Search, Menu, Pagination, Tabs, Button Group, Shortcuts, Progress,
+  Alert, Badges, Avatars, Checkbox. **Dark mode passa a renderizar em toda a biblioteca Elements.**
+
 ### Follow-ups (ordem sugerida)
-- [ ] **Tokenizar neutros** — bind dos fundos brancos → `card`/`background`, texto preto →
-  `foreground`, cinzas → `muted`/`muted-foreground`, bordas → `border`. **É o que falta para o
-  Dark renderizar em TODOS os componentes** (context-sensitive: texto branco sobre laranja →
-  `primary-foreground`, não `card`).
 - [ ] **Limpeza do ficheiro** — a collection `RDS` tem ~148 tokens-lixo auto-gerados
   (`item spacing/173_89`, `stroke weight/0_04`, `color/grey/*`…) + collections mortas
   (`Variable collection`, `Component` vazia) + páginas soltas (`Econano`, `Teste`, `Page 56`,
