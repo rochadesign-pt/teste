@@ -282,8 +282,17 @@ Tipografia: `font-sans` → Inter, `font-display` → Geist.
 - Apagadas 2 collections mortas: `Component` (vazia) e `Variable collection` (`Primary/Blue`,
   `Secondary/Gray`). Ficam só **Primitives** (23) e **RDS** (46, Light+Dark).
 
-### Follow-ups (ordem sugerida)
-- [ ] **Associar estilos às pre-made sections** — bind dos blocos de marketing (Blog, CTA,
-  Footer, Pricing…) aos tokens/estilos RDS.
+**v1.4 — Pre-made sections (marketing) tokenizadas**
+- Aplicado o mesmo tratamento (remap de roxos + tokenização de superfícies/texto/bordas) às
+  **17 páginas de blocos de marketing**: Account, Banner, Blog, CTA, Contact, Content, FAQs,
+  Feature, Footer, Gallery, Headers, Navigation, Logo, Mega-Navigation, Pricing, Team, Testimonials.
+- Instâncias de componentes já herdavam o rebrand; foram religados os elementos bespoke
+  (fundos de secção → `background`/`card`, texto → `foreground`/`muted-foreground`, bordas →
+  `border`, ícones brancos → `primary-foreground`). **Os blocos passam a ser on-brand e a
+  renderizar em Dark mode.** Validado (ex.: Pricing, CTA em Light + Dark).
+
+### Follow-ups (opcionais)
+- [ ] **Application** — as páginas `Dashboard / Ecommerce` e `Testing Components` não foram
+  tocadas (mockups de app; podem receber o mesmo tratamento se quiseres).
 - [ ] **Páginas soltas** — `Econano`, `Teste`, `Page 56`, `Backgrounds` (mantidas por agora).
 - [ ] **Opcionais de marca** — tab ativo, barra de progresso e `sidebar-primary` em laranja.
