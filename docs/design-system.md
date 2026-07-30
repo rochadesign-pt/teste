@@ -25,9 +25,10 @@ copy-paste direto para Tailwind v4 + CSS variables).
 
 ---
 
-## 2. Cores — tokens semânticos (modo Light)
+## 2. Cores — tokens semânticos
 
-> O sistema é atualmente **light-only** (1 modo). Ver §8 para o Dark mode (follow-up).
+> A collection `RDS` tem **dois modos: `Light` e `Dark`** (color scheme completo, estilo Untitled UI).
+> A tabela abaixo mostra o modo **Light**; ver §2.2 para a escala primária e §2.3 para o **Dark**.
 > Nomes de token = nomes das CSS variables do shadcn.
 
 | Token | Valor | Uso |
@@ -62,6 +63,51 @@ copy-paste direto para Tailwind v4 + CSS variables).
 
 > Nota: `sidebar-primary` (item de nav ativo) mantém-se **neutro** (`#171717`) por design.
 > Se quiseres o item ativo em laranja, é uma alteração de 1 token.
+
+### 2.2 Escala primária (tints + shades)
+
+Escala de marca ao estilo Untitled UI (`primary/50…900`), usada para superfícies soft,
+hovers, focus tints e texto sobre fundos claros. `primary/500` = `primary` = a marca.
+
+| Step | Light | Dark | Uso típico |
+|---|---|---|---|
+| `primary/50` | `#FFF3EE` | `#2E1207` | Fundo soft (ex.: alerta primário) |
+| `primary/100` | `#FFE3D6` | `#3D1808` | Hover/tint subtil |
+| `primary/200` | `#FFC3A8` | `#5A240C` | Borda soft |
+| `primary/300` | `#FD9E77` | `#7A3210` | — |
+| `primary/400` | `#FC7A47` | `#C13A10` | — |
+| **`primary/500`** | **`#FB5A24`** | **`#FB5A24`** | **Marca / `primary`** |
+| `primary/600` | `#E84A16` | `#FC7A47` | Hover do primary |
+| `primary/700` | `#C13A10` | `#FD9E77` | Pressed |
+| `primary/800` | `#952D0E` | `#FFC3A8` | — |
+| `primary/900` | `#5E1D0A` | `#FFE3D6` | Texto sobre fundo soft |
+
+> No **Dark** a escala inverte-se: os tints claros passam a laranjas escuros e os shades
+> escuros passam a laranjas claros — por isso um alerta soft fica *fundo laranja-escuro +
+> texto laranja-claro* automaticamente ao mudar o modo.
+
+### 2.3 Dark mode — tokens semânticos
+
+| Token | Dark |
+|---|---|
+| `background` / `foreground` | `#0A0A0A` / `#FAFAFA` |
+| `card` / `card-foreground` | `#171717` / `#FAFAFA` |
+| `popover` / `popover-foreground` | `#171717` / `#FAFAFA` |
+| `primary` / `primary-foreground` | `#FB5A24` / `#FAFAFA` |
+| `secondary` / `secondary-foreground` | `#262626` / `#FAFAFA` |
+| `muted` / `muted-foreground` | `#262626` / `#A1A1A1` |
+| `accent` / `accent-foreground` | `#262626` / `#FAFAFA` |
+| `destructive` / `destructive-foreground` | `#FF5C5C` / `#2A0A0A` |
+| `border` / `input` / `ring` | `#2A2A2A` / `#2A2A2A` / `#FB5A24` |
+| `surface` / `surface-foreground` | `#171717` / `#FAFAFA` |
+| `code` / `code-foreground` | `#171717` / `#FAFAFA` |
+| `selection` / `selection-foreground` | `#FFFFFF` / `#0A0A0A` |
+| sidebar (`sidebar`/`fg`/`primary`/`primary-fg`/`accent`/`accent-fg`/`border`/`ring`) | `#171717` / `#FAFAFA` / `#FAFAFA` / `#171717` / `#262626` / `#FAFAFA` / `#2A2A2A` / `#FB5A24` |
+
+> ⚠️ **Nota de rendering:** os tokens em Dark estão definidos e funcionam nos componentes
+> **tokenizados** (ex.: os que usam a escala primária). Para o Dark renderizar em **todos**
+> os componentes falta tokenizar os neutros hardcoded (fundos brancos, texto preto, bordas
+> cinza) → ver follow-up em §8.
 
 ### ⚠️ Acessibilidade do laranja
 
@@ -212,10 +258,24 @@ Tipografia: `font-sans` → Inter, `font-display` → Geist.
   semânticos (laranja). Focus roxo (`#924FF8` / `#E1D5FF`) → laranja (`ring` + glow).
 - Correção: roxo decorativo em Badges/Tags/Avatars (`Color=Purple`) restaurado — não é a marca.
 
-### Follow-ups sugeridos
-- [ ] **Dark mode** — adicionar 2.º modo à collection `RDS` (o sistema é light-only).
-- [ ] **Limpeza de tokens** — a collection `RDS` tem ~148 tokens-lixo auto-gerados
-  (`item spacing/173_89`, `stroke weight/0_04`, `color/grey/*`…) e há collections mortas
-  (`Variable collection`, `Component` vazia). Remover com cuidado (podem estar ligados a instâncias).
-- [ ] **Blocos de marketing** — rebrandizar a secção Components (pretos hardcoded).
-- [ ] **Opcionais de marca** — tab ativo, barra de progresso e `sidebar-primary` em laranja (se quiseres).
+**v1.1 — Escala primária + Dark mode**
+- Criada a **escala `primary/50…900`** (tints + shades de laranja) como tokens, com scopes e
+  code syntax.
+- **Remapeados por luminância** todos os roxos-tint restantes nos Elements (fundos soft,
+  hovers, focus, texto escuro) → step correspondente da escala. Preservadas as cores
+  decorativas literais (`Color=Purple/Pink/…`).
+- Adicionado **Dark mode**: modos `Light` + `Dark` na collection `RDS`, com 45 valores
+  (semânticos + escala primária invertida). Validado em componentes tokenizados.
+
+### Follow-ups (ordem sugerida)
+- [ ] **Tokenizar neutros** — bind dos fundos brancos → `card`/`background`, texto preto →
+  `foreground`, cinzas → `muted`/`muted-foreground`, bordas → `border`. **É o que falta para o
+  Dark renderizar em TODOS os componentes** (context-sensitive: texto branco sobre laranja →
+  `primary-foreground`, não `card`).
+- [ ] **Limpeza do ficheiro** — a collection `RDS` tem ~148 tokens-lixo auto-gerados
+  (`item spacing/173_89`, `stroke weight/0_04`, `color/grey/*`…) + collections mortas
+  (`Variable collection`, `Component` vazia) + páginas soltas (`Econano`, `Teste`, `Page 56`,
+  `Backgrounds`). Remover com cuidado (podem estar ligados a instâncias).
+- [ ] **Associar estilos às pre-made sections** — bind dos blocos de marketing (Blog, CTA,
+  Footer, Pricing…) aos tokens/estilos RDS.
+- [ ] **Opcionais de marca** — tab ativo, barra de progresso e `sidebar-primary` em laranja.
