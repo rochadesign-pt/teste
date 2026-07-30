@@ -275,11 +275,15 @@ Tipografia: `font-sans` → Inter, `font-display` → Geist.
   → `border`, em Inputs, Search, Menu, Pagination, Tabs, Button Group, Shortcuts, Progress,
   Alert, Badges, Avatars, Checkbox. **Dark mode passa a renderizar em toda a biblioteca Elements.**
 
+**v1.3 — Limpeza**
+- Apagados **149 tokens-lixo** auto-gerados da collection RDS (`item spacing/*`, `stroke weight/*`,
+  `color/grey/*`, `width/*`, `height/*`, `font */*`, `line height/*`…). RDS passa de ~195 → **46
+  tokens limpos** (só semânticos + escala `primary/*` + `radius`).
+- Apagadas 2 collections mortas: `Component` (vazia) e `Variable collection` (`Primary/Blue`,
+  `Secondary/Gray`). Ficam só **Primitives** (23) e **RDS** (46, Light+Dark).
+
 ### Follow-ups (ordem sugerida)
-- [ ] **Limpeza do ficheiro** — a collection `RDS` tem ~148 tokens-lixo auto-gerados
-  (`item spacing/173_89`, `stroke weight/0_04`, `color/grey/*`…) + collections mortas
-  (`Variable collection`, `Component` vazia) + páginas soltas (`Econano`, `Teste`, `Page 56`,
-  `Backgrounds`). Remover com cuidado (podem estar ligados a instâncias).
 - [ ] **Associar estilos às pre-made sections** — bind dos blocos de marketing (Blog, CTA,
   Footer, Pricing…) aos tokens/estilos RDS.
+- [ ] **Páginas soltas** — `Econano`, `Teste`, `Page 56`, `Backgrounds` (mantidas por agora).
 - [ ] **Opcionais de marca** — tab ativo, barra de progresso e `sidebar-primary` em laranja.
