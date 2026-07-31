@@ -146,7 +146,7 @@ export function Category({ addItem }) {
   )
 
   return (
-    <main className="pt-[92px]">
+    <main className="pt-[140px]">
       {/* category banner */}
       <section className="relative">
         <FauxPhoto scene={category.scene} subject={category.subject} className="min-h-[220px] lg:min-h-[260px]">

@@ -56,41 +56,6 @@ function Arrows({ onPrev, onNext }) {
   )
 }
 
-const ICONS = {
-  flame: 'M6 1c2 2 1 3.5 2.5 5C10.5 3.5 9 2.5 10 1c3 1.5 4 4.5 4 7a5 5 0 1 1-10 0c0-1.8.8-3.4 2-5z',
-  drop: 'M8 1.5C11 5 13 7 13 9.5a5 5 0 1 1-10 0C3 7 5 5 8 1.5z',
-  sparkle: 'M8 1l1.6 4.4L14 7l-4.4 1.6L8 13l-1.6-4.4L2 7l4.4-1.6L8 1z',
-  shield: 'M8 1.5l5 2v4c0 3.3-2.2 5.6-5 6.5-2.8-.9-5-3.2-5-6.5v-4l5-2z',
-  hand: 'M4 8V4.5a1 1 0 0 1 2 0V8m0-1V3a1 1 0 0 1 2 0v4m0 0V3.5a1 1 0 0 1 2 0V8m0-1.5a1 1 0 0 1 2 0V10a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4l-1-2',
-  car: 'M2 9l1.5-4h9L14 9m-12 0h12m-12 0v3h2v-1h8v1h2V9',
-  leaf: 'M2 14C2 8 6 3 14 2c0 8-5 12-9 12-1.5 0-3-.5-3-.5',
-  tool: 'M10.5 2.5a3 3 0 0 0-4 4l-4.5 4.5 2 2 4.5-4.5a3 3 0 0 0 4-4l-2 2-1.5-1.5 2-2z',
-}
-
-/* ——— 1 · Strip de ícones de categoria (limpa o header) ——— */
-function IconStrip() {
-  return (
-    <div className="border-b border-line bg-white pt-[92px]">
-      <div className={`${WRAP} flex gap-1 overflow-x-auto py-3 [scrollbar-width:none]`}>
-        {home.iconCategories.map((c, i) => (
-          <Link
-            key={i}
-            to={`/categoria/${c.slug}`}
-            className="group flex shrink-0 flex-col items-center gap-1.5 rounded-lg px-4 py-1.5 transition-colors hover:bg-page"
-          >
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-page text-ink transition-colors group-hover:bg-accent group-hover:text-white">
-              <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4" aria-hidden="true">
-                <path d={ICONS[c.icon]} stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-            <span className="text-[11px] font-medium whitespace-nowrap">{c.title}</span>
-          </Link>
-        ))}
-      </div>
-    </div>
-  )
-}
-
 /* ——— 3 · New Arrivals (promo + carrossel + tabs) ——— */
 function NewArrivals({ addItem }) {
   const reduce = useReducedMotion()
@@ -597,8 +562,7 @@ function Newsletter() {
 
 export function Home({ addItem }) {
   return (
-    <main>
-      <IconStrip />
+    <main className="pt-[140px]">
       <HeroBanner />
       <NewArrivals addItem={addItem} />
       <FlashSale />

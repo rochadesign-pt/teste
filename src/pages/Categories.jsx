@@ -8,7 +8,7 @@ const WRAP = 'mx-auto max-w-[1600px] px-6 lg:px-10'
 
 export function Categories() {
   return (
-    <main className="pt-[92px]">
+    <main className="pt-[140px]">
       {/* header */}
       <section className="border-b border-line bg-white">
         <div className={`${WRAP} py-10`}>

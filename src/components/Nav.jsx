@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { nav } from '../data/site'
+import { shopCategories, countByCat } from '../data/catalog'
 import { Bottle } from './Bottle'
 
 const EASE = [0.32, 0.72, 0, 1]
@@ -21,6 +22,37 @@ function Chevron({ open }) {
     </motion.svg>
   )
 }
+
+function SearchIcon({ className = '' }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className={className}>
+      <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M11.5 11.5 15 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+// Recursos / páginas institucionais (dropdown estilo "Pages")
+const recursos = [
+  { label: 'Sustentabilidade', href: '#' },
+  { label: 'Fichas técnicas & FDS', href: '#' },
+  { label: 'Centro de ajuda', href: '#' },
+  { label: 'Sobre a Mistolin', href: '#' },
+  { label: 'Contactos', href: '#' },
+]
+
+// Linha de navegação com dropdowns (réplica do padrão Hyper).
+const navRow = [
+  { id: 'produtos', label: 'Produtos', kind: 'mega' },
+  { id: 'solucoes', label: 'Soluções', kind: 'mega' },
+  { id: 'cat-cozinha', label: 'Cozinha', kind: 'cat', slug: 'cozinha' },
+  { id: 'cat-desinfecao', label: 'Desinfeção', kind: 'cat', slug: 'desinfecao' },
+  { id: 'cat-superficies', label: 'Superfícies', kind: 'cat', slug: 'superficies' },
+  { id: 'recursos', label: 'Recursos', kind: 'recursos' },
+  { id: 'promocoes', label: 'Promoções', kind: 'link', href: '/categorias', accent: true },
+]
+
+const catBySlug = (slug) => shopCategories.find((c) => c.slug === slug)
 
 function MegaProdutos({ onNavigate }) {
   return (
@@ -80,13 +112,14 @@ function MegaProdutos({ onNavigate }) {
       <div className="col-span-full flex flex-wrap items-center gap-2 border-t border-line pt-5">
         <span className="text-[11px] font-medium tracking-[0.12em] text-muted">DESTAQUES</span>
         {nav.produtos.highlights.map((h) => (
-          <a
+          <Link
             key={h}
-            href="#"
+            to="/categorias"
+            onClick={onNavigate}
             className="rounded-md border border-line bg-white px-3 py-1.5 text-[12px] font-medium transition-colors duration-150 hover:border-ink/30"
           >
             {h}
-          </a>
+          </Link>
         ))}
       </div>
     </div>
@@ -110,11 +143,140 @@ function MegaSolucoes() {
   )
 }
 
+// Dropdown pequeno de subcategorias (estilo "Tables & Desks ▾")
+function CatDropdown({ slug, onNavigate }) {
+  const cat = catBySlug(slug)
+  if (!cat) return null
+  return (
+    <div className="w-64 p-2">
+      <Link
+        to={`/categoria/${slug}`}
+        onClick={onNavigate}
+        className="flex items-center justify-between rounded-md px-3 py-2 text-[13px] font-semibold hover:bg-page"
+      >
+        Ver toda a categoria
+        <span className="text-[11px] font-normal text-muted">{countByCat(slug)} produtos</span>
+      </Link>
+      <div className="my-1 h-px bg-line" />
+      <ul>
+        {cat.subcats.map((s) => (
+          <li key={s}>
+            <Link
+              to={`/categoria/${slug}`}
+              onClick={onNavigate}
+              className="block rounded-md px-3 py-1.5 text-[13px] text-muted transition-colors hover:bg-page hover:text-ink"
+            >
+              {s}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+// Dropdown de recursos (estilo "Pages ▾")
+function RecursosDropdown() {
+  return (
+    <div className="w-56 p-2">
+      <ul>
+        {recursos.map((r) => (
+          <li key={r.label}>
+            <a
+              href={r.href}
+              className="block rounded-md px-3 py-1.5 text-[13px] text-muted transition-colors hover:bg-page hover:text-ink"
+            >
+              {r.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+// Barra de pesquisa central com dropdown "Todas as categorias".
+function SearchField({ open, setOpen, enter, scheduleClose, cancelClose, compact = false }) {
+  const navigate = useNavigate()
+  const [q, setQ] = useState('')
+  const submit = (e) => {
+    e.preventDefault()
+    navigate('/categorias')
+    setOpen(null)
+  }
+  return (
+    <div className="relative w-full">
+      <form
+        onSubmit={submit}
+        className="flex h-11 items-stretch overflow-visible rounded-lg border border-line bg-white shadow-xs focus-within:border-accent"
+      >
+        {!compact && (
+          <div className="relative shrink-0" onMouseEnter={() => enter('allcats')} onMouseLeave={scheduleClose}>
+            <button
+              type="button"
+              aria-expanded={open === 'allcats'}
+              onClick={() => setOpen(open === 'allcats' ? null : 'allcats')}
+              className={`flex h-full items-center gap-2 rounded-l-lg border-r border-line px-4 text-[13px] font-medium whitespace-nowrap transition-colors ${
+                open === 'allcats' ? 'bg-page' : 'bg-page/60 hover:bg-page'
+              }`}
+            >
+              Todas as categorias
+              <Chevron open={open === 'allcats'} />
+            </button>
+          </div>
+        )}
+        <input
+          type="search"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="O que procura hoje?"
+          aria-label="Procurar produtos"
+          className="min-w-0 flex-1 bg-transparent px-4 text-sm outline-none placeholder:text-muted/70"
+        />
+        <button
+          type="submit"
+          aria-label="Pesquisar"
+          className="flex shrink-0 items-center justify-center rounded-r-lg bg-accent px-5 text-white transition-colors hover:bg-accent-deep"
+        >
+          <SearchIcon />
+        </button>
+      </form>
+
+      {/* dropdown de todas as categorias */}
+      <AnimatePresence>
+        {open === 'allcats' && !compact && (
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.18, ease: EASE }}
+            onMouseEnter={cancelClose}
+            onMouseLeave={scheduleClose}
+            className="absolute top-[calc(100%+8px)] left-0 z-50 w-72 rounded-lg border border-line bg-white p-2 shadow-[0_24px_48px_-24px_rgba(9,11,12,0.25)]"
+          >
+            {shopCategories.map((c) => (
+              <Link
+                key={c.slug}
+                to={`/categoria/${c.slug}`}
+                onClick={() => setOpen(null)}
+                className="flex items-center justify-between rounded-md px-3 py-2 text-[13px] font-medium transition-colors hover:bg-page"
+              >
+                {c.title}
+                <span className="text-[11px] font-normal text-muted">{countByCat(c.slug)}</span>
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
 export function Nav({ cartCount = 0, onCartOpen }) {
   const reduce = useReducedMotion()
   const location = useLocation()
   const [scrolled, setScrolled] = useState(false)
-  const [open, setOpen] = useState(null) // 'produtos' | 'solucoes' | 'mobile' | null
+  const [open, setOpen] = useState(null) // navRow id | 'allcats' | 'mobile' | null
   const closeTimer = useRef(null)
 
   useEffect(() => {
@@ -143,6 +305,7 @@ export function Nav({ cartCount = 0, onCartOpen }) {
   const cancelClose = () => clearTimeout(closeTimer.current)
 
   const mega = open === 'produtos' || open === 'solucoes'
+  const anyOverlay = mega || open === 'allcats'
 
   return (
     <>
@@ -168,91 +331,57 @@ export function Nav({ cartCount = 0, onCartOpen }) {
         </div>
 
         <div
-          className={`transition-colors duration-300 ${
-            scrolled || mega || open === 'mobile'
-              ? 'bg-white shadow-[0_1px_0_rgba(9,11,12,0.08)]'
-              : 'bg-white/85 backdrop-blur-md'
+          className={`bg-white transition-shadow duration-300 ${
+            scrolled || anyOverlay || open === 'mobile' ? 'shadow-[0_1px_0_rgba(9,11,12,0.08)]' : ''
           }`}
         >
-          <nav className="flex h-16 w-full items-center justify-between px-6 lg:px-10">
-            <Link to="/" className="flex items-baseline gap-2 text-ink">
+          {/* main row: logo · pesquisa central · ações */}
+          <div className="flex h-16 w-full items-center gap-4 px-6 lg:gap-8 lg:px-10">
+            <Link to="/" className="flex shrink-0 items-baseline gap-2 text-ink">
               <span className="font-display text-xl font-bold tracking-tight">MISTOLIN</span>
               <span className="rounded-md bg-accent px-1.5 py-0.5 text-[10px] font-bold text-white">
                 PRO
               </span>
             </Link>
 
-            {/* desktop menu */}
-            <ul className="hidden items-center gap-1 text-sm font-medium md:flex">
-              <li onMouseEnter={() => enter('produtos')} onMouseLeave={scheduleClose}>
-                <button
-                  type="button"
-                  aria-expanded={open === 'produtos'}
-                  onClick={() => setOpen(open === 'produtos' ? null : 'produtos')}
-                  className={`flex items-center gap-1.5 rounded-md px-3 py-2 transition-colors duration-150 ${
-                    open === 'produtos' ? 'bg-page' : 'hover:bg-page'
-                  }`}
-                >
-                  Produtos
-                  <Chevron open={open === 'produtos'} />
-                </button>
-              </li>
-              <li onMouseEnter={() => enter('solucoes')} onMouseLeave={scheduleClose}>
-                <button
-                  type="button"
-                  aria-expanded={open === 'solucoes'}
-                  onClick={() => setOpen(open === 'solucoes' ? null : 'solucoes')}
-                  className={`flex items-center gap-1.5 rounded-md px-3 py-2 transition-colors duration-150 ${
-                    open === 'solucoes' ? 'bg-page' : 'hover:bg-page'
-                  }`}
-                >
-                  Soluções
-                  <Chevron open={open === 'solucoes'} />
-                </button>
-              </li>
-              {nav.simple.map((item) => (
-                <li key={item.label}>
-                  <a
-                    href={item.href}
-                    className="rounded-md px-3 py-2 transition-colors duration-150 hover:bg-page"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex items-center gap-2">
-              {/* search */}
-              <div className="hidden items-center rounded-md border border-line bg-page pl-3 lg:flex">
-                <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="text-muted">
-                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.5" />
-                  <path d="M11.5 11.5 15 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
-                <input
-                  type="search"
-                  placeholder="Procurar produtos…"
-                  aria-label="Procurar"
-                  className="h-9 w-40 bg-transparent px-2.5 text-[13px] outline-none placeholder:text-muted/70 xl:w-56"
+            {/* pesquisa — elemento principal */}
+            <div className="hidden flex-1 justify-center md:flex">
+              <div className="w-full max-w-[680px]">
+                <SearchField
+                  open={open}
+                  setOpen={setOpen}
+                  enter={enter}
+                  scheduleClose={scheduleClose}
+                  cancelClose={cancelClose}
                 />
               </div>
-              <button
-                type="button"
-                aria-label="Pesquisar"
-                className="flex h-9 w-9 items-center justify-center rounded-md border border-line bg-white text-ink transition-colors duration-200 hover:border-ink/30 lg:hidden"
+            </div>
+
+            {/* ações */}
+            <div className="flex shrink-0 items-center gap-2 lg:gap-4">
+              <a
+                href="#"
+                className="hidden items-center gap-2 text-[13px] font-medium text-ink hover:text-accent-deep lg:flex"
               >
-                <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.5" />
-                  <path d="M11.5 11.5 15 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <circle cx="8" cy="5.5" r="2.5" stroke="currentColor" strokeWidth="1.4" />
+                  <path d="M3 13c0-2.5 2.2-4 5-4s5 1.5 5 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
                 </svg>
-              </button>
+                Conta
+              </a>
+              <span className="hidden h-5 w-px bg-line lg:block" />
               <button
                 type="button"
                 onClick={onCartOpen}
                 className="flex h-9 items-center gap-2 rounded-md bg-ink px-3.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-accent-deep"
               >
-                Carrinho
-                <span className="flex h-5 w-5 items-center justify-center rounded-md bg-accent text-[11px] font-bold">
+                <span className="hidden sm:inline">Carrinho</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="sm:hidden">
+                  <path d="M1.5 1.5h1.7l1.3 8h7l1.3-6H4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="6" cy="13.5" r="1" fill="currentColor" />
+                  <circle cx="11" cy="13.5" r="1" fill="currentColor" />
+                </svg>
+                <span className="flex h-5 min-w-5 items-center justify-center rounded-md bg-accent px-1 text-[11px] font-bold">
                   {cartCount}
                 </span>
               </button>
@@ -269,31 +398,101 @@ export function Nav({ cartCount = 0, onCartOpen }) {
                 </svg>
               </button>
             </div>
-          </nav>
+          </div>
 
-          {/* mega panels */}
-          <AnimatePresence>
-            {mega && (
-              <motion.div
-                key={open}
-                initial={{ opacity: 0, y: reduce ? 0 : -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: reduce ? 0 : -6 }}
-                transition={{ duration: 0.22, ease: EASE }}
-                onMouseEnter={cancelClose}
-                onMouseLeave={scheduleClose}
-                className="hidden border-t border-line bg-white shadow-[0_24px_48px_-24px_rgba(9,11,12,0.18)] md:block"
-              >
-                {open === 'produtos' ? <MegaProdutos onNavigate={() => setOpen(null)} /> : <MegaSolucoes />}
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {/* pesquisa mobile (full-width) */}
+          <div className="border-t border-line px-6 py-1.5 md:hidden">
+            <SearchField open={open} setOpen={setOpen} enter={enter} scheduleClose={scheduleClose} cancelClose={cancelClose} compact />
+          </div>
+
+          {/* nav row com dropdowns (desktop) */}
+          <div className="hidden border-t border-line md:block">
+            <nav className="mx-auto flex h-12 max-w-[1600px] items-center gap-0.5 px-6 lg:px-10">
+              {navRow.map((item) => {
+                if (item.kind === 'link') {
+                  return (
+                    <Link
+                      key={item.id}
+                      to={item.href}
+                      className={`rounded-md px-3 py-2 text-[13px] font-semibold transition-colors hover:bg-page ${
+                        item.accent ? 'text-accent-deep' : 'text-ink'
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                }
+                const isOpen = open === item.id
+                const small = item.kind === 'cat' || item.kind === 'recursos'
+                return (
+                  <div
+                    key={item.id}
+                    className="relative"
+                    onMouseEnter={() => enter(item.id)}
+                    onMouseLeave={scheduleClose}
+                  >
+                    <button
+                      type="button"
+                      aria-expanded={isOpen}
+                      onClick={() => setOpen(isOpen ? null : item.id)}
+                      className={`flex items-center gap-1.5 rounded-md px-3 py-2 text-[13px] font-medium transition-colors ${
+                        isOpen ? 'bg-page text-ink' : 'text-ink hover:bg-page'
+                      }`}
+                    >
+                      {item.label}
+                      <Chevron open={isOpen} />
+                    </button>
+                    {/* dropdown pequeno posicionado */}
+                    {small && (
+                      <AnimatePresence>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -4 }}
+                            transition={{ duration: 0.18, ease: EASE }}
+                            onMouseEnter={cancelClose}
+                            onMouseLeave={scheduleClose}
+                            className="absolute top-[calc(100%+6px)] left-0 z-50 rounded-lg border border-line bg-white shadow-[0_24px_48px_-24px_rgba(9,11,12,0.25)]"
+                          >
+                            {item.kind === 'cat' ? (
+                              <CatDropdown slug={item.slug} onNavigate={() => setOpen(null)} />
+                            ) : (
+                              <RecursosDropdown />
+                            )}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    )}
+                  </div>
+                )
+              })}
+            </nav>
+
+            {/* mega panels full-width */}
+            <AnimatePresence>
+              {mega && (
+                <motion.div
+                  key={open}
+                  initial={{ opacity: 0, y: reduce ? 0 : -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: reduce ? 0 : -6 }}
+                  transition={{ duration: 0.22, ease: EASE }}
+                  onMouseEnter={cancelClose}
+                  onMouseLeave={scheduleClose}
+                  className="border-t border-line bg-white shadow-[0_24px_48px_-24px_rgba(9,11,12,0.18)]"
+                >
+                  {open === 'produtos' ? <MegaProdutos onNavigate={() => setOpen(null)} /> : <MegaSolucoes />}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </header>
 
-      {/* dim page under open mega menu */}
+      {/* dim page under open overlay */}
       <AnimatePresence>
-        {mega && (
+        {anyOverlay && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -324,7 +523,7 @@ export function Nav({ cartCount = 0, onCartOpen }) {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: reduce ? 0 : '-100%', opacity: reduce ? 0 : 1 }}
               transition={{ duration: 0.35, ease: EASE }}
-              className="fixed top-0 left-0 z-50 flex h-full w-[86%] max-w-sm flex-col overflow-y-auto bg-white p-6 pt-20"
+              className="fixed top-0 left-0 z-50 flex h-full w-[86%] max-w-sm flex-col overflow-y-auto bg-white p-6 pt-8"
             >
               <Link
                 to="/categorias"
@@ -334,29 +533,16 @@ export function Nav({ cartCount = 0, onCartOpen }) {
                 Todas as categorias
                 <span aria-hidden="true">→</span>
               </Link>
-              {nav.produtos.columns.map((col) => (
-                <div key={col.title} className="border-b border-line py-4">
-                  <Link
-                    to={`/categoria/${col.slug}`}
-                    onClick={() => setOpen(null)}
-                    className="text-sm font-semibold"
-                  >
-                    {col.title}
-                  </Link>
-                  <ul className="mt-2 space-y-2">
-                    {col.links.map((l) => (
-                      <li key={l}>
-                        <Link
-                          to={`/categoria/${col.slug}`}
-                          onClick={() => setOpen(null)}
-                          className="text-[13px] text-muted"
-                        >
-                          {l}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              {shopCategories.map((c) => (
+                <Link
+                  key={c.slug}
+                  to={`/categoria/${c.slug}`}
+                  onClick={() => setOpen(null)}
+                  className="flex items-center justify-between border-b border-line py-3.5 text-sm font-medium"
+                >
+                  {c.title}
+                  <span className="text-[11px] text-muted">{countByCat(c.slug)}</span>
+                </Link>
               ))}
               <div className="border-b border-line py-4">
                 <p className="text-sm font-semibold">Soluções</p>
@@ -371,9 +557,9 @@ export function Nav({ cartCount = 0, onCartOpen }) {
                 </ul>
               </div>
               <div className="py-4">
-                {nav.simple.map((item) => (
-                  <a key={item.label} href={item.href} className="block py-1.5 text-sm font-medium">
-                    {item.label}
+                {recursos.map((r) => (
+                  <a key={r.label} href={r.href} className="block py-1.5 text-sm font-medium">
+                    {r.label}
                   </a>
                 ))}
               </div>
