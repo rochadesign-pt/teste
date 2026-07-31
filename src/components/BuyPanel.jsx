@@ -143,7 +143,7 @@ export function BuyPanel({ format, setFormat, onAdd, variant = 'tabs' }) {
 
       {/* qty + CTA */}
       <div className="mt-6 flex gap-2.5">
-        <div className="flex h-12 shrink-0 items-center rounded-lg border border-line bg-white">
+        <div className="flex h-12 shrink-0 items-center rounded-full border border-line bg-white">
           <button
             type="button"
             aria-label="Diminuir quantidade"
@@ -168,7 +168,7 @@ export function BuyPanel({ format, setFormat, onAdd, variant = 'tabs' }) {
           whileHover={reduce ? {} : { scale: 1.01 }}
           whileTap={reduce ? {} : { scale: 0.985 }}
           transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-          className="flex h-12 flex-1 items-center justify-center gap-2.5 rounded-lg bg-ink text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-deep"
+          className="flex h-12 flex-1 items-center justify-center gap-2.5 rounded-full bg-ink text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-deep"
         >
           Adicionar ao carrinho — {fmt(unit * qty)}
           <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />

@@ -271,7 +271,7 @@ export function Cart({ open, onClose, items, setQty, removeItem, addItem, swapIt
                   whileHover={reduce ? {} : { scale: 1.01 }}
                   whileTap={reduce ? {} : { scale: 0.985 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-                  className="mt-4 flex h-13 w-full items-center justify-center gap-2.5 rounded-2xl bg-ink py-4 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-deep"
+                  className="mt-4 flex h-13 w-full items-center justify-center gap-2.5 rounded-full bg-ink py-4 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-deep"
                 >
                   Finalizar compra em segurança
                   <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />

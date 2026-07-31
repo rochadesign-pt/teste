@@ -47,10 +47,10 @@ export function Hero({ format, setFormat, onAdd, variant }) {
               >
                 <Bottle className="w-full" />
               </motion.div>
-              <span className="absolute bottom-4 left-4 rounded-md bg-page px-2.5 py-1 text-[11px] font-medium">
+              <span className="absolute bottom-4 left-4 rounded-full bg-page px-3 py-1 text-[11px] font-medium">
                 pH 13–14 · alcalino
               </span>
-              <span className="absolute right-4 bottom-4 rounded-md bg-ink px-2.5 py-1 text-[11px] font-medium text-white">
+              <span className="absolute right-4 bottom-4 rounded-full bg-ink px-3 py-1 text-[11px] font-medium text-white">
                 Uso profissional
               </span>
             </div>
@@ -94,7 +94,7 @@ export function Hero({ format, setFormat, onAdd, variant }) {
           <Photo src={g.lifestyle} alt="Aplicação em cozinha profissional" className="aspect-[16/9] border-0 bg-ink">
             <div className="absolute inset-0 bg-gradient-to-tr from-ink via-ink/90 to-[#20302a]" />
             <div className="absolute inset-0 flex flex-col justify-between p-5 text-white">
-              <span className="self-start rounded-md bg-white/10 px-2 py-1 text-[10px] font-medium tracking-[0.12em]">
+              <span className="self-start rounded-full bg-white/10 px-2.5 py-1 text-[10px] font-medium tracking-[0.12em]">
                 HORECA
               </span>
               <div>

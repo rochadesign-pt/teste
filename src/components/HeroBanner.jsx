@@ -56,7 +56,7 @@ export function HeroBanner() {
                   initial={{ opacity: 0, y: reduce ? 0 : 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, ease: EASE, delay: 0.12 }}
-                  className="mb-3 w-fit rounded-md bg-accent px-2.5 py-1 text-sm font-bold text-white"
+                  className="mb-3 w-fit rounded-full bg-accent px-3 py-1 text-sm font-bold text-white"
                 >
                   {slide.badge}
                 </motion.span>
@@ -93,7 +93,7 @@ export function HeroBanner() {
               >
                 <Link
                   to={slide.href}
-                  className="inline-flex h-12 items-center gap-2.5 rounded-lg bg-white px-7 text-sm font-semibold text-ink transition-colors duration-200 hover:bg-accent hover:text-white"
+                  className="inline-flex h-12 items-center gap-2.5 rounded-full bg-white px-8 text-sm font-semibold text-ink transition-colors duration-200 hover:bg-accent hover:text-white"
                 >
                   {slide.cta}
                   <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
@@ -134,7 +134,7 @@ export function HeroBanner() {
               type="button"
               aria-label={b.label}
               onClick={() => go(b.dir)}
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/25 bg-white/10 text-white backdrop-blur transition-colors duration-200 hover:bg-white hover:text-ink"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur transition-colors duration-200 hover:bg-white hover:text-ink"
             >
               <svg width="9" height="12" viewBox="0 0 9 12" fill="none" aria-hidden="true">
                 <path d={b.d} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

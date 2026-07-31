@@ -102,7 +102,7 @@ function MegaProdutos({ onNavigate }) {
         <Link
           to={nav.produtos.featured.href}
           onClick={onNavigate}
-          className="mt-3 inline-flex h-9 items-center justify-center rounded-md bg-ink px-4 text-[12px] font-semibold text-white transition-colors duration-200 hover:bg-accent-deep"
+          className="mt-3 inline-flex h-9 items-center justify-center rounded-full bg-ink px-5 text-[12px] font-semibold text-white transition-colors duration-200 hover:bg-accent-deep"
         >
           {nav.produtos.featured.cta}
         </Link>
@@ -116,7 +116,7 @@ function MegaProdutos({ onNavigate }) {
             key={h}
             to="/categorias"
             onClick={onNavigate}
-            className="rounded-md border border-line bg-white px-3 py-1.5 text-[12px] font-medium transition-colors duration-150 hover:border-ink/30"
+            className="rounded-full border border-line bg-white px-3.5 py-1.5 text-[12px] font-medium transition-colors duration-150 hover:border-ink/30"
           >
             {h}
           </Link>
@@ -208,7 +208,7 @@ function SearchField({ open, setOpen, enter, scheduleClose, cancelClose, compact
     <div className="relative w-full">
       <form
         onSubmit={submit}
-        className="flex h-11 items-stretch overflow-visible rounded-lg border border-line bg-white shadow-xs focus-within:border-accent"
+        className="flex h-11 items-stretch overflow-visible rounded-full border border-line bg-white shadow-xs focus-within:border-accent"
       >
         {!compact && (
           <div className="relative shrink-0" onMouseEnter={() => enter('allcats')} onMouseLeave={scheduleClose}>
@@ -216,7 +216,7 @@ function SearchField({ open, setOpen, enter, scheduleClose, cancelClose, compact
               type="button"
               aria-expanded={open === 'allcats'}
               onClick={() => setOpen(open === 'allcats' ? null : 'allcats')}
-              className={`flex h-full items-center gap-2 rounded-l-lg border-r border-line px-4 text-[13px] font-medium whitespace-nowrap transition-colors ${
+              className={`flex h-full items-center gap-2 rounded-l-full border-r border-line pr-4 pl-5 text-[13px] font-medium whitespace-nowrap transition-colors ${
                 open === 'allcats' ? 'bg-page' : 'bg-page/60 hover:bg-page'
               }`}
             >
@@ -236,7 +236,7 @@ function SearchField({ open, setOpen, enter, scheduleClose, cancelClose, compact
         <button
           type="submit"
           aria-label="Pesquisar"
-          className="flex shrink-0 items-center justify-center rounded-r-lg bg-accent px-5 text-white transition-colors hover:bg-accent-deep"
+          className="flex shrink-0 items-center justify-center rounded-r-full bg-accent px-5 text-white transition-colors hover:bg-accent-deep"
         >
           <SearchIcon />
         </button>
@@ -339,7 +339,7 @@ export function Nav({ cartCount = 0, onCartOpen }) {
           <div className="flex h-16 w-full items-center gap-4 px-6 lg:gap-8 lg:px-10">
             <Link to="/" className="flex shrink-0 items-baseline gap-2 text-ink">
               <span className="font-display text-xl font-bold tracking-tight">MISTOLIN</span>
-              <span className="rounded-md bg-accent px-1.5 py-0.5 text-[10px] font-bold text-white">
+              <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold text-white">
                 PRO
               </span>
             </Link>
@@ -367,7 +367,7 @@ export function Nav({ cartCount = 0, onCartOpen }) {
                   <path d="M2.5 6.5 4 2.5h8l1.5 4M2.5 6.5v6.5h11V6.5M2.5 6.5h11M6 13V9.5h4V13" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 Encontrar loja
-                <span className="rounded bg-accent-soft px-1.5 py-0.5 text-[10px] font-semibold text-accent-deep">14</span>
+                <span className="rounded-full bg-accent-soft px-1.5 py-0.5 text-[10px] font-semibold text-accent-deep">14</span>
               </a>
               <span className="hidden h-5 w-px bg-line xl:block" />
               <a
@@ -384,7 +384,7 @@ export function Nav({ cartCount = 0, onCartOpen }) {
               <button
                 type="button"
                 onClick={onCartOpen}
-                className="flex h-9 items-center gap-2 rounded-md bg-ink px-3.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-accent-deep"
+                className="flex h-9 items-center gap-2 rounded-full bg-ink px-4 text-sm font-medium text-white transition-colors duration-200 hover:bg-accent-deep"
               >
                 <span className="hidden sm:inline">Carrinho</span>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="sm:hidden">
@@ -392,7 +392,7 @@ export function Nav({ cartCount = 0, onCartOpen }) {
                   <circle cx="6" cy="13.5" r="1" fill="currentColor" />
                   <circle cx="11" cy="13.5" r="1" fill="currentColor" />
                 </svg>
-                <span className="flex h-5 min-w-5 items-center justify-center rounded-md bg-accent px-1 text-[11px] font-bold">
+                <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-accent px-1 text-[11px] font-bold">
                   {cartCount}
                 </span>
               </button>
@@ -402,7 +402,7 @@ export function Nav({ cartCount = 0, onCartOpen }) {
                 aria-label="Abrir menu"
                 aria-expanded={open === 'mobile'}
                 onClick={() => setOpen(open === 'mobile' ? null : 'mobile')}
-                className="flex h-9 w-9 items-center justify-center rounded-md border border-line md:hidden"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-line md:hidden"
               >
                 <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true">
                   <path d="M1 1h14M1 6h14M1 11h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -425,7 +425,7 @@ export function Nav({ cartCount = 0, onCartOpen }) {
                     <Link
                       key={item.id}
                       to={item.href}
-                      className={`rounded-md px-3 py-2 text-[13px] font-semibold transition-colors hover:bg-page ${
+                      className={`rounded-full px-3.5 py-2 text-[13px] font-semibold transition-colors hover:bg-page ${
                         item.accent ? 'text-accent-deep' : 'text-ink'
                       }`}
                     >
@@ -446,7 +446,7 @@ export function Nav({ cartCount = 0, onCartOpen }) {
                       type="button"
                       aria-expanded={isOpen}
                       onClick={() => setOpen(isOpen ? null : item.id)}
-                      className={`flex items-center gap-1.5 rounded-md px-3 py-2 text-[13px] font-medium transition-colors ${
+                      className={`flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[13px] font-medium transition-colors ${
                         isOpen ? 'bg-page text-ink' : 'text-ink hover:bg-page'
                       }`}
                     >
@@ -551,7 +551,7 @@ export function Nav({ cartCount = 0, onCartOpen }) {
                   </svg>
                   Encontrar loja
                 </span>
-                <span className="rounded bg-accent-soft px-1.5 py-0.5 text-[10px] font-semibold text-accent-deep">14</span>
+                <span className="rounded-full bg-accent-soft px-1.5 py-0.5 text-[10px] font-semibold text-accent-deep">14</span>
               </a>
               {shopCategories.map((c) => (
                 <Link

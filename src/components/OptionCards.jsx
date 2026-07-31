@@ -36,7 +36,7 @@ export function VolumeRow({ f, active, onSelect }) {
         <span className="flex items-center gap-2 text-sm font-medium">
           {f.label} — {f.detail}
           {f.tag && (
-            <span className="rounded-md bg-accent-soft px-1.5 py-0.5 text-[10px] font-medium text-accent-deep">
+            <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-medium text-accent-deep">
               {f.tag}
             </span>
           )}
@@ -117,7 +117,7 @@ export function BundleCard({ o, active, onSelect }) {
       {/* image */}
       <div className="relative h-28 w-full overflow-hidden border-b border-line">
         <SetVisual o={o} />
-        <span className="absolute top-2 left-2 rounded-md bg-accent px-1.5 py-0.5 text-[10px] font-semibold text-white">
+        <span className="absolute top-2 left-2 rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold text-white">
           −{save(o)}%
         </span>
         <span className="absolute top-2 right-2">

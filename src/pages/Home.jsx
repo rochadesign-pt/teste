@@ -45,7 +45,7 @@ function Arrows({ onPrev, onNext }) {
           type="button"
           aria-label={b.label}
           onClick={b.fn}
-          className="flex h-9 w-9 items-center justify-center rounded-md border border-line bg-white transition-colors duration-200 hover:border-ink/30"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-line bg-white transition-colors duration-200 hover:border-ink/30"
         >
           <svg width="9" height="12" viewBox="0 0 9 12" fill="none" aria-hidden="true">
             <path d={b.d} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -69,17 +69,17 @@ function NewArrivals({ addItem }) {
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <h2 className="font-display text-2xl font-semibold sm:text-3xl">Novidades</h2>
         <div className="flex items-center gap-3">
-          <div role="tablist" className="flex gap-1 rounded-lg border border-line bg-page p-1">
+          <div role="tablist" className="flex gap-1 rounded-full border border-line bg-page p-1">
             {home.newArrivals.tabs.map((t) => (
               <button
                 key={t.id}
                 role="tab"
                 aria-selected={tab === t.id}
                 onClick={() => setTab(t.id)}
-                className={`relative rounded-md px-3.5 py-1.5 text-[13px] font-medium transition-colors ${tab === t.id ? 'text-white' : 'text-muted hover:text-ink'}`}
+                className={`relative rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors ${tab === t.id ? 'text-white' : 'text-muted hover:text-ink'}`}
               >
                 {tab === t.id && (
-                  <motion.span layoutId="na-tab" transition={{ duration: reduce ? 0 : 0.3, ease: EASE }} className="absolute inset-0 rounded-md bg-ink" />
+                  <motion.span layoutId="na-tab" transition={{ duration: reduce ? 0 : 0.3, ease: EASE }} className="absolute inset-0 rounded-full bg-ink" />
                 )}
                 <span className="relative">{t.label}</span>
               </button>
@@ -98,7 +98,7 @@ function NewArrivals({ addItem }) {
               <p className="text-[11px] font-medium tracking-[0.14em] text-white/70">{home.newArrivals.promo.eyebrow}</p>
               <p className="font-display mt-1 text-xl leading-tight font-semibold">{home.newArrivals.promo.title}</p>
               <p className="mt-2 text-[12px] text-white/70">{home.newArrivals.promo.text}</p>
-              <span className="mt-4 inline-flex h-9 items-center gap-2 rounded-lg bg-white px-4 text-[12px] font-semibold text-ink transition-colors group-hover:bg-accent group-hover:text-white">
+              <span className="mt-4 inline-flex h-9 items-center gap-2 rounded-full bg-white px-5 text-[12px] font-semibold text-ink transition-colors group-hover:bg-accent group-hover:text-white">
                 {home.newArrivals.promo.cta} →
               </span>
             </div>
@@ -148,7 +148,7 @@ function FlashSale() {
     <section className={`${WRAP} pb-2`}>
       <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl bg-accent-soft px-6 py-4">
         <div className="flex items-center gap-3">
-          <span className="rounded-md bg-accent px-2 py-1 text-[11px] font-bold text-white">FLASH</span>
+          <span className="rounded-full bg-accent px-2.5 py-1 text-[11px] font-bold text-white">FLASH</span>
           <p className="text-sm font-semibold">Promoções relâmpago terminam em:</p>
         </div>
         <div className="flex items-center gap-1.5">
@@ -163,7 +163,7 @@ function FlashSale() {
             </span>
           ))}
         </div>
-        <Link to="/produto/htg-30" className="rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-deep">
+        <Link to="/produto/htg-30" className="rounded-full bg-ink px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-deep">
           Ver ofertas
         </Link>
       </div>
@@ -205,7 +205,7 @@ function CollectionGrid() {
               <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(0,0,0,0.55)_0%,transparent_75%)]" />
               <div className="absolute inset-y-0 left-0 flex max-w-sm flex-col justify-center p-8 text-white">
                 <h3 className="font-display text-2xl leading-tight font-semibold sm:text-3xl">{home.lifestyleSplit.big.title}</h3>
-                <span className="mt-5 inline-flex w-fit items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-ink transition-colors group-hover:bg-accent group-hover:text-white">
+                <span className="mt-5 inline-flex w-fit items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-ink transition-colors group-hover:bg-accent group-hover:text-white">
                   {home.lifestyleSplit.big.cta} →
                 </span>
               </div>
@@ -283,7 +283,7 @@ function TwoPromos() {
                 <div className="relative flex h-full min-h-[200px] flex-col justify-center p-7 text-white">
                   <h3 className="font-display text-2xl font-semibold">{b.title}</h3>
                   <p className="mt-1 text-[13px] text-white/75">{b.text}</p>
-                  <span className="mt-4 inline-flex w-fit items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-ink transition-colors group-hover:bg-ink group-hover:text-white">
+                  <span className="mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-ink transition-colors group-hover:bg-ink group-hover:text-white">
                     {b.cta} →
                   </span>
                 </div>
@@ -342,7 +342,7 @@ function Studio() {
       <div className={`${WRAP} grid grid-cols-1 items-center gap-10 py-16 lg:grid-cols-2 lg:gap-16`}>
         <motion.div {...reveal}>
           <FauxPhoto scene="steel" subject="bottle" className="aspect-[4/3.4] rounded-xl shadow-xs">
-            <span className="absolute top-4 left-4 rounded-md bg-white/90 px-2.5 py-1 text-[11px] font-medium text-ink">Vale de Cambra, Portugal</span>
+            <span className="absolute top-4 left-4 rounded-full bg-white/90 px-3 py-1 text-[11px] font-medium text-ink">Vale de Cambra, Portugal</span>
           </FauxPhoto>
         </motion.div>
         <motion.div {...reveal} transition={{ ...reveal.transition, delay: 0.08 }}>
@@ -359,7 +359,7 @@ function Studio() {
               </li>
             ))}
           </ul>
-          <a href={s.href} className="mt-7 inline-flex h-11 items-center gap-2.5 rounded-lg bg-ink px-6 text-sm font-semibold text-white transition-colors hover:bg-accent-deep">
+          <a href={s.href} className="mt-7 inline-flex h-11 items-center gap-2.5 rounded-full bg-ink px-7 text-sm font-semibold text-white transition-colors hover:bg-accent-deep">
             {s.cta}
             <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
           </a>
@@ -399,7 +399,7 @@ function Details() {
               <p className="text-[11px] font-medium tracking-[0.14em] text-white/70">{d.eyebrow}</p>
               <h2 className="font-display mt-2 max-w-sm text-3xl leading-tight font-semibold">{d.title}</h2>
               <p className="mt-2 max-w-sm text-[13px] text-white/75">{d.text}</p>
-              <a href={d.href} className="mt-5 inline-flex h-10 items-center gap-2 rounded-lg bg-white px-5 text-[13px] font-semibold text-ink transition-colors hover:bg-accent hover:text-white">
+              <a href={d.href} className="mt-5 inline-flex h-10 items-center gap-2 rounded-full bg-white px-6 text-[13px] font-semibold text-ink transition-colors hover:bg-accent hover:text-white">
                 {d.cta} →
               </a>
             </div>
@@ -521,7 +521,7 @@ function Services() {
       <div className={`${WRAP} grid grid-cols-2 gap-6 py-8 lg:grid-cols-4`}>
         {home.services.map((s) => (
           <div key={s.title} className="flex items-center gap-3">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent-deep">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent-deep">
               <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4" aria-hidden="true">
                 <path d={ic[s.icon]} stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -550,8 +550,8 @@ function Newsletter() {
           <p className="mt-2 text-sm text-white/60">Campanhas exclusivas, novos produtos e dicas técnicas. Sem spam.</p>
         </div>
         <form onSubmit={(e) => { e.preventDefault(); setDone(true) }} className="flex flex-col gap-2 sm:flex-row">
-          <input type="email" required placeholder="O seu email profissional" aria-label="Email" className="h-12 flex-1 rounded-lg border border-white/15 bg-white/10 px-4 text-sm text-white outline-none placeholder:text-white/50 focus:border-accent" />
-          <motion.button type="submit" whileTap={reduce ? {} : { scale: 0.98 }} className="h-12 rounded-lg bg-accent px-6 text-sm font-semibold text-white transition-colors hover:bg-accent-deep">
+          <input type="email" required placeholder="O seu email profissional" aria-label="Email" className="h-12 flex-1 rounded-full border border-white/15 bg-white/10 px-5 text-sm text-white outline-none placeholder:text-white/50 focus:border-accent" />
+          <motion.button type="submit" whileTap={reduce ? {} : { scale: 0.98 }} className="h-12 rounded-full bg-accent px-7 text-sm font-semibold text-white transition-colors hover:bg-accent-deep">
             {done ? 'Subscrito ✓' : 'Subscrever'}
           </motion.button>
         </form>

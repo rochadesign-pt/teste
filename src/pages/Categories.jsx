@@ -58,7 +58,7 @@ export function Categories() {
             >
               <Link to={`/categoria/${c.slug}`} className="group block">
                 <Placeholder zoom className="aspect-[4/3] border border-line shadow-xs">
-                  <span className="absolute top-3 left-3 rounded-md bg-white/90 px-2 py-0.5 text-[11px] font-medium text-ink backdrop-blur">
+                  <span className="absolute top-3 left-3 rounded-full bg-white/90 px-2.5 py-0.5 text-[11px] font-medium text-ink backdrop-blur">
                     {countByCat(c.slug)} produtos
                   </span>
                   <span className="absolute right-3 bottom-3 flex h-9 w-9 items-center justify-center rounded-full bg-white text-ink shadow-xs transition-colors duration-200 group-hover:bg-accent group-hover:text-white">

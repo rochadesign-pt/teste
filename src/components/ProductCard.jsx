@@ -43,7 +43,7 @@ export function ProductCard({ p, addItem }) {
         {/* badges */}
         {p.tag && (
           <span
-            className={`pointer-events-none absolute top-3 left-3 rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wide ${
+            className={`pointer-events-none absolute top-3 left-3 rounded-full px-2.5 py-0.5 text-[10px] font-semibold tracking-wide ${
               onSale ? 'bg-accent text-white' : p.tag === 'Novo' ? 'bg-ink text-white' : 'bg-white text-ink shadow-xs'
             }`}
           >
@@ -69,7 +69,7 @@ export function ProductCard({ p, addItem }) {
               type="button"
               whileTap={{ scale: 0.98 }}
               onClick={() => addItem(p.id)}
-              className="flex h-10 w-full items-center justify-center gap-1.5 rounded-lg bg-ink text-[13px] font-semibold text-white shadow-xs transition-colors hover:bg-accent-deep"
+              className="flex h-10 w-full items-center justify-center gap-1.5 rounded-full bg-ink text-[13px] font-semibold text-white shadow-xs transition-colors hover:bg-accent-deep"
             >
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                 <path d="M6 1v10M1 6h10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
@@ -79,7 +79,7 @@ export function ProductCard({ p, addItem }) {
           ) : (
             <Link
               to={p.href}
-              className="flex h-10 w-full items-center justify-center rounded-lg bg-white text-[13px] font-semibold text-ink shadow-xs transition-colors hover:bg-ink hover:text-white"
+              className="flex h-10 w-full items-center justify-center rounded-full bg-white text-[13px] font-semibold text-ink shadow-xs transition-colors hover:bg-ink hover:text-white"
             >
               Ver produto
             </Link>

@@ -9,7 +9,7 @@ function GroupLabel({ children, hint, promo = false }) {
       <p className="flex items-center gap-1.5 text-xs font-medium">
         {children}
         {promo && (
-          <span className="rounded-md bg-accent px-1.5 py-0.5 text-[9px] font-semibold tracking-[0.08em] text-white">
+          <span className="rounded-full bg-accent px-2 py-0.5 text-[9px] font-semibold tracking-[0.08em] text-white">
             PROMO
           </span>
         )}

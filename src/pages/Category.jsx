@@ -184,7 +184,7 @@ export function Category({ addItem }) {
         <p className="mt-1 text-[12px] leading-relaxed text-muted">
           Condições dedicadas para volume, faturação com NIF e apoio técnico especializado.
         </p>
-        <a href="#" className="mt-3 inline-flex h-9 items-center justify-center rounded-lg bg-ink px-4 text-[12px] font-semibold text-white transition-colors hover:bg-accent-deep">
+        <a href="#" className="mt-3 inline-flex h-9 items-center justify-center rounded-full bg-ink px-5 text-[12px] font-semibold text-white transition-colors hover:bg-accent-deep">
           Pedir proposta
         </a>
       </div>
@@ -220,7 +220,7 @@ export function Category({ addItem }) {
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, ease: EASE, delay: 0.08 }} className="hidden lg:block">
             <Placeholder className="aspect-[4/3]" rounded="rounded-2xl">
-              <span className="absolute top-4 left-4 rounded-md bg-white/90 px-2.5 py-1 text-[11px] font-medium text-ink">
+              <span className="absolute top-4 left-4 rounded-full bg-white/90 px-3 py-1 text-[11px] font-medium text-ink">
                 {countByCat(slug)} produtos · {category.title}
               </span>
             </Placeholder>
@@ -271,7 +271,7 @@ export function Category({ addItem }) {
                 <button
                   type="button"
                   onClick={() => setFiltersOpen(true)}
-                  className="flex h-9 items-center gap-2 rounded-md border border-line bg-white px-3 text-[13px] font-medium lg:hidden"
+                  className="flex h-9 items-center gap-2 rounded-full border border-line bg-white px-4 text-[13px] font-medium lg:hidden"
                 >
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                     <path d="M1 3h12M3 7h8M5 11h4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
@@ -280,14 +280,14 @@ export function Category({ addItem }) {
                 </button>
 
                 {/* column density */}
-                <div className="hidden items-center gap-1 rounded-md border border-line bg-white p-1 xl:flex">
+                <div className="hidden items-center gap-1 rounded-full border border-line bg-white p-1 xl:flex">
                   {[3, 4].map((n) => (
                     <button
                       key={n}
                       type="button"
                       aria-label={`${n} colunas`}
                       onClick={() => setCols(n)}
-                      className={`flex h-7 w-7 items-center justify-center rounded transition-colors ${cols === n ? 'bg-ink text-white' : 'text-muted hover:bg-page'}`}
+                      className={`flex h-7 w-7 items-center justify-center rounded-full transition-colors ${cols === n ? 'bg-ink text-white' : 'text-muted hover:bg-page'}`}
                     >
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                         {Array.from({ length: n }).map((_, i) => (
@@ -303,7 +303,7 @@ export function Category({ addItem }) {
                   <select
                     value={sort}
                     onChange={(e) => setSort(e.target.value)}
-                    className="h-9 rounded-md border border-line bg-white px-3 text-[13px] font-medium outline-none focus:border-accent"
+                    className="h-9 rounded-full border border-line bg-white px-4 text-[13px] font-medium outline-none focus:border-accent"
                   >
                     {SORTS.map((s) => (
                       <option key={s.id} value={s.id}>{s.label}</option>
@@ -372,7 +372,7 @@ export function Category({ addItem }) {
                 <button
                   type="button"
                   onClick={() => setVisible((v) => v + PAGE)}
-                  className="mt-1 rounded-lg border border-line bg-white px-7 py-3 text-sm font-semibold transition-colors duration-200 hover:border-ink"
+                  className="mt-1 rounded-full border border-line bg-white px-8 py-3 text-sm font-semibold transition-colors duration-200 hover:border-ink"
                 >
                   Carregar mais
                 </button>
@@ -413,7 +413,7 @@ export function Category({ addItem }) {
               <button
                 type="button"
                 onClick={() => setFiltersOpen(false)}
-                className="mt-6 h-11 shrink-0 rounded-lg bg-ink text-sm font-semibold text-white"
+                className="mt-6 h-11 shrink-0 rounded-full bg-ink text-sm font-semibold text-white"
               >
                 Ver {filtered.length} produtos
               </button>
