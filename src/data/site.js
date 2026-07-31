@@ -194,6 +194,119 @@ export const home = {
     href: '#',
     keys: ['htg750', 'dda90', 'inx25', 'dlm15'],
   },
+  // ——— Strip de ícones de categoria (sob o header) ———
+  iconCategories: [
+    { title: 'Cozinha', slug: 'cozinha', icon: 'flame' },
+    { title: 'Lavandaria', slug: 'lavandaria', icon: 'drop' },
+    { title: 'Superfícies', slug: 'superficies', icon: 'sparkle' },
+    { title: 'Desinfeção', slug: 'desinfecao', icon: 'shield' },
+    { title: 'Mãos & Pele', slug: 'maos-pele', icon: 'hand' },
+    { title: 'Auto', slug: 'auto', icon: 'car' },
+    { title: 'Agroalimentar', slug: 'agroalimentar', icon: 'leaf' },
+    { title: 'Acessórios', slug: 'acessorios', icon: 'tool' },
+    { title: 'Fornos', slug: 'cozinha', icon: 'flame' },
+    { title: 'Pavimentos', slug: 'superficies', icon: 'sparkle' },
+  ],
+  // ——— New Arrivals (promo lateral + carrossel) ———
+  newArrivals: {
+    promo: { eyebrow: 'DESTAQUE', title: 'Linha Cozinha profissional', text: 'A gama que resolve as gorduras mais difíceis.', cta: 'Comprar', href: '/categoria/cozinha' },
+    tabs: [
+      { id: 'novidades', label: 'Novidades' },
+      { id: 'mais-vendidos', label: 'Mais vendidos' },
+    ],
+  },
+  // ——— Grelha de coleções (banners de imagem) ———
+  collectionTiles: [
+    { title: 'Concentrados de alto rendimento', slug: 'cozinha', scene: 'kitchen', subject: 'bottle', span: false },
+    { title: 'Certificado para agroalimentar', slug: 'agroalimentar', scene: 'green', subject: 'mist', span: false },
+    { title: 'Recargas económicas até 20 LT', slug: 'superficies', scene: 'steel', subject: 'set', span: false },
+    { title: 'Higiene de mãos e pele', slug: 'maos-pele', scene: 'cream', subject: 'mist', span: false },
+  ],
+  lifestyleSplit: {
+    small: [
+      { title: 'Cozinha', slug: 'cozinha', scene: 'kitchen' },
+      { title: 'Desinfeção', slug: 'desinfecao', scene: 'green' },
+    ],
+    big: { title: 'Cozinhas profissionais impecáveis, turno após turno.', cta: 'Ver soluções HORECA', href: '#', scene: 'kitchen' },
+  },
+  // ——— Feature de testemunho (produto + citação) ———
+  feature: {
+    productKey: 'htg750',
+    quote: 'Todos os produtos são desenvolvidos e fabricados em Portugal, testados em operação real.',
+    name: 'Equipa Mistolin PRO',
+    role: 'Vale de Cambra',
+  },
+  // ——— Inspiração por espaços ———
+  spaces: [
+    { title: 'Restaurantes & bares', scene: 'kitchen', count: 42 },
+    { title: 'Hotelaria', scene: 'cream', count: 35 },
+    { title: 'Indústria alimentar', scene: 'steel', count: 28 },
+  ],
+  // ——— Dois promo banners lado a lado ———
+  twoPromos: [
+    { title: 'Tiragorduras', discount: '−40% €/L', text: 'Nas recargas de 20 LT', cta: 'Comprar', href: '/produto/htg-30', scene: 'kitchen' },
+    { title: 'Desinfeção', discount: '−30%', text: 'Gama alimentar e virucida', cta: 'Comprar', href: '/categoria/desinfecao', scene: 'green' },
+  ],
+  // ——— Shop Our Offers (chips + grelha) ———
+  offersChips: ['Cozinha', 'Pavimentos', 'Inox', 'Loiça', 'Recargas', 'Desinfeção', 'Mãos', 'Agroalimentar'],
+  // ——— Sobre a Mistolin (studio) ———
+  studio: {
+    eyebrow: 'DESDE 2009',
+    title: 'A equipa por trás da Mistolin',
+    text: 'A Mistolin Solutions nasceu em 2009 em Vale de Cambra, dedicada à higiene e limpeza profissional. Representa marcas nacionais e internacionais, com a Mistolin PRO no centro da oferta.',
+    points: ['Higiene profissional desde 2009', 'Fabrico e I&D em Portugal', 'Mais de 200 produtos em catálogo'],
+    cta: 'Falar com a equipa',
+    href: '#',
+  },
+  // ——— Barra de citação ———
+  quoteBar: {
+    main: 'Produtos com resultados que se veem — feitos por quem conhece a operação por dentro.',
+    author: 'Mistolin PRO',
+    left: 'Higiene profissional',
+    right: 'Fabricado em Portugal',
+  },
+  // ——— Difference in the Details ———
+  details: {
+    eyebrow: 'NA PRÁTICA',
+    title: 'A diferença está nos detalhes',
+    text: 'Da diluição certa ao formato ideal — cada produto pensado para render mais e trabalhar menos.',
+    cta: 'Ver guias',
+    href: '#',
+    selects: [
+      { label: 'Escolher volumetria', key: 'htg5' },
+      { label: 'Escolher desinfetante', key: 'dda90k' },
+      { label: 'Escolher acessórios', key: 'inx25' },
+    ],
+  },
+  // ——— Marquee de palavras-chave ———
+  keywords: ['Tiragorduras', 'Desinfetantes', 'Loiça', 'Pavimentos', 'Inox', 'Recargas', 'Agroalimentar', 'Mãos & Pele'],
+  // ——— Approach (4 features) ———
+  approach: {
+    title: 'Uma abordagem pensada para profissionais',
+    chips: ['Certificado HACCP', 'Fabricado em PT', 'Apoio técnico', 'Stock garantido'],
+    features: [
+      { title: 'Eficaz', text: 'Fórmulas concentradas de elevado rendimento.', scene: 'kitchen' },
+      { title: 'Transparente', text: 'Fichas técnicas e de segurança em todos os produtos.', scene: 'steel' },
+      { title: 'Certificado', text: 'Aprovado para contacto alimentar e uso profissional.', scene: 'green' },
+      { title: 'Sustentável', text: 'Formulações biodegradáveis e recargas que reduzem plástico.', scene: 'cream' },
+    ],
+  },
+  // ——— We're on Gram ———
+  gram: [
+    { scene: 'kitchen', subject: 'bottle', handle: '@cozinha.doporto' },
+    { scene: 'steel', subject: 'mist', handle: '@hotelmar.algarve' },
+    { scene: 'green', subject: 'set', handle: '@grupohoreca.pt' },
+    { scene: 'cream', subject: 'bottle', handle: '@pastelaria.central' },
+    { scene: 'kitchen', subject: 'mist', handle: '@churrasqueira.lx' },
+    { scene: 'steel', subject: 'bottle', handle: '@limpeza.pro.pt' },
+  ],
+  // ——— Serviços (rodapé superior) ———
+  services: [
+    { icon: 'headset', title: 'Apoio ao cliente', text: '+351 256 000 000' },
+    { icon: 'chat', title: 'Dúvidas & FDS', text: 'apoio@mistolin.pt' },
+    { icon: 'truck', title: 'Expedição', text: '24–48h · Portugal' },
+    { icon: 'pin', title: 'Sede', text: 'Vale de Cambra, PT' },
+  ],
   testimonials: [
     {
       quote: 'Dissolve gordura carbonizada que antes exigia horas de esfrega. Insubstituível.',

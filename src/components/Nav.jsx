@@ -147,11 +147,24 @@ export function Nav({ cartCount = 0, onCartOpen }) {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50">
-        {/* announcement bar */}
-        <div className="bg-ink text-center text-[11px] font-medium text-white">
-          <p className="px-4 py-1.5">
-            Envio grátis em encomendas acima de 30 € · Expedição em 24–48h
-          </p>
+        {/* utility bar */}
+        <div className="bg-ink text-white">
+          <div className="mx-auto flex h-7 max-w-[1600px] items-center justify-between px-6 text-[11px] font-medium lg:px-10">
+            <div className="hidden items-center gap-4 sm:flex">
+              <a href="#" className="opacity-70 hover:opacity-100">Centro de ajuda</a>
+              <a href="#" className="opacity-70 hover:opacity-100">Seguir encomenda</a>
+              <a href="#" className="opacity-70 hover:opacity-100">Fichas técnicas</a>
+            </div>
+            <p className="flex items-center gap-1.5">
+              <span className="h-1 w-1 rounded-full bg-accent" />
+              Envio grátis acima de 30 € · Expedição em 24–48h
+            </p>
+            <div className="hidden items-center gap-4 sm:flex">
+              <span className="opacity-70">Portugal (EUR €)</span>
+              <span className="opacity-40">·</span>
+              <a href="#" className="opacity-70 hover:opacity-100">Apoio pro</a>
+            </div>
+          </div>
         </div>
 
         <div
@@ -210,10 +223,23 @@ export function Nav({ cartCount = 0, onCartOpen }) {
             </ul>
 
             <div className="flex items-center gap-2">
+              {/* search */}
+              <div className="hidden items-center rounded-md border border-line bg-page pl-3 lg:flex">
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="text-muted">
+                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.5" />
+                  <path d="M11.5 11.5 15 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+                <input
+                  type="search"
+                  placeholder="Procurar produtos…"
+                  aria-label="Procurar"
+                  className="h-9 w-40 bg-transparent px-2.5 text-[13px] outline-none placeholder:text-muted/70 xl:w-56"
+                />
+              </div>
               <button
                 type="button"
                 aria-label="Pesquisar"
-                className="hidden h-9 w-9 items-center justify-center rounded-md border border-line bg-white text-ink transition-colors duration-200 hover:border-ink/30 md:flex"
+                className="flex h-9 w-9 items-center justify-center rounded-md border border-line bg-white text-ink transition-colors duration-200 hover:border-ink/30 lg:hidden"
               >
                 <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                   <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.5" />
