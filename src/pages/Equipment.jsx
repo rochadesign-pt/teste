@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useMemo, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
-import { equipment, equipmentCatalog } from '../data/equipment'
+import { getEquipment, equipmentList, initSelection, computeTotal, mainIdOf, configSummary } from '../data/equipment'
 import { EquipmentHero } from '../components/EquipmentHero'
 import { Placeholder } from '../components/Placeholder'
 import { Stars } from '../components/PayIcons'
@@ -17,20 +17,18 @@ const reveal = {
   transition: { duration: 0.5, ease: EASE },
 }
 
-/* ——— ribbon of quick facts ——— */
-function Ribbon() {
-  const facts = ['4 saídas de doseamento', 'Até −40% de consumo', 'Instalação por técnico', 'Garantia 24 meses']
+function Ribbon({ eq }) {
   return (
     <section className="border-y border-line bg-white">
       <div className={`${WRAP} grid grid-cols-2 gap-y-4 py-6 md:grid-cols-4`}>
-        {facts.map((f) => (
-          <div key={f} className="flex items-center gap-2.5 text-[13px] font-medium">
+        {eq.specHighlights.map((s) => (
+          <div key={s.label} className="flex items-center gap-2.5 text-[13px] font-medium">
             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent-soft">
-              <svg width="11" height="9" viewBox="0 0 12 10" fill="none" aria-hidden="true">
-                <path d="M1 5l3.4 3.4L11 1.6" stroke="#518708" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <svg width="11" height="9" viewBox="0 0 12 10" fill="none" aria-hidden="true"><path d="M1 5l3.4 3.4L11 1.6" stroke="#518708" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </span>
-            {f}
+            <span>
+              {s.value} {s.unit} <span className="text-muted">· {s.label}</span>
+            </span>
           </div>
         ))}
       </div>
@@ -38,21 +36,18 @@ function Ribbon() {
   )
 }
 
-/* ——— installation = integrated service ——— */
-function ServiceHighlight() {
-  const s = equipment.service
+function ServiceHighlight({ eq }) {
+  const s = eq.service
   return (
     <section className={`${WRAP} py-16 lg:py-20`}>
       <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
         <motion.div {...reveal}>
           <Placeholder className="aspect-[4/3] border border-line shadow-xs" rounded="rounded-2xl">
-            <span className="absolute top-4 left-4 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold text-white">
-              Serviço incluído
-            </span>
+            <span className="absolute top-4 left-4 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold text-white">Serviço incluído</span>
           </Placeholder>
         </motion.div>
         <motion.div {...reveal} transition={{ ...reveal.transition, delay: 0.08 }}>
-          <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-accent-deep">INSTALAÇÃO CHAVE-NA-MÃO</p>
+          <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-accent-deep">{s.eyebrow}</p>
           <h2 className="font-display text-3xl font-semibold leading-tight sm:text-4xl">{s.title}</h2>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">{s.text}</p>
           <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -71,16 +66,13 @@ function ServiceHighlight() {
   )
 }
 
-/* ——— benefits ——— */
-function Benefits() {
+function Benefits({ eq }) {
   return (
     <section className="bg-page">
       <div className={`${WRAP} py-16 lg:py-20`}>
-        <motion.h2 {...reveal} className="font-display max-w-xl text-3xl font-semibold sm:text-4xl">
-          Porquê uma central de doseamento
-        </motion.h2>
+        <motion.h2 {...reveal} className="font-display max-w-xl text-3xl font-semibold sm:text-4xl">{eq.benefitsTitle}</motion.h2>
         <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {equipment.benefits.map((b, i) => (
+          {eq.benefits.map((b, i) => (
             <motion.div key={b.title} {...reveal} transition={{ ...reveal.transition, delay: (i % 4) * 0.06 }} className="rounded-2xl border border-line bg-white p-1">
               <Placeholder className="aspect-[4/3]" rounded="rounded-xl" />
               <div className="p-4">
@@ -95,25 +87,17 @@ function Benefits() {
   )
 }
 
-/* ——— installation steps ——— */
-function Steps() {
+function Steps({ eq }) {
   return (
     <section className="bg-ink text-white">
       <div className={`${WRAP} py-20 lg:py-24`}>
         <motion.div {...reveal} className="mb-10 flex flex-wrap items-end justify-between gap-6">
-          <h2 className="font-display text-3xl font-semibold sm:text-4xl">Como funciona a instalação</h2>
-          <p className="max-w-xs text-sm leading-relaxed text-white/50">
-            Tratamos de tudo — do agendamento ao arranque — para a central ficar operacional no mesmo dia.
-          </p>
+          <h2 className="font-display text-3xl font-semibold sm:text-4xl">{eq.stepsTitle}</h2>
+          <p className="max-w-xs text-sm leading-relaxed text-white/50">{eq.stepsHint}</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-          {equipment.steps.map((step, i) => (
-            <motion.article
-              key={step.n}
-              {...reveal}
-              transition={{ ...reveal.transition, delay: i * 0.1 }}
-              className="group rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition-colors duration-300 hover:border-accent/40"
-            >
+          {eq.steps.map((step, i) => (
+            <motion.article key={step.n} {...reveal} transition={{ ...reveal.transition, delay: i * 0.1 }} className="group rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition-colors duration-300 hover:border-accent/40">
               <p className="text-[11px] font-medium tracking-[0.14em] text-white/40">{step.n}</p>
               <h3 className="mt-14 text-lg font-semibold transition-colors duration-300 group-hover:text-accent">{step.title}</h3>
               <p className="mt-2 text-[13px] leading-relaxed text-white/60">{step.text}</p>
@@ -125,22 +109,19 @@ function Steps() {
   )
 }
 
-/* ——— reviews ——— */
-function Reviews() {
+function Reviews({ eq }) {
   return (
     <section id="reviews" className={`${WRAP} py-16 lg:py-20`}>
-      <motion.div {...reveal} className="mb-8 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <h2 className="font-display text-3xl font-semibold sm:text-4xl">O que dizem as operações</h2>
-          <div className="mt-3 flex items-center gap-2 text-sm">
-            <Stars value={equipment.reviewSummary.average} />
-            <span className="font-medium">{equipment.reviewSummary.average.toFixed(1).replace('.', ',')}</span>
-            <span className="text-muted">· {equipment.reviewSummary.total} avaliações verificadas</span>
-          </div>
+      <motion.div {...reveal} className="mb-8">
+        <h2 className="font-display text-3xl font-semibold sm:text-4xl">O que dizem os utilizadores</h2>
+        <div className="mt-3 flex items-center gap-2 text-sm">
+          <Stars value={eq.reviewSummary.average} />
+          <span className="font-medium">{eq.reviewSummary.average.toFixed(1).replace('.', ',')}</span>
+          <span className="text-muted">· {eq.reviewSummary.total} avaliações verificadas</span>
         </div>
       </motion.div>
       <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-        {equipment.reviews.map((r, i) => (
+        {eq.reviews.map((r, i) => (
           <motion.figure key={r.name} {...reveal} transition={{ ...reveal.transition, delay: (i % 3) * 0.06 }} className="flex flex-col rounded-2xl border border-line bg-white p-5">
             <div className="flex items-center justify-between">
               <Stars value={r.rating} />
@@ -164,23 +145,20 @@ function Reviews() {
   )
 }
 
-/* ——— compatible consumables (cross-sell) ——— */
-function Consumables() {
+function Accessories({ eq }) {
   return (
     <section className="bg-page">
       <div className={`${WRAP} py-16 lg:py-20`}>
         <motion.div {...reveal} className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="mb-1.5 text-[11px] font-medium tracking-[0.16em] text-accent-deep">CONSUMÍVEIS COMPATÍVEIS</p>
-            <h2 className="font-display text-3xl font-semibold sm:text-4xl">Recargas para a central</h2>
+            <p className="mb-1.5 text-[11px] font-medium tracking-[0.16em] text-accent-deep">{eq.accessoriesEyebrow}</p>
+            <h2 className="font-display text-3xl font-semibold sm:text-4xl">{eq.accessoriesTitle}</h2>
           </div>
-          <Link to="/categorias" className="text-sm font-medium text-accent-deep underline-offset-2 hover:underline">
-            Ver catálogo →
-          </Link>
+          <Link to="/categorias" className="text-sm font-medium text-accent-deep underline-offset-2 hover:underline">Ver catálogo →</Link>
         </motion.div>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-          {equipment.consumables.map((c, i) => (
-            <motion.div key={c.code} {...reveal} transition={{ ...reveal.transition, delay: (i % 3) * 0.06 }} className="flex items-center gap-4 rounded-2xl border border-line bg-white p-4">
+          {eq.accessories.map((c, i) => (
+            <motion.div key={c.name} {...reveal} transition={{ ...reveal.transition, delay: (i % 3) * 0.06 }} className="flex items-center gap-4 rounded-2xl border border-line bg-white p-4">
               <Placeholder className="h-20 w-20 shrink-0 border border-line" rounded="rounded-xl" />
               <div className="min-w-0 flex-1">
                 <p className="text-[13px] font-semibold leading-snug">{c.name}</p>
@@ -195,8 +173,7 @@ function Consumables() {
   )
 }
 
-/* ——— faq ——— */
-function Faq() {
+function Faq({ eq }) {
   const [open, setOpen] = useState(0)
   const reduce = useReducedMotion()
   return (
@@ -204,15 +181,11 @@ function Faq() {
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
         <motion.div {...reveal}>
           <h2 className="font-display text-3xl font-semibold sm:text-4xl">Perguntas frequentes</h2>
-          <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">
-            Sobre a instalação, os consumíveis, a garantia e o apoio a empresas.
-          </p>
-          <a href="#" className="mt-5 inline-flex h-11 items-center rounded-full bg-ink px-6 text-sm font-semibold text-white transition-colors hover:bg-accent-deep">
-            Falar com a equipa técnica
-          </a>
+          <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">Tudo o que precisa de saber antes de decidir.</p>
+          <a href="#" className="mt-5 inline-flex h-11 items-center rounded-full bg-ink px-6 text-sm font-semibold text-white transition-colors hover:bg-accent-deep">Falar com a equipa</a>
         </motion.div>
         <div className="divide-y divide-line border-t border-line">
-          {equipment.faqs.map((f, i) => {
+          {eq.faqs.map((f, i) => {
             const isOpen = open === i
             return (
               <div key={f.q}>
@@ -236,11 +209,32 @@ function Faq() {
   )
 }
 
-/* ——— sticky bar ——— */
-function StickyBar({ kitId, onAdd }) {
+function OtherEquipment({ current }) {
+  const others = equipmentList.filter((e) => e.slug !== current)
+  if (!others.length) return null
+  return (
+    <section className={`${WRAP} pb-20`}>
+      <p className="mb-4 text-[11px] font-medium tracking-[0.16em] text-accent-deep">OUTROS EQUIPAMENTOS</p>
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        {others.map((e) => (
+          <Link key={e.slug} to={`/equipamento/${e.slug}`} className="group flex items-center gap-4 rounded-2xl border border-line bg-white p-4 transition-colors hover:border-ink/25">
+            <Placeholder className="h-20 w-20 shrink-0 border border-line" rounded="rounded-xl" />
+            <div className="min-w-0 flex-1">
+              <p className="text-[11px] font-medium tracking-[0.12em] text-muted">{e.line}</p>
+              <p className="mt-0.5 text-sm font-semibold group-hover:text-accent-deep">{e.name}</p>
+              <p className="mt-1 text-sm font-semibold tabular-nums">desde {fmt(e.basePrice)}</p>
+            </div>
+            <span className="text-muted transition-transform group-hover:translate-x-0.5" aria-hidden="true">→</span>
+          </Link>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function StickyBar({ eq, total, onAdd }) {
   const [show, setShow] = useState(false)
   const reduce = useReducedMotion()
-  const sel = equipmentCatalog[kitId]
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > 700)
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -258,16 +252,12 @@ function StickyBar({ kitId, onAdd }) {
         >
           <div className={`${WRAP} flex items-center justify-between gap-4 py-3`}>
             <div className="min-w-0">
-              <p className="truncate text-[13px] font-semibold">{equipment.name}</p>
-              <p className="truncate text-[11px] text-muted">{sel.detail} · instalação incluída</p>
+              <p className="truncate text-[13px] font-semibold">{eq.name}</p>
+              <p className="truncate text-[11px] text-muted">{eq.statusLabel}</p>
             </div>
             <div className="flex shrink-0 items-center gap-3">
-              <p className="font-display text-lg font-semibold tabular-nums">{fmt(sel.price)}</p>
-              <button
-                type="button"
-                onClick={() => onAdd(kitId, 1)}
-                className="flex h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-semibold text-white transition-colors hover:bg-accent-deep"
-              >
+              <p className="font-display text-lg font-semibold tabular-nums">{fmt(total)}</p>
+              <button type="button" onClick={onAdd} className="flex h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-semibold text-white transition-colors hover:bg-accent-deep">
                 Adicionar
                 <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
               </button>
@@ -280,18 +270,52 @@ function StickyBar({ kitId, onAdd }) {
 }
 
 export function Equipment({ addItem }) {
-  const [kitId, setKitId] = useState(equipment.kits[0].id)
+  const { slug } = useParams()
+  const eq = getEquipment(slug)
+  const [selection, setSelection] = useState(() => (eq ? initSelection(eq) : {}))
+
+  // reset selection when the product changes
+  useEffect(() => {
+    if (eq) setSelection(initSelection(eq))
+  }, [slug]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const total = useMemo(() => (eq ? computeTotal(eq, selection) : 0), [eq, selection])
+
+  const setSingle = (groupId, choiceId) => setSelection((s) => ({ ...s, [groupId]: choiceId }))
+  const toggleAddon = (groupId, choiceId) =>
+    setSelection((s) => {
+      const cur = s[groupId] || []
+      return { ...s, [groupId]: cur.includes(choiceId) ? cur.filter((x) => x !== choiceId) : [...cur, choiceId] }
+    })
+
+  const handleAdd = () => {
+    if (!eq) return
+    addItem(mainIdOf(eq, selection), 1, true, { price: total, name: eq.name, detail: configSummary(eq, selection), kind: 'equip-config' })
+  }
+
+  if (!eq) {
+    return (
+      <main className="pt-[160px] pb-24 text-center">
+        <p className="text-sm text-muted">Equipamento não encontrado.</p>
+        <Link to="/equipamento/mixpro-ds4" className="mt-4 inline-block text-sm font-medium text-accent-deep hover:underline">
+          Ver equipamentos →
+        </Link>
+      </main>
+    )
+  }
+
   return (
     <main>
-      <EquipmentHero kitId={kitId} setKitId={setKitId} onAdd={(id, qty) => addItem(id, qty)} />
-      <Ribbon />
-      <ServiceHighlight />
-      <Benefits />
-      <Steps />
-      <Reviews />
-      <Consumables />
-      <Faq />
-      <StickyBar kitId={kitId} onAdd={(id, qty) => addItem(id, qty)} />
+      <EquipmentHero product={eq} selection={selection} setSingle={setSingle} toggleAddon={toggleAddon} total={total} onAdd={handleAdd} />
+      <Ribbon eq={eq} />
+      <ServiceHighlight eq={eq} />
+      <Benefits eq={eq} />
+      <Steps eq={eq} />
+      <Reviews eq={eq} />
+      <Accessories eq={eq} />
+      <Faq eq={eq} />
+      <OtherEquipment current={eq.slug} />
+      <StickyBar eq={eq} total={total} onAdd={handleAdd} />
     </main>
   )
 }

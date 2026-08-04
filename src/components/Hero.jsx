@@ -22,9 +22,9 @@ export function Hero({ format, setFormat, onAdd, variant }) {
   const g = product.gallery
 
   return (
-    <section className="mx-auto grid max-w-[1280px] grid-cols-1 gap-8 px-6 pt-28 pb-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:px-12 lg:pt-32">
+    <section className="mx-auto grid max-w-[1280px] grid-cols-1 gap-8 px-6 pt-[160px] pb-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:px-12 lg:pt-[172px]">
       {/* Left — photo gallery: main + details + lifestyle */}
-      <div className="flex flex-col gap-3 lg:sticky lg:top-28 lg:self-start">
+      <div className="flex flex-col gap-3 lg:sticky lg:top-[152px] lg:self-start">
         {/* main product photo */}
         <motion.div
           initial={{ opacity: 0, scale: reduce ? 1 : 0.99 }}

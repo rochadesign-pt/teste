@@ -46,7 +46,7 @@ export function Cart({ open, onClose, items, setQty, removeItem, addItem, swapIt
   }, [open, onClose])
 
   const count = items.reduce((s, it) => s + it.qty, 0)
-  const subtotal = items.reduce((s, it) => s + (CATALOG[it.id]?.price ?? 0) * it.qty, 0)
+  const subtotal = items.reduce((s, it) => s + (it.price ?? CATALOG[it.id]?.price ?? 0) * it.qty, 0)
   const missing = Math.max(0, product.freeShippingFrom - subtotal)
   const progress = Math.min(1, subtotal / product.freeShippingFrom)
 
@@ -152,8 +152,14 @@ export function Cart({ open, onClose, items, setQty, removeItem, addItem, swapIt
                   {/* line items */}
                   <ul className="divide-y divide-line">
                     {items.map((it) => {
-                      const p = CATALOG[it.id]
-                      if (!p) return null
+                      const base = CATALOG[it.id]
+                      const p = {
+                        name: it.name ?? base?.name,
+                        detail: it.detail ?? base?.detail,
+                        price: it.price ?? base?.price,
+                        kind: it.kind ?? base?.kind,
+                      }
+                      if (p.name == null || p.price == null) return null
                       return (
                         <motion.li
                           key={it.id}
@@ -164,7 +170,7 @@ export function Cart({ open, onClose, items, setQty, removeItem, addItem, swapIt
                           transition={{ duration: 0.3, ease: EASE }}
                           className="flex gap-4 py-5"
                         >
-                          <Thumb dark={p.kind === 'bundle'} equip={p.kind === 'equip-kit'} />
+                          <Thumb dark={p.kind === 'bundle'} equip={typeof p.kind === 'string' && p.kind.startsWith('equip')} />
                           <div className="min-w-0 flex-1">
                             <div className="flex items-start justify-between gap-3">
                               <p className="text-sm leading-snug font-medium">{p.name}</p>

@@ -22,13 +22,13 @@ function App() {
   const [items, setItems] = useState([])
   const [cartOpen, setCartOpen] = useState(false)
 
-  const addItem = useCallback((id, qty = 1, open = true) => {
+  const addItem = useCallback((id, qty = 1, open = true, meta = null) => {
     setItems((prev) => {
       const existing = prev.find((it) => it.id === id)
       if (existing) {
         return prev.map((it) => (it.id === id ? { ...it, qty: it.qty + qty } : it))
       }
-      return [...prev, { id, qty }]
+      return [...prev, { id, qty, ...(meta || {}) }]
     })
     if (open) setCartOpen(true)
   }, [])
@@ -64,7 +64,7 @@ function App() {
           <Route path="/categorias" element={<Categories />} />
           <Route path="/categoria/:slug" element={<Category addItem={addItem} />} />
           <Route path="/produto/htg-30" element={<Product addItem={addItem} />} />
-          <Route path="/equipamento/mixpro-ds4" element={<Equipment addItem={addItem} />} />
+          <Route path="/equipamento/:slug" element={<Equipment addItem={addItem} />} />
         </Routes>
         <Footer />
         <Cart
