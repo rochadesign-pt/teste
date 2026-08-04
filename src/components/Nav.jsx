@@ -48,6 +48,7 @@ const navRow = [
   { id: 'cat-cozinha', label: 'Cozinha', kind: 'cat', slug: 'cozinha' },
   { id: 'cat-desinfecao', label: 'Desinfeção', kind: 'cat', slug: 'desinfecao' },
   { id: 'cat-superficies', label: 'Superfícies', kind: 'cat', slug: 'superficies' },
+  { id: 'equipamentos', label: 'Equipamentos', kind: 'link', href: '/equipamento/mixpro-ds4' },
   { id: 'recursos', label: 'Recursos', kind: 'recursos' },
   { id: 'promocoes', label: 'Promoções', kind: 'link', href: '/categorias', accent: true },
 ]
@@ -564,6 +565,14 @@ export function Nav({ cartCount = 0, onCartOpen }) {
                   <span className="text-[11px] text-muted">{countByCat(c.slug)}</span>
                 </Link>
               ))}
+              <Link
+                to="/equipamento/mixpro-ds4"
+                onClick={() => setOpen(null)}
+                className="flex items-center justify-between border-b border-line py-3.5 text-sm font-medium"
+              >
+                Equipamentos
+                <span aria-hidden="true">→</span>
+              </Link>
               <div className="border-b border-line py-4">
                 <p className="text-sm font-semibold">Soluções</p>
                 <ul className="mt-2 space-y-2">

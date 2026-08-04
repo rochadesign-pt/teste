@@ -8,6 +8,7 @@ import { Home } from './pages/Home'
 import { Product } from './pages/Product'
 import { Categories } from './pages/Categories'
 import { Category } from './pages/Category'
+import { Equipment } from './pages/Equipment'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -63,6 +64,7 @@ function App() {
           <Route path="/categorias" element={<Categories />} />
           <Route path="/categoria/:slug" element={<Category addItem={addItem} />} />
           <Route path="/produto/htg-30" element={<Product addItem={addItem} />} />
+          <Route path="/equipamento/mixpro-ds4" element={<Equipment addItem={addItem} />} />
         </Routes>
         <Footer />
         <Cart

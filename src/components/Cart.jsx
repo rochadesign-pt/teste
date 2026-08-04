@@ -1,14 +1,27 @@
 import { useEffect } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { product, catalog } from '../data/product'
+import { equipmentCatalog } from '../data/equipment'
 import { PayIcons } from './PayIcons'
 import { Bottle } from './Bottle'
 
 const EASE = [0.32, 0.72, 0, 1]
 
+// merged lookup: consumables (formats/kits/bundles/combos) + equipment kits
+const CATALOG = { ...catalog, ...equipmentCatalog }
+
 const fmt = (n) => `${n.toFixed(2).replace('.', ',')} €`
 
-function Thumb({ dark }) {
+function Thumb({ dark, equip }) {
+  if (equip) {
+    return (
+      <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-page text-ink/40">
+        <svg viewBox="0 0 16 16" fill="none" className="h-8 w-8" aria-hidden="true">
+          <path d="M2.5 5.5 8 2.5l5.5 3v5L8 13.5 2.5 10.5v-5z M2.5 5.5 8 8.5l5.5-3 M8 8.5v5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+    )
+  }
   return (
     <div
       className={`flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl ${dark ? 'bg-ink' : 'bg-page'}`}
@@ -33,7 +46,7 @@ export function Cart({ open, onClose, items, setQty, removeItem, addItem, swapIt
   }, [open, onClose])
 
   const count = items.reduce((s, it) => s + it.qty, 0)
-  const subtotal = items.reduce((s, it) => s + catalog[it.id].price * it.qty, 0)
+  const subtotal = items.reduce((s, it) => s + (CATALOG[it.id]?.price ?? 0) * it.qty, 0)
   const missing = Math.max(0, product.freeShippingFrom - subtotal)
   const progress = Math.min(1, subtotal / product.freeShippingFrom)
 
@@ -139,7 +152,8 @@ export function Cart({ open, onClose, items, setQty, removeItem, addItem, swapIt
                   {/* line items */}
                   <ul className="divide-y divide-line">
                     {items.map((it) => {
-                      const p = catalog[it.id]
+                      const p = CATALOG[it.id]
+                      if (!p) return null
                       return (
                         <motion.li
                           key={it.id}
@@ -150,7 +164,7 @@ export function Cart({ open, onClose, items, setQty, removeItem, addItem, swapIt
                           transition={{ duration: 0.3, ease: EASE }}
                           className="flex gap-4 py-5"
                         >
-                          <Thumb dark={p.kind === 'bundle'} />
+                          <Thumb dark={p.kind === 'bundle'} equip={p.kind === 'equip-kit'} />
                           <div className="min-w-0 flex-1">
                             <div className="flex items-start justify-between gap-3">
                               <p className="text-sm leading-snug font-medium">{p.name}</p>
