@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { Bottle } from './Bottle'
+import { Placeholder } from './Placeholder'
 
 const fmt = (n) => `${n.toFixed(2).replace('.', ',')} €`
 const perL = (f) => `${(f.price / f.liters).toFixed(2).replace('.', ',')} €/L`
@@ -48,26 +48,10 @@ export function VolumeRow({ f, active, onSelect }) {
   )
 }
 
-// Visual for a bundle card: real photo when provided, otherwise a composed
-// fallback that stacks the bottles to suggest a set.
+// Visual for a bundle card: real photo when provided, otherwise a gray
+// placeholder stand-in.
 function SetVisual({ o }) {
-  if (o.image) {
-    return <img src={o.image} alt={o.name} loading="lazy" className="h-full w-full object-cover" />
-  }
-  const n = Math.min(3, o.items.length)
-  return (
-    <div className="flex h-full items-end justify-center bg-page">
-      {Array.from({ length: n }).map((_, i) => (
-        <div
-          key={i}
-          style={{ zIndex: n - i, marginLeft: i ? '-16%' : 0 }}
-          className="w-[26%] translate-y-[12%] drop-shadow-[0_8px_12px_rgba(0,0,0,0.12)]"
-        >
-          <Bottle className="w-full" />
-        </div>
-      ))}
-    </div>
-  )
+  return <Placeholder src={o.image} alt={o.name} className="h-full w-full" rounded="rounded-none" />
 }
 
 // Kit — compact text row per the mockup: name + role left, price right.

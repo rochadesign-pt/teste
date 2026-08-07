@@ -3,7 +3,6 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { product, catalog } from '../data/product'
 import { equipmentCatalog } from '../data/equipment'
 import { PayIcons } from './PayIcons'
-import { Bottle } from './Bottle'
 
 const EASE = [0.32, 0.72, 0, 1]
 
@@ -23,10 +22,12 @@ function Thumb({ dark, equip }) {
     )
   }
   return (
-    <div
-      className={`flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl ${dark ? 'bg-ink' : 'bg-page'}`}
-    >
-      <Bottle className="h-12 w-auto" />
+    <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#e7eaea] text-[#c3cbcb]">
+      <svg viewBox="0 0 48 48" className="h-7 w-7" fill="none" aria-hidden="true">
+        <rect x="6" y="8" width="36" height="32" rx="4" stroke="currentColor" strokeWidth="2" />
+        <circle cx="17" cy="19" r="3.5" stroke="currentColor" strokeWidth="2" />
+        <path d="M9 34l9-9 7 7 5-5 9 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
     </div>
   )
 }
@@ -249,8 +250,12 @@ export function Cart({ open, onClose, items, setQty, removeItem, addItem, swapIt
                             key={c.code}
                             className="flex items-center gap-3 rounded-2xl border border-line p-3"
                           >
-                            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-page">
-                              <Bottle className="h-9 w-auto" />
+                            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#e7eaea] text-[#c3cbcb]">
+                              <svg viewBox="0 0 48 48" className="h-6 w-6" fill="none" aria-hidden="true">
+                                <rect x="6" y="8" width="36" height="32" rx="4" stroke="currentColor" strokeWidth="2" />
+                                <circle cx="17" cy="19" r="3.5" stroke="currentColor" strokeWidth="2" />
+                                <path d="M9 34l9-9 7 7 5-5 9 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                              </svg>
                             </div>
                             <div className="min-w-0 flex-1">
                               <p className="truncate text-[13px] font-medium">{c.name}</p>

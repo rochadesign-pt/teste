@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { nav } from '../data/site'
 import { shopCategories, countByCat } from '../data/catalog'
-import { Bottle } from './Bottle'
+import { Placeholder } from './Placeholder'
 
 const EASE = [0.32, 0.72, 0, 1]
 
@@ -95,9 +95,7 @@ function MegaProdutos({ onNavigate }) {
         <p className="text-[10px] font-medium tracking-[0.14em] text-accent-deep">
           {nav.produtos.featured.eyebrow}
         </p>
-        <div className="my-3 flex h-24 items-center justify-center overflow-hidden rounded-md bg-white">
-          <Bottle className="h-20 w-auto" />
-        </div>
+        <Placeholder className="my-3 h-24" rounded="rounded-md" />
         <p className="text-sm font-semibold">{nav.produtos.featured.title}</p>
         <p className="mt-0.5 text-[12px] leading-snug text-muted">{nav.produtos.featured.text}</p>
         <Link

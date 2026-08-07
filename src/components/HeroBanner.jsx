@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { home } from '../data/site'
 import { FauxPhoto } from './FauxPhoto'
-import { Bottle } from './Bottle'
 
 const EASE = [0.32, 0.72, 0, 1]
 const AUTOPLAY = 6000
@@ -41,12 +40,8 @@ export function HeroBanner() {
             transition={{ duration: 0.55, ease: EASE }}
             className="absolute inset-0"
           >
-            <FauxPhoto scene={slide.scene} subject={slide.subject} className="h-full w-full">
+            <FauxPhoto className="h-full w-full">
               <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(0,0,0,0.64)_0%,rgba(0,0,0,0.34)_46%,transparent_76%)]" />
-              {/* product shot */}
-              <div className="absolute right-[6%] bottom-0 hidden w-[24%] max-w-[300px] translate-y-[4%] drop-shadow-[0_30px_44px_rgba(0,0,0,0.4)] lg:block">
-                <Bottle className="w-full" />
-              </div>
             </FauxPhoto>
 
             {/* copy */}

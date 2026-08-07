@@ -7,7 +7,7 @@ import { HeroBanner } from '../components/HeroBanner'
 import { ProductCard } from '../components/ProductCard'
 import { FauxPhoto } from '../components/FauxPhoto'
 import { GuaranteeIcon, Stars } from '../components/PayIcons'
-import { Bottle } from '../components/Bottle'
+import { Placeholder } from '../components/Placeholder'
 
 const EASE = [0.32, 0.72, 0, 1]
 const WRAP = 'mx-auto max-w-[1600px] px-6 lg:px-10'
@@ -225,9 +225,7 @@ function TestimonialFeature() {
       <div className={`${WRAP} grid grid-cols-1 items-center gap-8 py-14 lg:grid-cols-[320px_1fr]`}>
         <motion.div {...reveal}>
           <div className="rounded-xl border border-line bg-white p-5 shadow-xs">
-            <div className="flex h-40 items-center justify-center rounded-lg bg-page">
-              <Bottle className="h-32 w-auto" />
-            </div>
+            <Placeholder className="h-40" rounded="rounded-lg" />
             <p className="mt-3 text-[13px] font-medium">{p.name}</p>
             <p className="text-[12px] text-muted">{p.detail}</p>
             <p className="mt-1 text-sm font-semibold">{fmt(p.price)}</p>
@@ -411,9 +409,7 @@ function Details() {
             return (
               <motion.div key={sel.key} {...reveal} transition={{ ...reveal.transition, delay: i * 0.05 }} className={i === 2 ? 'sm:col-span-2' : ''}>
                 <Link to={p.href} className="group flex h-full items-center gap-4 rounded-xl border border-line bg-white p-4">
-                  <div className="flex h-24 w-20 shrink-0 items-center justify-center rounded-lg bg-page">
-                    <Bottle className="h-20 w-auto" />
-                  </div>
+                  <Placeholder className="h-24 w-20 shrink-0" rounded="rounded-lg" />
                   <div>
                     <p className="text-[11px] font-medium tracking-[0.12em] text-accent-deep">{sel.label.toUpperCase()}</p>
                     <p className="mt-1 text-sm font-semibold">{p.name}</p>
