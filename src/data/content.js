@@ -155,3 +155,42 @@ export const articles = [
 ]
 
 export const getArticle = (slug) => articles.find((a) => a.slug === slug) || null
+
+// ——— Contactos ———
+export const contact = {
+  lead: 'Precisa de uma proposta, de apoio técnico ou de encontrar a loja mais próxima? Fale connosco — respondemos em dias úteis, normalmente no próprio dia.',
+  channels: [
+    { icon: 'phone', title: 'Apoio ao cliente', value: '+351 256 000 000', note: 'Dias úteis · 9h–18h' },
+    { icon: 'mail', title: 'Comercial & propostas', value: 'comercial@mistolin.pt', note: 'Volume, revenda e contratos' },
+    { icon: 'doc', title: 'Fichas técnicas & FDS', value: 'apoio@mistolin.pt', note: 'Pedidos e documentação' },
+    { icon: 'pin', title: '14 unidades', value: 'Encontrar loja', note: 'De norte a sul e ilhas', to: '/lojas' },
+  ],
+  hq: { title: 'Sede', lines: ['Mistolin Solutions', 'Vagos · Aveiro, Portugal'] },
+  hours: [
+    { d: 'Segunda a sexta', h: '9h00 – 18h00' },
+    { d: 'Sábado', h: '9h00 – 13h00' },
+    { d: 'Domingo e feriados', h: 'Encerrado' },
+  ],
+  social: ['Instagram', 'LinkedIn', 'Facebook'],
+  subjects: ['Pedido de proposta', 'Apoio técnico', 'Encomendas & envios', 'Revenda / parceria', 'Outro assunto'],
+}
+
+// ——— Rede de lojas (14 unidades) ———
+export const stores = [
+  { id: 'porto', name: 'Porto · Matosinhos', region: 'Norte', address: 'Rua da Indústria 120, 4450-001 Matosinhos', phone: '+351 220 000 001', email: 'porto@mistolin.pt', hours: 'Seg–Sex 9h–18h · Sáb 9h–13h' },
+  { id: 'braga', name: 'Braga', region: 'Norte', address: 'Av. da Liberdade 210, 4710-249 Braga', phone: '+351 253 000 002', email: 'braga@mistolin.pt', hours: 'Seg–Sex 9h–18h · Sáb 9h–13h' },
+  { id: 'vagos', name: 'Aveiro · Vagos', region: 'Centro', address: 'Zona Industrial de Vagos, 3840-385 Vagos', phone: '+351 234 000 003', email: 'aveiro@mistolin.pt', hours: 'Seg–Sex 8h30–18h30', hq: true },
+  { id: 'viseu', name: 'Viseu', region: 'Centro', address: 'Rua do Comércio 45, 3500-106 Viseu', phone: '+351 232 000 004', email: 'viseu@mistolin.pt', hours: 'Seg–Sex 9h–18h' },
+  { id: 'coimbra', name: 'Coimbra', region: 'Centro', address: 'Av. Fernão de Magalhães 300, 3000-177 Coimbra', phone: '+351 239 000 005', email: 'coimbra@mistolin.pt', hours: 'Seg–Sex 9h–18h · Sáb 9h–13h' },
+  { id: 'leiria', name: 'Leiria', region: 'Centro', address: 'Rua Capitão Mouzinho 18, 2400-159 Leiria', phone: '+351 244 000 006', email: 'leiria@mistolin.pt', hours: 'Seg–Sex 9h–18h' },
+  { id: 'loures', name: 'Lisboa · Loures', region: 'Lisboa e Vale do Tejo', address: 'Estrada Nacional 8, 2670-000 Loures', phone: '+351 210 000 007', email: 'lisboa@mistolin.pt', hours: 'Seg–Sex 8h30–18h30 · Sáb 9h–13h' },
+  { id: 'sintra', name: 'Sintra', region: 'Lisboa e Vale do Tejo', address: 'Rua das Oliveiras 5, 2710-000 Sintra', phone: '+351 219 000 008', email: 'sintra@mistolin.pt', hours: 'Seg–Sex 9h–18h' },
+  { id: 'setubal', name: 'Setúbal', region: 'Lisboa e Vale do Tejo', address: 'Av. Luísa Todi 88, 2900-461 Setúbal', phone: '+351 265 000 009', email: 'setubal@mistolin.pt', hours: 'Seg–Sex 9h–18h' },
+  { id: 'evora', name: 'Évora', region: 'Alentejo', address: 'Rua de Aviz 33, 7000-591 Évora', phone: '+351 266 000 010', email: 'evora@mistolin.pt', hours: 'Seg–Sex 9h–18h' },
+  { id: 'faro', name: 'Faro', region: 'Algarve', address: 'Rua de Portugal 76, 8000-281 Faro', phone: '+351 289 000 011', email: 'faro@mistolin.pt', hours: 'Seg–Sex 9h–18h · Sáb 9h–13h' },
+  { id: 'portimao', name: 'Portimão', region: 'Algarve', address: 'Av. São João de Deus 12, 8500-000 Portimão', phone: '+351 282 000 012', email: 'portimao@mistolin.pt', hours: 'Seg–Sex 9h–18h' },
+  { id: 'funchal', name: 'Funchal · Madeira', region: 'Ilhas', address: 'Rua do Ribeirinho 40, 9000-000 Funchal', phone: '+351 291 000 013', email: 'madeira@mistolin.pt', hours: 'Seg–Sex 9h–18h' },
+  { id: 'acores', name: 'Ponta Delgada · Açores', region: 'Ilhas', address: 'Av. Infante D. Henrique 22, 9500-150 Ponta Delgada', phone: '+351 296 000 014', email: 'acores@mistolin.pt', hours: 'Seg–Sex 9h–18h' },
+]
+
+export const storeRegions = [...new Set(stores.map((s) => s.region))]

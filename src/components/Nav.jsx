@@ -38,7 +38,7 @@ const recursos = [
   { label: 'Blog & notícias', to: '/blog' },
   { label: 'Perguntas frequentes', to: '/faq' },
   { label: 'Fichas técnicas & FDS', href: '#' },
-  { label: 'Contactos', href: '#' },
+  { label: 'Contactos', to: '/contactos' },
 ]
 
 // Linha de navegação com dropdowns (réplica do padrão Hyper).
@@ -361,8 +361,8 @@ export function Nav({ cartCount = 0, onCartOpen }) {
 
             {/* ações */}
             <div className="flex shrink-0 items-center gap-2 lg:gap-4">
-              <a
-                href="#"
+              <Link
+                to="/lojas"
                 className="hidden items-center gap-2 text-[13px] font-medium text-ink hover:text-accent-deep xl:flex"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -370,7 +370,7 @@ export function Nav({ cartCount = 0, onCartOpen }) {
                 </svg>
                 Encontrar loja
                 <span className="rounded-full bg-accent-soft px-1.5 py-0.5 text-[10px] font-semibold text-accent-deep">14</span>
-              </a>
+              </Link>
               <span className="hidden h-5 w-px bg-line xl:block" />
               <a
                 href="#"
@@ -546,7 +546,7 @@ export function Nav({ cartCount = 0, onCartOpen }) {
                 Todas as categorias
                 <span aria-hidden="true">→</span>
               </Link>
-              <a href="#" className="flex items-center justify-between border-b border-line py-4 text-sm font-semibold">
+              <Link to="/lojas" onClick={() => setOpen(null)} className="flex items-center justify-between border-b border-line py-4 text-sm font-semibold">
                 <span className="flex items-center gap-2">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <path d="M2.5 6.5 4 2.5h8l1.5 4M2.5 6.5v6.5h11V6.5M2.5 6.5h11M6 13V9.5h4V13" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
@@ -554,7 +554,7 @@ export function Nav({ cartCount = 0, onCartOpen }) {
                   Encontrar loja
                 </span>
                 <span className="rounded-full bg-accent-soft px-1.5 py-0.5 text-[10px] font-semibold text-accent-deep">14</span>
-              </a>
+              </Link>
               {shopCategories.map((c) => (
                 <Link
                   key={c.slug}

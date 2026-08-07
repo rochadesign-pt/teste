@@ -88,8 +88,8 @@ export function Faq() {
               <h2 className="font-display text-xl font-semibold sm:text-2xl">Não encontrou a resposta?</h2>
               <p className="mt-2 max-w-md text-sm text-muted">Fale com a equipa técnica ou visite uma das 14 unidades. Ajudamos na escolha e na utilização dos produtos.</p>
               <div className="mt-5 flex flex-wrap gap-3">
-                <a href="#" className="inline-flex h-11 items-center rounded-full bg-ink px-6 text-sm font-semibold text-white transition-colors hover:bg-accent-deep">Falar com a equipa</a>
-                <a href="#" className="inline-flex h-11 items-center rounded-full border border-line bg-white px-6 text-sm font-semibold transition-colors hover:border-ink">Encontrar loja</a>
+                <Link to="/contactos" className="inline-flex h-11 items-center rounded-full bg-ink px-6 text-sm font-semibold text-white transition-colors hover:bg-accent-deep">Falar com a equipa</Link>
+                <Link to="/lojas" className="inline-flex h-11 items-center rounded-full border border-line bg-white px-6 text-sm font-semibold transition-colors hover:border-ink">Encontrar loja</Link>
               </div>
             </div>
           </div>

@@ -112,10 +112,10 @@ export function Manifesto() {
         <motion.div {...reveal} className="rounded-2xl bg-accent-soft/70 p-10 text-center sm:p-14">
           <h2 className="font-display mx-auto max-w-2xl text-2xl leading-tight font-semibold sm:text-4xl">{m.closing.title}</h2>
           <p className="mx-auto mt-4 max-w-md text-sm text-muted">{m.closing.text}</p>
-          <a href="#" className="mt-7 inline-flex h-12 items-center gap-2.5 rounded-full bg-ink px-7 text-sm font-semibold text-white transition-colors hover:bg-accent-deep">
+          <Link to="/contactos" className="mt-7 inline-flex h-12 items-center gap-2.5 rounded-full bg-ink px-7 text-sm font-semibold text-white transition-colors hover:bg-accent-deep">
             {m.closing.cta}
             <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
-          </a>
+          </Link>
         </motion.div>
       </section>
     </main>

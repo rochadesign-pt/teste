@@ -32,9 +32,9 @@ const columns = [
     title: 'Suporte',
     links: [
       { label: 'Perguntas frequentes', to: '/faq' },
-      { label: 'Contactos' },
+      { label: 'Contactos', to: '/contactos' },
       { label: 'Fichas técnicas' },
-      { label: 'Encontrar loja' },
+      { label: 'Encontrar loja', to: '/lojas' },
     ],
   },
 ]
@@ -49,12 +49,12 @@ export function Footer() {
             <br />
             <span className="text-accent">sem meias-medidas.</span>
           </p>
-          <a
-            href="#"
+          <Link
+            to="/contactos"
             className="flex h-14 items-center rounded-full border border-white/25 px-8 text-sm font-semibold transition-colors duration-200 hover:bg-white hover:text-ink"
           >
             Falar com a equipa comercial
-          </a>
+          </Link>
         </div>
 
         <div className="grid grid-cols-2 gap-8 border-t border-white/10 py-10 text-sm sm:grid-cols-4">

@@ -13,6 +13,8 @@ import { Manifesto } from './pages/Manifesto'
 import { Faq } from './pages/Faq'
 import { Blog } from './pages/Blog'
 import { Article } from './pages/Article'
+import { Contacts } from './pages/Contacts'
+import { Stores } from './pages/Stores'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -73,6 +75,8 @@ function App() {
           <Route path="/faq" element={<Faq />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<Article />} />
+          <Route path="/contactos" element={<Contacts />} />
+          <Route path="/lojas" element={<Stores />} />
         </Routes>
         <Footer />
         <Cart
