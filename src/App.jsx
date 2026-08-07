@@ -9,6 +9,10 @@ import { Product } from './pages/Product'
 import { Categories } from './pages/Categories'
 import { Category } from './pages/Category'
 import { Equipment } from './pages/Equipment'
+import { Manifesto } from './pages/Manifesto'
+import { Faq } from './pages/Faq'
+import { Blog } from './pages/Blog'
+import { Article } from './pages/Article'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -65,6 +69,10 @@ function App() {
           <Route path="/categoria/:slug" element={<Category addItem={addItem} />} />
           <Route path="/produto/htg-30" element={<Product addItem={addItem} />} />
           <Route path="/equipamento/:slug" element={<Equipment addItem={addItem} />} />
+          <Route path="/manifesto" element={<Manifesto />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<Article />} />
         </Routes>
         <Footer />
         <Cart

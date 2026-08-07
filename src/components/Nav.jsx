@@ -34,10 +34,10 @@ function SearchIcon({ className = '' }) {
 
 // Recursos / páginas institucionais (dropdown estilo "Pages")
 const recursos = [
-  { label: 'Sustentabilidade', href: '#' },
+  { label: 'Manifesto', to: '/manifesto' },
+  { label: 'Blog & notícias', to: '/blog' },
+  { label: 'Perguntas frequentes', to: '/faq' },
   { label: 'Fichas técnicas & FDS', href: '#' },
-  { label: 'Centro de ajuda', href: '#' },
-  { label: 'Sobre a Mistolin', href: '#' },
   { label: 'Contactos', href: '#' },
 ]
 
@@ -181,12 +181,15 @@ function RecursosDropdown() {
       <ul>
         {recursos.map((r) => (
           <li key={r.label}>
-            <a
-              href={r.href}
-              className="block rounded-md px-3 py-1.5 text-[13px] text-muted transition-colors hover:bg-page hover:text-ink"
-            >
-              {r.label}
-            </a>
+            {r.to ? (
+              <Link to={r.to} className="block rounded-md px-3 py-1.5 text-[13px] text-muted transition-colors hover:bg-page hover:text-ink">
+                {r.label}
+              </Link>
+            ) : (
+              <a href={r.href} className="block rounded-md px-3 py-1.5 text-[13px] text-muted transition-colors hover:bg-page hover:text-ink">
+                {r.label}
+              </a>
+            )}
           </li>
         ))}
       </ul>
@@ -584,11 +587,17 @@ export function Nav({ cartCount = 0, onCartOpen }) {
                 </ul>
               </div>
               <div className="py-4">
-                {recursos.map((r) => (
-                  <a key={r.label} href={r.href} className="block py-1.5 text-sm font-medium">
-                    {r.label}
-                  </a>
-                ))}
+                {recursos.map((r) =>
+                  r.to ? (
+                    <Link key={r.label} to={r.to} onClick={() => setOpen(null)} className="block py-1.5 text-sm font-medium">
+                      {r.label}
+                    </Link>
+                  ) : (
+                    <a key={r.label} href={r.href} className="block py-1.5 text-sm font-medium">
+                      {r.label}
+                    </a>
+                  ),
+                )}
               </div>
             </motion.div>
           </>
