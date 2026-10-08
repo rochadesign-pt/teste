@@ -23,6 +23,8 @@ const columns = [
     title: 'Empresa',
     links: [
       { label: 'Manifesto', to: '/manifesto' },
+      { label: 'Cultura', to: '/cultura' },
+      { label: 'Recrutamento', to: '/recrutamento' },
       { label: 'Blog & notícias', to: '/blog' },
       { label: 'Sustentabilidade' },
       { label: 'Certificações' },

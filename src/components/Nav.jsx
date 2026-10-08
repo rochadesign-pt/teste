@@ -35,6 +35,8 @@ function SearchIcon({ className = '' }) {
 // Recursos / páginas institucionais (dropdown estilo "Pages")
 const recursos = [
   { label: 'Manifesto', to: '/manifesto' },
+  { label: 'Cultura', to: '/cultura' },
+  { label: 'Recrutamento', to: '/recrutamento' },
   { label: 'Blog & notícias', to: '/blog' },
   { label: 'Perguntas frequentes', to: '/faq' },
   { label: 'Fichas técnicas & FDS', href: '#' },

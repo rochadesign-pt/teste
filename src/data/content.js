@@ -194,3 +194,132 @@ export const stores = [
 ]
 
 export const storeRegions = [...new Set(stores.map((s) => s.region))]
+
+// ——— Cultura ———
+// Copy de conceito: retrata a forma de trabalhar de uma equipa de higiene
+// profissional. Citações atribuídas a funções (não a pessoas reais).
+export const culture = {
+  kicker: 'Cultura',
+  title: 'Gente que leva a limpeza a sério — e o trabalho em equipa ainda mais.',
+  lead: 'Por trás de cada fórmula, cada entrega e cada instalação há uma equipa que conhece a operação por dentro. É assim que trabalhamos, e é isto que esperamos uns dos outros.',
+  values: [
+    { n: '01', title: 'Conhecemos o terreno', text: 'Vamos às cozinhas, às lavandarias e às fábricas. Decidimos com base no que vemos na operação real, não no que imaginamos a partir de um escritório.' },
+    { n: '02', title: 'Dizemos as coisas como são', text: 'Feedback direto, sem rodeios e com respeito. Um problema identificado cedo é um problema que já não chega ao cliente.' },
+    { n: '03', title: 'Aprendemos todos os dias', text: 'Formação técnica contínua, do laboratório ao comercial. Quem sabe mais ensina — e quem chega fica a saber depressa.' },
+    { n: '04', title: 'Ninguém fica sozinho', text: '14 unidades, uma só equipa. Quando uma loja precisa, a rede responde: partilhamos stock, conhecimento e mãos.' },
+  ],
+  rituals: [
+    { title: 'Formação no terreno', text: 'Cada pessoa nova passa pelas lojas, pelo armazém e por instalações com a equipa técnica antes de assumir funções.' },
+    { title: 'Academia técnica', text: 'Sessões regulares sobre química de limpeza, segurança, doseamento e normas sanitárias — abertas a todas as áreas.' },
+    { title: 'Encontro anual da rede', text: 'Uma vez por ano, as 14 unidades juntam-se em Vagos para partilhar resultados, ideias e o que correu menos bem.' },
+    { title: 'Portas abertas', text: 'A direção está a uma conversa de distância. Sugestões de melhoria chegam a quem decide — e são respondidas.' },
+  ],
+  quotes: [
+    { text: 'Aqui aprende-se a perceber o problema antes de vender o produto. Esse foi o meu primeiro mês e continua a ser o meu trabalho todos os dias.', role: 'Técnica comercial · Porto' },
+    { text: 'Quando uma instalação corre mal num sábado, não há “isso não é comigo”. Liga-se a quem sabe e resolve-se.', role: 'Técnico de equipamentos · Lisboa' },
+    { text: 'O laboratório testa cada fórmula com quem a vai usar. Ouvir as equipas no terreno mudou a forma como formulamos.', role: 'Responsável de I&D · Vagos' },
+  ],
+  stats: [
+    { value: '14', label: 'Unidades de norte a sul e ilhas' },
+    { value: '40+', label: 'Empresas no MSTN Group' },
+    { value: '100%', label: 'Capital português' },
+    { value: '2009', label: 'A crescer desde' },
+  ],
+  closing: {
+    title: 'Revê-se nesta forma de trabalhar?',
+    text: 'Estamos sempre à procura de pessoas com rigor, curiosidade e vontade de resolver.',
+    cta: 'Ver vagas abertas',
+  },
+}
+
+// ——— Recrutamento ———
+export const careers = {
+  kicker: 'Recrutamento',
+  title: 'Junte-se à maior rede de higiene profissional do país.',
+  lead: 'Procuramos pessoas que gostam de resolver problemas reais — no laboratório, no armazém, na estrada ou ao balcão. Aqui o trabalho vê-se: em cada cozinha limpa, em cada auditoria passada.',
+  perks: [
+    { icon: 'learn', title: 'Formação contínua', text: 'Academia técnica interna e formação certificada ao longo de todo o percurso.' },
+    { icon: 'grow', title: 'Progressão real', text: 'Planos de carreira claros e preferência por talento interno nas novas vagas.' },
+    { icon: 'health', title: 'Seguro de saúde', text: 'Seguro de saúde para colaboradores, extensível ao agregado familiar.' },
+    { icon: 'car', title: 'Viatura e equipamento', text: 'Viatura, telemóvel e portátil para as funções comerciais e técnicas.' },
+    { icon: 'gift', title: 'Desconto em produto', text: 'Condições especiais em toda a gama para colaboradores.' },
+    { icon: 'pin', title: 'Perto de casa', text: '14 unidades no país — trabalhe na região onde vive.' },
+  ],
+  process: [
+    { n: '01', title: 'Candidatura', text: 'Envie o CV para uma vaga ou faça uma candidatura espontânea. Respondemos sempre, em até 10 dias úteis.' },
+    { n: '02', title: 'Primeira conversa', text: 'Uma chamada de 20–30 minutos com recursos humanos para nos conhecermos melhor.' },
+    { n: '03', title: 'Entrevista com a equipa', text: 'Conhece a chefia direta e, quando faz sentido, visita a unidade onde vai trabalhar.' },
+    { n: '04', title: 'Proposta e integração', text: 'Proposta clara por escrito e um plano de integração no terreno para as primeiras semanas.' },
+  ],
+  jobs: [
+    {
+      id: 'tecnico-comercial-norte',
+      title: 'Técnico/a Comercial HORECA',
+      area: 'Comercial',
+      location: 'Porto',
+      type: 'Tempo inteiro',
+      summary: 'Acompanhar uma carteira de clientes de hotelaria e restauração, do diagnóstico ao plano de higiene.',
+      tasks: ['Visitar clientes e identificar necessidades de higiene', 'Preparar propostas e planos de higienização', 'Formar as equipas dos clientes na utilização dos produtos'],
+      profile: ['Experiência comercial B2B (preferencialmente HORECA)', 'Carta de condução', 'Facilidade de comunicação e organização'],
+    },
+    {
+      id: 'tecnico-equipamentos-lisboa',
+      title: 'Técnico/a de Equipamentos',
+      area: 'Técnica',
+      location: 'Lisboa',
+      type: 'Tempo inteiro',
+      summary: 'Instalar, calibrar e manter centrais de doseamento e equipamentos de lavagem nos clientes.',
+      tasks: ['Instalação e calibração de centrais de doseamento', 'Manutenção preventiva e corretiva', 'Formação das equipas no arranque dos equipamentos'],
+      profile: ['Formação em eletricidade, eletromecânica ou similar', 'Carta de condução', 'Disponibilidade para deslocações na região'],
+    },
+    {
+      id: 'quimico-id-vagos',
+      title: 'Químico/a de I&D',
+      area: 'Produção & I&D',
+      location: 'Vagos',
+      type: 'Tempo inteiro',
+      summary: 'Desenvolver e otimizar fórmulas de detergência profissional, do laboratório à produção.',
+      tasks: ['Desenvolvimento e reformulação de produtos', 'Ensaios de eficácia e estabilidade', 'Elaboração de fichas técnicas e FDS'],
+      profile: ['Licenciatura em Química, Eng. Química ou similar', 'Conhecimento de regulamentação CLP/REACH (valorizado)', 'Rigor e espírito de equipa'],
+    },
+    {
+      id: 'operador-producao-vagos',
+      title: 'Operador/a de Produção',
+      area: 'Produção & I&D',
+      location: 'Vagos',
+      type: 'Turnos',
+      summary: 'Preparar, encher e controlar lotes de produto na unidade fabril.',
+      tasks: ['Preparação de lotes segundo procedimento', 'Operação de linhas de enchimento', 'Registos de controlo de qualidade'],
+      profile: ['Experiência em ambiente industrial (valorizada)', 'Disponibilidade para turnos', 'Cumprimento rigoroso de normas de segurança'],
+    },
+    {
+      id: 'conselheiro-loja-faro',
+      title: 'Conselheiro/a de Loja',
+      area: 'Lojas',
+      location: 'Faro',
+      type: 'Tempo inteiro',
+      summary: 'Atender e aconselhar clientes profissionais ao balcão e gerir a reposição da loja.',
+      tasks: ['Aconselhamento técnico ao balcão', 'Gestão de stock e reposição', 'Apoio a encomendas e faturação'],
+      profile: ['Experiência em atendimento ou retalho', 'Orientação para o cliente', 'Gosto por aprender sobre produto técnico'],
+    },
+    {
+      id: 'logistica-madeira',
+      title: 'Assistente de Logística',
+      area: 'Logística',
+      location: 'Funchal',
+      type: 'Tempo inteiro',
+      summary: 'Garantir a receção, armazenagem e expedição de encomendas na unidade da Madeira.',
+      tasks: ['Receção e conferência de mercadoria', 'Preparação e expedição de encomendas', 'Organização do armazém'],
+      profile: ['Experiência em armazém (valorizada)', 'Carta de empilhador (valorizada)', 'Organização e sentido de responsabilidade'],
+    },
+  ],
+  faq: [
+    { q: 'Posso candidatar-me a mais do que uma vaga?', a: 'Sim. Indique na candidatura as vagas que lhe interessam — avaliamos o seu perfil para todas.' },
+    { q: 'Não encontro uma vaga para mim. E agora?', a: 'Envie uma candidatura espontânea. Guardamos o seu CV e contactamo-lo quando surgir uma oportunidade compatível na sua região.' },
+    { q: 'Quanto tempo demora o processo?', a: 'Em média, entre duas e quatro semanas desde a candidatura até à proposta. Damos sempre resposta, mesmo quando não avançamos.' },
+    { q: 'Têm estágios?', a: 'Sim, sobretudo nas áreas de I&D, produção e marketing. As vagas de estágio são publicadas aqui e também aceitamos candidaturas espontâneas.' },
+  ],
+}
+
+export const jobAreas = [...new Set(careers.jobs.map((j) => j.area))]
+export const jobLocations = [...new Set(careers.jobs.map((j) => j.location))]
