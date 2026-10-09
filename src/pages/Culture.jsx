@@ -70,9 +70,9 @@ export function Culture() {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <motion.div {...reveal}>
             <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-accent-deep uppercase">Como trabalhamos</p>
-            <h2 className="font-display max-w-sm text-2xl leading-tight font-semibold sm:text-3xl">Quatro coisas que esperamos uns dos outros</h2>
+            <h2 className="font-display max-w-sm text-2xl leading-tight font-semibold sm:text-3xl">Quatro coisas que esperamos de ti — e que podes esperar de nós</h2>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              Não são frases para a parede. São os critérios com que contratamos, avaliamos e decidimos.
+              Não são frases para a parede. São os critérios com que contratamos, avaliamos e decidimos — e que também podes exigir-nos.
             </p>
           </motion.div>
           <div className="grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2">

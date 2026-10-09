@@ -5,23 +5,23 @@
 
 export const manifesto = {
   kicker: 'Manifesto',
-  title: 'A higiene profissional não se improvisa.',
-  lead: 'Nascemos para simplificar a operação de quem não abre mão do rigor. Somos especialistas em detergência profissional — e tratamos a limpeza como aquilo que ela é: uma disciplina, não uma tarefa.',
+  title: 'Na tua operação, a higiene não se improvisa.',
+  lead: 'Existimos para simplificar o teu dia a dia. Sabemos que não abres mão do rigor — e nós também não. Somos especialistas em detergência profissional e tratamos a limpeza como aquilo que ela é: uma disciplina, não uma tarefa.',
   tenets: [
-    { n: '01', title: 'O rigor não é opcional', text: 'A conformidade sanitária é a base de tudo. Cada fórmula, cada diluição e cada procedimento existe para que quem confia em nós cumpra — sem margem para o improviso.' },
-    { n: '02', title: 'Eficiência é resultado, não sorte', text: 'Produtos concentrados, planos de higiene claros e formação da equipa. A limpeza certa faz-se com menos esforço, menos produto e resultados iguais em todos os turnos.' },
-    { n: '03', title: 'Fabricado em Portugal, pensado para o mundo', text: 'Desenvolvemos e produzimos em Portugal, testado em operação real. Da cozinha de bairro à indústria, a mesma exigência viaja connosco.' },
-    { n: '04', title: 'Uma rede, não uma prateleira', text: 'A maior rede nacional do setor, com milhares de referências e proximidade a sério. Estamos onde a operação está, quando a operação precisa.' },
-    { n: '05', title: 'Conhecimento antes do produto', text: 'Vendemos menos “garrafas” e mais soluções. Aconselhamos, formamos e acompanhamos — porque o produto certo, mal usado, não resolve nada.' },
-    { n: '06', title: 'Sustentabilidade concentrada', text: 'Fórmulas concentradas e recargas que reduzem plástico e transporte. Fazer melhor com menos é, também, uma forma de rigor.' },
+    { n: '01', title: 'O rigor não é opcional', text: 'A conformidade sanitária é a base de tudo. Cada fórmula, cada diluição e cada procedimento existe para que tu cumpras — sem margem para o improviso.' },
+    { n: '02', title: 'Eficiência é resultado, não sorte', text: 'Produtos concentrados, planos de higiene claros e formação para a tua equipa. Limpas com menos esforço, menos produto e os mesmos resultados em todos os turnos.' },
+    { n: '03', title: 'Fabricado em Portugal, pensado para o mundo', text: 'Desenvolvemos e produzimos em Portugal, e testamos tudo em operação real. Tenhas uma cozinha de bairro ou uma fábrica, a exigência que levamos até ti é a mesma.' },
+    { n: '04', title: 'Uma rede, não uma prateleira', text: 'A maior rede nacional do setor, com milhares de referências e proximidade a sério. Estamos onde tu estás, quando precisas de nós.' },
+    { n: '05', title: 'Conhecimento antes do produto', text: 'Vendemos menos “garrafas” e mais soluções. Aconselhamos-te, formamos a tua equipa e acompanhamos-te — porque o produto certo, mal usado, não resolve nada.' },
+    { n: '06', title: 'Sustentabilidade concentrada', text: 'Fórmulas concentradas e recargas que reduzem plástico e transporte. Fazes melhor com menos — e isso também é rigor.' },
   ],
   story: {
     eyebrow: 'Desde 2009',
-    title: 'De Portugal para quem não pode falhar na higiene',
+    title: 'De Portugal para ti, que não podes falhar na higiene',
     paras: [
-      'A Mistolin Solutions nasceu em 2009, dedicada à higiene e limpeza profissional, e tornou-se a maior rede nacional do setor — com milhares de referências ao serviço de quem trabalha todos os dias com margens apertadas e zero tolerância à falha.',
-      'Fazemos parte do MSTN Group, um grupo familiar de capital 100% português fundado em 1992, que reúne hoje mais de 40 empresas em Portugal, Espanha, Cabo Verde e Moçambique. É essa escala que nos permite conjugar fabrico próprio, I&D e uma rede de proximidade rara no setor.',
-      'Presentes de norte a sul — e na Madeira desde 2020 — trabalhamos lado a lado com hotelaria, restauração, indústria, saúde, facilities e economia social, adaptando cada solução à realidade de cada operação.',
+      'A Mistolin Solutions nasceu em 2009, dedicada à higiene e limpeza profissional, e tornou-se a maior rede nacional do setor — com milhares de referências ao serviço de quem, como tu, trabalha todos os dias com margens apertadas e zero tolerância à falha.',
+      'Fazemos parte do MSTN Group, um grupo familiar de capital 100% português fundado em 1992, que reúne hoje mais de 40 empresas em Portugal, Espanha, Cabo Verde e Moçambique. É essa escala que te garante fabrico próprio, I&D e uma rede de proximidade rara no setor.',
+      'Presentes de norte a sul — e na Madeira desde 2020 — trabalhamos lado a lado contigo — na hotelaria, restauração, indústria, saúde, facilities ou economia social — e adaptamos cada solução à realidade da tua operação.',
     ],
   },
   stats: [
@@ -32,9 +32,9 @@ export const manifesto = {
   ],
   sectors: ['Hotelaria', 'Restauração', 'Indústria alimentar', 'Saúde e cuidados', 'Facilities', 'Economia social'],
   closing: {
-    title: 'Rigor, eficiência e proximidade — em cada operação.',
-    text: 'Se a higiene é levada a sério no seu negócio, falamos a mesma língua.',
-    cta: 'Falar com a equipa',
+    title: 'Rigor, eficiência e proximidade — na tua operação.',
+    text: 'Se levas a higiene a sério no teu negócio, falamos a mesma língua.',
+    cta: 'Fala com a equipa',
   },
 }
 
@@ -201,23 +201,23 @@ export const storeRegions = [...new Set(stores.map((s) => s.region))]
 export const culture = {
   kicker: 'Cultura',
   title: 'Gente que leva a limpeza a sério — e o trabalho em equipa ainda mais.',
-  lead: 'Por trás de cada fórmula, cada entrega e cada instalação há uma equipa que conhece a operação por dentro. É assim que trabalhamos, e é isto que esperamos uns dos outros.',
+  lead: 'Por trás de cada fórmula, cada entrega e cada instalação há uma equipa que conhece a operação por dentro. É assim que trabalhamos — e é isto que podes esperar de nós, e nós de ti.',
   values: [
-    { n: '01', title: 'Conhecemos o terreno', text: 'Vamos às cozinhas, às lavandarias e às fábricas. Decidimos com base no que vemos na operação real, não no que imaginamos a partir de um escritório.' },
-    { n: '02', title: 'Dizemos as coisas como são', text: 'Feedback direto, sem rodeios e com respeito. Um problema identificado cedo é um problema que já não chega ao cliente.' },
-    { n: '03', title: 'Aprendemos todos os dias', text: 'Formação técnica contínua, do laboratório ao comercial. Quem sabe mais ensina — e quem chega fica a saber depressa.' },
-    { n: '04', title: 'Ninguém fica sozinho', text: '14 unidades, uma só equipa. Quando uma loja precisa, a rede responde: partilhamos stock, conhecimento e mãos.' },
+    { n: '01', title: 'Vais ao terreno', text: 'Aqui vais às cozinhas, às lavandarias e às fábricas. Decides com base no que vês na operação real, não no que imaginas a partir de um escritório.' },
+    { n: '02', title: 'Dizes as coisas como são', text: 'Dás feedback direto, sem rodeios e com respeito — e recebes o mesmo. Um problema identificado cedo é um problema que já não chega ao cliente.' },
+    { n: '03', title: 'Aprendes todos os dias', text: 'Formação técnica contínua, do laboratório ao comercial. Se sabes mais, ensinas — e quando chegas, aprendes depressa.' },
+    { n: '04', title: 'Nunca ficas sozinho', text: '14 unidades, uma só equipa. Quando precisas, a rede responde: partilhamos stock, conhecimento e mãos.' },
   ],
   rituals: [
-    { title: 'Formação no terreno', text: 'Cada pessoa nova passa pelas lojas, pelo armazém e por instalações com a equipa técnica antes de assumir funções.' },
-    { title: 'Academia técnica', text: 'Sessões regulares sobre química de limpeza, segurança, doseamento e normas sanitárias — abertas a todas as áreas.' },
-    { title: 'Encontro anual da rede', text: 'Uma vez por ano, as 14 unidades juntam-se em Vagos para partilhar resultados, ideias e o que correu menos bem.' },
-    { title: 'Portas abertas', text: 'A direção está a uma conversa de distância. Sugestões de melhoria chegam a quem decide — e são respondidas.' },
+    { title: 'Formação no terreno', text: 'Quando chegas, passas pelas lojas, pelo armazém e por instalações com a equipa técnica antes de assumires funções.' },
+    { title: 'Academia técnica', text: 'Sessões regulares sobre química de limpeza, segurança, doseamento e normas sanitárias — abertas a ti, seja qual for a tua área.' },
+    { title: 'Encontro anual da rede', text: 'Uma vez por ano, as 14 unidades juntam-se em Vagos para partilhar resultados, ideias e o que correu menos bem. Também tens lugar à mesa.' },
+    { title: 'Portas abertas', text: 'A direção está a uma conversa de distância. As tuas sugestões chegam a quem decide — e têm sempre resposta.' },
   ],
   quotes: [
-    { text: 'Aqui aprende-se a perceber o problema antes de vender o produto. Esse foi o meu primeiro mês e continua a ser o meu trabalho todos os dias.', role: 'Técnica comercial · Porto' },
-    { text: 'Quando uma instalação corre mal num sábado, não há “isso não é comigo”. Liga-se a quem sabe e resolve-se.', role: 'Técnico de equipamentos · Lisboa' },
-    { text: 'O laboratório testa cada fórmula com quem a vai usar. Ouvir as equipas no terreno mudou a forma como formulamos.', role: 'Responsável de I&D · Vagos' },
+    { text: 'Aqui aprendes a perceber o problema antes de vender o produto. Foi isso que me ensinaram no primeiro mês e continua a ser o meu trabalho todos os dias.', role: 'Técnica comercial · Porto' },
+    { text: 'Quando uma instalação corre mal num sábado, não há “isso não é comigo”. Ligas a quem sabe e resolves.', role: 'Técnico de equipamentos · Lisboa' },
+    { text: 'Se estás no terreno, a tua opinião chega ao laboratório: testamos cada fórmula com quem a vai usar. Ouvir-te mudou a forma como formulamos.', role: 'Responsável de I&D · Vagos' },
   ],
   stats: [
     { value: '14', label: 'Unidades de norte a sul e ilhas' },
@@ -226,8 +226,8 @@ export const culture = {
     { value: '2009', label: 'A crescer desde' },
   ],
   closing: {
-    title: 'Revê-se nesta forma de trabalhar?',
-    text: 'Estamos sempre à procura de pessoas com rigor, curiosidade e vontade de resolver.',
+    title: 'Revês-te nesta forma de trabalhar?',
+    text: 'Estamos sempre à procura de pessoas com rigor, curiosidade e vontade de resolver. Pode ser que sejas tu.',
     cta: 'Ver vagas abertas',
   },
 }
@@ -235,21 +235,21 @@ export const culture = {
 // ——— Recrutamento ———
 export const careers = {
   kicker: 'Recrutamento',
-  title: 'Junte-se à maior rede de higiene profissional do país.',
-  lead: 'Procuramos pessoas que gostam de resolver problemas reais — no laboratório, no armazém, na estrada ou ao balcão. Aqui o trabalho vê-se: em cada cozinha limpa, em cada auditoria passada.',
+  title: 'Junta-te à maior rede de higiene profissional do país.',
+  lead: 'Se gostas de resolver problemas reais — no laboratório, no armazém, na estrada ou ao balcão — há lugar para ti. Aqui o teu trabalho vê-se: em cada cozinha limpa, em cada auditoria passada.',
   perks: [
-    { icon: 'learn', title: 'Formação contínua', text: 'Academia técnica interna e formação certificada ao longo de todo o percurso.' },
-    { icon: 'grow', title: 'Progressão real', text: 'Planos de carreira claros e preferência por talento interno nas novas vagas.' },
-    { icon: 'health', title: 'Seguro de saúde', text: 'Seguro de saúde para colaboradores, extensível ao agregado familiar.' },
-    { icon: 'car', title: 'Viatura e equipamento', text: 'Viatura, telemóvel e portátil para as funções comerciais e técnicas.' },
-    { icon: 'gift', title: 'Desconto em produto', text: 'Condições especiais em toda a gama para colaboradores.' },
-    { icon: 'pin', title: 'Perto de casa', text: '14 unidades no país — trabalhe na região onde vive.' },
+    { icon: 'learn', title: 'Formação contínua', text: 'Academia técnica interna e formação certificada ao longo de todo o teu percurso.' },
+    { icon: 'grow', title: 'Progressão real', text: 'Planos de carreira claros — e, nas novas vagas, a prioridade é de quem já está cá dentro.' },
+    { icon: 'health', title: 'Seguro de saúde', text: 'Seguro de saúde para ti, extensível ao teu agregado familiar.' },
+    { icon: 'car', title: 'Viatura e equipamento', text: 'Viatura, telemóvel e portátil, se estiveres numa função comercial ou técnica.' },
+    { icon: 'gift', title: 'Desconto em produto', text: 'Condições especiais em toda a gama, só para quem é da equipa.' },
+    { icon: 'pin', title: 'Perto de casa', text: '14 unidades no país — trabalha na região onde vives.' },
   ],
   process: [
-    { n: '01', title: 'Candidatura', text: 'Envie o CV para uma vaga ou faça uma candidatura espontânea. Respondemos sempre, em até 10 dias úteis.' },
+    { n: '01', title: 'Candidatura', text: 'Envia o teu CV para uma vaga ou faz uma candidatura espontânea. Respondemos-te sempre, em até 10 dias úteis.' },
     { n: '02', title: 'Primeira conversa', text: 'Uma chamada de 20–30 minutos com recursos humanos para nos conhecermos melhor.' },
-    { n: '03', title: 'Entrevista com a equipa', text: 'Conhece a chefia direta e, quando faz sentido, visita a unidade onde vai trabalhar.' },
-    { n: '04', title: 'Proposta e integração', text: 'Proposta clara por escrito e um plano de integração no terreno para as primeiras semanas.' },
+    { n: '03', title: 'Entrevista com a equipa', text: 'Conheces a tua chefia direta e, quando faz sentido, visitas a unidade onde vais trabalhar.' },
+    { n: '04', title: 'Proposta e integração', text: 'Recebes uma proposta clara por escrito e um plano de integração no terreno para as primeiras semanas.' },
   ],
   jobs: [
     {
@@ -314,10 +314,10 @@ export const careers = {
     },
   ],
   faq: [
-    { q: 'Posso candidatar-me a mais do que uma vaga?', a: 'Sim. Indique na candidatura as vagas que lhe interessam — avaliamos o seu perfil para todas.' },
-    { q: 'Não encontro uma vaga para mim. E agora?', a: 'Envie uma candidatura espontânea. Guardamos o seu CV e contactamo-lo quando surgir uma oportunidade compatível na sua região.' },
-    { q: 'Quanto tempo demora o processo?', a: 'Em média, entre duas e quatro semanas desde a candidatura até à proposta. Damos sempre resposta, mesmo quando não avançamos.' },
-    { q: 'Têm estágios?', a: 'Sim, sobretudo nas áreas de I&D, produção e marketing. As vagas de estágio são publicadas aqui e também aceitamos candidaturas espontâneas.' },
+    { q: 'Posso candidatar-me a mais do que uma vaga?', a: 'Sim. Indica na candidatura as vagas que te interessam — avaliamos o teu perfil para todas.' },
+    { q: 'Não encontro uma vaga para mim. E agora?', a: 'Envia uma candidatura espontânea. Guardamos o teu CV e contactamos-te quando surgir uma oportunidade compatível na tua região.' },
+    { q: 'Quanto tempo demora o processo?', a: 'Em média, entre duas e quatro semanas desde a candidatura até à proposta. Damos-te sempre resposta, mesmo quando não avançamos.' },
+    { q: 'Têm estágios?', a: 'Sim, sobretudo nas áreas de I&D, produção e marketing. As vagas de estágio são publicadas aqui — e também podes enviar uma candidatura espontânea.' },
   ],
 }
 
