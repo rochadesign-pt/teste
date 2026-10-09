@@ -73,7 +73,7 @@ function JobRow({ job, open, onToggle, onApply }) {
             <div className="border-t border-line px-5 pt-5 pb-6">
               <p className="max-w-2xl text-sm leading-relaxed text-muted">{job.summary}</p>
               <div className="mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2">
-                {[['O que vai fazer', job.tasks], ['O que procuramos', job.profile]].map(([title, list]) => (
+                {[['O que vais fazer', job.tasks], ['O que procuramos', job.profile]].map(([title, list]) => (
                   <div key={title}>
                     <p className="text-[11px] font-medium tracking-[0.12em] text-muted uppercase">{title}</p>
                     <ul className="mt-2 space-y-1.5">
@@ -220,7 +220,7 @@ export function Careers() {
       <section id="vagas" className={`${WRAP} py-20`}>
         <motion.div {...reveal} className="mb-8">
           <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-accent-deep uppercase">Vagas abertas</p>
-          <h2 className="font-display text-2xl font-semibold sm:text-3xl">Encontre o seu lugar na equipa</h2>
+          <h2 className="font-display text-2xl font-semibold sm:text-3xl">Encontra o teu lugar na equipa</h2>
         </motion.div>
 
         <div className="mb-6 space-y-3">
@@ -248,7 +248,7 @@ export function Careers() {
           {jobs.length === 0 && (
             <div className="rounded-2xl border border-dashed border-line bg-white p-8 text-center">
               <p className="text-sm font-medium">Sem vagas para esta combinação, por agora.</p>
-              <p className="mt-1 text-sm text-muted">Envie uma candidatura espontânea — guardamos o seu CV para a próxima oportunidade.</p>
+              <p className="mt-1 text-sm text-muted">Envia uma candidatura espontânea — guardamos o teu CV para a próxima oportunidade.</p>
               <button type="button" onClick={() => { setRole(SPONTANEOUS); scrollToId('candidatura') }} className="mt-4 text-[13px] font-medium text-accent-deep hover:underline">
                 Candidatura espontânea →
               </button>
@@ -281,7 +281,7 @@ export function Careers() {
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
           <motion.div {...reveal} id="candidatura">
             <h2 className="font-display text-2xl font-semibold sm:text-3xl">Enviar candidatura</h2>
-            <p className="mt-2 text-sm text-muted">Escolha uma vaga ou deixe o seu CV para futuras oportunidades.</p>
+            <p className="mt-2 text-sm text-muted">Escolhe uma vaga ou deixa o teu CV para futuras oportunidades.</p>
             <form onSubmit={(e) => { e.preventDefault(); setDone(true) }} className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
               <select
                 aria-label="Vaga"
@@ -310,7 +310,7 @@ export function Careers() {
                 <span className="shrink-0 rounded-full bg-page px-3.5 py-1.5 text-[12px] font-medium">{cv ? 'Trocar' : 'Escolher ficheiro'}</span>
                 <input required type="file" accept=".pdf,.doc,.docx" onChange={(e) => setCv(e.target.files?.[0]?.name || '')} className="sr-only" />
               </label>
-              <textarea rows={4} placeholder="Conte-nos, em poucas linhas, porque quer juntar-se à equipa (opcional)" aria-label="Mensagem" className="rounded-2xl border border-line bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-accent sm:col-span-2" />
+              <textarea rows={4} placeholder="Conta-nos, em poucas linhas, porque queres juntar-te à equipa (opcional)" aria-label="Mensagem" className="rounded-2xl border border-line bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-accent sm:col-span-2" />
               <div className="sm:col-span-2">
                 <motion.button
                   type="submit"
@@ -320,7 +320,7 @@ export function Careers() {
                   {done ? 'Candidatura enviada ✓' : 'Enviar candidatura'}
                   <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
                 </motion.button>
-                <p className="mt-3 text-[11px] text-muted">Os seus dados são usados apenas neste processo de recrutamento e guardados por um máximo de 2 anos.</p>
+                <p className="mt-3 text-[11px] text-muted">Os teus dados são usados apenas neste processo de recrutamento e guardados por um máximo de 2 anos.</p>
               </div>
             </form>
           </motion.div>
@@ -334,7 +334,7 @@ export function Careers() {
             </div>
             <p className="mt-6 text-sm text-muted">
               Outra dúvida?{' '}
-              <Link to="/contactos" className="font-medium text-accent-deep hover:underline">Fale connosco</Link>
+              <Link to="/contactos" className="font-medium text-accent-deep hover:underline">Fala connosco</Link>
             </p>
           </motion.aside>
         </div>
