@@ -1,20 +1,14 @@
-// Catálogo de EQUIPAMENTOS com campos dinâmicos.
+// DEFINIÇÕES dos campos dinâmicos dos EQUIPAMENTOS + adaptador para as páginas.
 //
-// Cada equipamento pertence a um TIPO. O tipo define o seu próprio esquema de
-// campos (`fields`) — as características que fazem sentido para aquele tipo
-// (saídas de um doseador ≠ largura de trabalho de uma lavadora). A página de
-// listagem gera filtros, chips dos cards e comparações a partir deste esquema,
-// sem código específico por tipo.
-//
-// As NECESSIDADES de instalação (energia, água, montagem…) são transversais a
-// todos os tipos e vivem em `requirementFields`, para poderem ser filtradas no
-// catálogo inteiro.
-//
-// Mapeamento Shopify sugerido (ver docs/campos-dinamicos.md):
-//   tipo de equipamento → metaobject `equipment_type`
-//   fields              → metafields `equipment.<key>` no produto
-//   services            → metafield `equipment.services` (lista de referências
-//                          a metaobjects `service`) + modo incluído/opcional
+// Os equipamentos em si são produtos Shopify normais (ver shop.js). Aqui ficam
+// apenas as DEFINIÇÕES de metafields:
+//   · equipmentTypes[].fields → metafields `equipamento.<key>` — cada tipo
+//     (metaobject `tipo_equipamento`) diz quais se aplicam e quais filtram.
+//   · requirementFields       → metafields `instalacao.<key>`, comuns a todos.
+// As chaves são únicas no catálogo inteiro (ex.: `autonomia_min` vs
+// `autonomia_km`), porque no Shopify cada metafield tem um só tipo e unidade.
+
+import { products, mf, minPrice, bySku } from './shop'
 
 // ——— definição de campo ———
 // { key, label, type: 'number' | 'enum' | 'multi' | 'boolean' | 'text',
@@ -73,7 +67,7 @@ export const equipmentTypes = [
       { key: 'largura', label: 'Largura de trabalho', type: 'number', unit: 'cm', filter: true, card: true },
       { key: 'rendimento', label: 'Rendimento', type: 'number', unit: 'm²/h', card: true },
       { key: 'deposito', label: 'Depósito', type: 'number', unit: 'L' },
-      { key: 'autonomia', label: 'Autonomia', type: 'number', unit: 'min' },
+      { key: 'autonomia_min', label: 'Autonomia', type: 'number', unit: 'min' },
     ],
   },
   {
@@ -82,173 +76,44 @@ export const equipmentTypes = [
     short: 'Mobilidade',
     text: 'Scooters elétricas para o dia a dia.',
     fields: [
-      { key: 'autonomia', label: 'Autonomia', type: 'number', unit: 'km', filter: true, card: true },
+      { key: 'autonomia_km', label: 'Autonomia', type: 'number', unit: 'km', filter: true, card: true },
       { key: 'velocidade', label: 'Velocidade máx.', type: 'number', unit: 'km/h', card: true },
       { key: 'carga', label: 'Peso máx. utilizador', type: 'number', unit: 'kg' },
     ],
   },
 ]
 
-// ——— equipamentos ———
-// short: nome curto para chips e referências cruzadas (ex.: página de serviços).
-// price: null + priceMode 'quote' → "Sob proposta".
-// services: [{ id, mode: 'included' | 'optional', price? }] — `price` substitui
-// o preço base do serviço para este equipamento.
-// href: página de produto, quando existe (template /equipamento/:slug).
-export const equipmentItems = [
-  {
-    slug: 'mixpro-ds4',
-    short: 'MixPro DS-4',
-    type: 'doseamento',
-    name: 'Central de Doseamento MixPro DS-4',
-    code: 'DS-4',
-    price: 890,
-    priceMode: 'from',
-    badge: 'Mais vendido',
-    href: '/equipamento/mixpro-ds4',
-    attrs: { saidas: 4, modo: ['Balde', 'Pulverizador', 'Recarga'], caudal: 8, diluicao: '0,1 – 10 %' },
-    requires: { energia: 'Sem energia', agua: 'Água fria', montagem: 'Parede', espaco: '40 × 30 × 15 cm' },
+// ——— equipamentos (derivados dos produtos Shopify) ———
+// Forma usada pelas páginas: { slug, short, type, name, code, price, priceMode,
+// badge, href, attrs, requires, services: [{ id, sku, mode }] }
+const PRICE_MODE = { fixo: 'fixed', desde: 'from', proposta: 'quote' }
+const fieldsOf = (p, ns) => Object.fromEntries(Object.entries(p.metafields).filter(([k]) => k.startsWith(ns + '.')).map(([k, v]) => [k.slice(ns.length + 1), v]))
+
+export const toEquipmentItem = (p) => {
+  const mode = PRICE_MODE[mf(p, 'custom.preco_modo')] || 'fixed'
+  return {
+    slug: p.handle,
+    short: mf(p, 'custom.nome_curto') || p.title,
+    type: mf(p, 'equipamento.tipo'),
+    name: p.title,
+    code: mf(p, 'custom.codigo'),
+    price: mode === 'quote' ? null : minPrice(p),
+    priceMode: mode,
+    badge: mf(p, 'custom.selo') || null,
+    href: mf(p, 'custom.pagina') || null,
+    attrs: fieldsOf(p, 'equipamento'),
+    requires: fieldsOf(p, 'instalacao'),
+    // referências a variantes de serviço (SKU) → { id: handle do serviço, sku, mode }
     services: [
-      { id: 'instalacao-doseamento', mode: 'included' },
-      { id: 'formacao-equipa', mode: 'included' },
-      { id: 'manutencao-preventiva', mode: 'optional' },
-    ],
-  },
-  {
-    slug: 'mixpro-ds2',
-    short: 'MixPro DS-2',
-    type: 'doseamento',
-    name: 'Central de Doseamento MixPro DS-2',
-    code: 'DS-2',
-    price: 590,
-    priceMode: 'from',
-    attrs: { saidas: 2, modo: ['Balde', 'Pulverizador'], caudal: 8, diluicao: '0,1 – 10 %' },
-    requires: { energia: 'Sem energia', agua: 'Água fria', montagem: 'Parede', espaco: '25 × 30 × 15 cm' },
-    services: [
-      { id: 'instalacao-doseamento', mode: 'included' },
-      { id: 'formacao-equipa', mode: 'included' },
-      { id: 'manutencao-preventiva', mode: 'optional' },
-    ],
-  },
-  {
-    slug: 'mixpro-ds1',
-    short: 'MixPro DS-1',
-    type: 'doseamento',
-    name: 'Doseador de Parede MixPro DS-1',
-    code: 'DS-1',
-    price: 249,
-    priceMode: 'fixed',
-    badge: 'Novo',
-    attrs: { saidas: 1, modo: ['Pulverizador'], caudal: 4, diluicao: '0,5 – 5 %' },
-    requires: { energia: 'Sem energia', agua: 'Água fria', montagem: 'Parede', espaco: '15 × 25 × 12 cm' },
-    services: [
-      { id: 'instalacao-doseamento', mode: 'optional', price: 79 },
-      { id: 'recalibracao', mode: 'optional' },
-    ],
-  },
-  {
-    slug: 'dosematic-l3',
-    short: 'Dosematic L3',
-    type: 'maquina',
-    name: 'Doseador Dosematic L3 Lava-Loiça',
-    code: 'L3',
-    price: 690,
-    priceMode: 'from',
-    attrs: { aplicacao: 'Lava-loiça', bombas: 3, controlo: 'Sinal da máquina', maquinas: 1 },
-    requires: { energia: '230 V', agua: 'Não precisa', montagem: 'Na máquina', espaco: 'Junto à máquina' },
-    services: [
-      { id: 'instalacao-maquina', mode: 'included' },
-      { id: 'formacao-equipa', mode: 'included' },
-      { id: 'manutencao-preventiva', mode: 'optional' },
-    ],
-  },
-  {
-    slug: 'dosematic-w5',
-    short: 'Dosematic W5',
-    type: 'maquina',
-    name: 'Doseador Dosematic W5 Lavandaria',
-    code: 'W5',
-    price: null,
-    priceMode: 'quote',
-    attrs: { aplicacao: 'Lavandaria', bombas: 5, controlo: 'Condutividade', maquinas: 3 },
-    requires: { energia: '230 V', agua: 'Não precisa', montagem: 'Parede', espaco: '60 × 40 × 20 cm' },
-    services: [
-      { id: 'visita-tecnica', mode: 'included' },
-      { id: 'instalacao-maquina', mode: 'included' },
-      { id: 'formacao-equipa', mode: 'included' },
-      { id: 'manutencao-preventiva', mode: 'optional' },
-    ],
-  },
-  {
-    slug: 'dispensador-sab-auto',
-    short: 'Sabonete automático',
-    type: 'dispensadores',
-    name: 'Dispensador Automático de Sabonete',
-    code: 'DSP-A1',
-    price: 39.9,
-    priceMode: 'fixed',
-    attrs: { produto: 'Sabonete', acionamento: 'Automático', capacidade: 1, material: 'ABS' },
-    requires: { energia: 'Pilhas', agua: 'Não precisa', montagem: 'Parede', espaco: '12 × 25 × 11 cm' },
-    services: [{ id: 'montagem-dispensador', mode: 'optional' }],
-  },
-  {
-    slug: 'dispensador-gel-inox',
-    short: 'Gel em inox',
-    type: 'dispensadores',
-    name: 'Dispensador de Gel em Inox',
-    code: 'DSP-M2',
-    price: 54.5,
-    priceMode: 'fixed',
-    attrs: { produto: 'Gel desinfetante', acionamento: 'Manual', capacidade: 0.9, material: 'Inox' },
-    requires: { energia: 'Sem energia', agua: 'Não precisa', montagem: 'Parede', espaco: '11 × 22 × 10 cm' },
-    services: [{ id: 'montagem-dispensador', mode: 'optional' }],
-  },
-  {
-    slug: 'lavadora-ls45',
-    short: 'Lavadora LS-45',
-    type: 'limpeza',
-    name: 'Lavadora de Pavimentos LS-45',
-    code: 'LS-45',
-    price: 3490,
-    priceMode: 'from',
-    attrs: { largura: 45, rendimento: 1800, deposito: 40, autonomia: 120 },
-    requires: { energia: 'Bateria', agua: 'Água fria', montagem: 'Móvel', espaco: 'Arrumação com tomada' },
-    services: [
-      { id: 'entrega-arranque', mode: 'included' },
-      { id: 'formacao-equipa', mode: 'included' },
-      { id: 'manutencao-preventiva', mode: 'optional', price: 39 },
-    ],
-  },
-  {
-    slug: 'lavadora-ls30',
-    short: 'Lavadora LS-30',
-    type: 'limpeza',
-    name: 'Lavadora Compacta LS-30',
-    code: 'LS-30',
-    price: 1690,
-    priceMode: 'from',
-    attrs: { largura: 30, rendimento: 900, deposito: 15, autonomia: 0 },
-    requires: { energia: '230 V', agua: 'Água fria', montagem: 'Móvel', espaco: 'Arrumação com tomada' },
-    services: [
-      { id: 'entrega-arranque', mode: 'included' },
-      { id: 'formacao-equipa', mode: 'optional' },
-      { id: 'manutencao-preventiva', mode: 'optional' },
-    ],
-  },
-  {
-    slug: 'brio-ride-on-75-550',
-    short: 'Brio Ride-On',
-    type: 'mobilidade',
-    name: 'Scooter Brio Ride-On 75-550',
-    code: '75-550',
-    price: 2190,
-    priceMode: 'from',
-    href: '/equipamento/brio-ride-on-75-550',
-    attrs: { autonomia: 45, velocidade: 15, carga: 160 },
-    requires: { energia: 'Bateria', agua: 'Não precisa', montagem: 'Móvel', espaco: 'Desmontável · cabe na bagageira' },
-    services: [{ id: 'entrega-arranque', mode: 'included' }],
-  },
-]
+      ...(mf(p, 'servicos.incluidos') || []).map((sku) => ({ sku, mode: 'included' })),
+      ...(mf(p, 'servicos.opcionais') || []).map((sku) => ({ sku, mode: 'optional' })),
+    ]
+      .map((r) => ({ ...r, id: bySku(r.sku)?.product.handle }))
+      .filter((r) => r.id),
+  }
+}
+
+export const equipmentItems = products.filter((p) => p.productType === 'Equipamento').map(toEquipmentItem)
 
 // ——— helpers ———
 export const typeOf = (id) => equipmentTypes.find((t) => t.id === id) || null
