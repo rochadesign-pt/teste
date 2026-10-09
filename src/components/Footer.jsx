@@ -16,7 +16,8 @@ const columns = [
       { label: 'HORECA' },
       { label: 'Indústria alimentar' },
       { label: 'Saúde' },
-      { label: 'Equipamentos', to: '/equipamento/mixpro-ds4' },
+      { label: 'Equipamentos', to: '/equipamentos' },
+      { label: 'Serviços', to: '/servicos' },
     ],
   },
   {
