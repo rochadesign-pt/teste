@@ -5,6 +5,7 @@ import { getEquipment, equipmentList, initSelection, computeTotal, mainIdOf, con
 import { EquipmentHero } from '../components/EquipmentHero'
 import { Placeholder } from '../components/Placeholder'
 import { Stars } from '../components/PayIcons'
+import { servicesForSlug } from '../data/services'
 
 const EASE = [0.32, 0.72, 0, 1]
 const WRAP = 'mx-auto max-w-[1280px] px-6 lg:px-12'
@@ -62,6 +63,35 @@ function ServiceHighlight({ eq }) {
           </ul>
         </motion.div>
       </div>
+    </section>
+  )
+}
+
+function LinkedServices({ eq }) {
+  const list = servicesForSlug(eq.slug)
+  if (!list.length) return null
+  return (
+    <section className={`${WRAP} pb-16 lg:pb-20`}>
+      <motion.div {...reveal} className="rounded-2xl border border-line bg-white p-6 lg:p-8">
+        <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="mb-1.5 text-[11px] font-medium tracking-[0.16em] text-accent-deep">SERVIÇOS DESTE EQUIPAMENTO</p>
+            <p className="text-sm text-muted">O que vem incluído e o que podes juntar mais tarde.</p>
+          </div>
+          <Link to="/servicos" className="text-[13px] font-medium text-accent-deep hover:underline">Ver todos os serviços →</Link>
+        </div>
+        <ul className="grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+          {list.map((s) => (
+            <li key={s.id} className="flex items-start justify-between gap-3 border-t border-line pt-3">
+              <span className="min-w-0">
+                <span className="block text-[13px] font-medium">{s.name}</span>
+                <span className="block text-[11px] text-muted">{s.duration}</span>
+              </span>
+              <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold tabular-nums ${s.mode === 'included' ? 'bg-accent-soft text-accent-deep' : 'bg-page'}`}>{s.label}</span>
+            </li>
+          ))}
+        </ul>
+      </motion.div>
     </section>
   )
 }
@@ -297,7 +327,7 @@ export function Equipment({ addItem }) {
     return (
       <main className="pt-[160px] pb-24 text-center">
         <p className="text-sm text-muted">Equipamento não encontrado.</p>
-        <Link to="/equipamento/mixpro-ds4" className="mt-4 inline-block text-sm font-medium text-accent-deep hover:underline">
+        <Link to="/equipamentos" className="mt-4 inline-block text-sm font-medium text-accent-deep hover:underline">
           Ver equipamentos →
         </Link>
       </main>
@@ -309,6 +339,7 @@ export function Equipment({ addItem }) {
       <EquipmentHero product={eq} selection={selection} setSingle={setSingle} toggleAddon={toggleAddon} total={total} onAdd={handleAdd} />
       <Ribbon eq={eq} />
       <ServiceHighlight eq={eq} />
+      <LinkedServices eq={eq} />
       <Benefits eq={eq} />
       <Steps eq={eq} />
       <Reviews eq={eq} />
